@@ -1,36 +1,24 @@
-﻿namespace MauiSample;
-
-#if IOS || MACCATALYST
-using Emarsys = EmarsysiOS.DotnetEmarsys;
-#elif ANDROID
-using Emarsys = EmarsysAndroid.DotnetEmarsys;
-#elif (NETSTANDARD || !PLATFORM) || (NET6_0_OR_GREATER && !IOS && !ANDROID)
-using Emarsys = System.Object;
-#endif
+﻿namespace sample;
 
 public partial class MainPage : ContentPage
 {
+	int count = 0;
+
 	public MainPage()
 	{
 		InitializeComponent();
-
-		// Call the native binding, which will append a platform specific string to the input string
-		var labelText = Emarsys.GetString("Community Toolkit");
-
-		sampleLabel.Text = "Hello, " + labelText;
 	}
 
-	async void OnDocsButtonClicked(object sender, EventArgs e)
+	private void OnCounterClicked(object sender, EventArgs e)
 	{
-		try
-		{
-			Uri uri = new Uri("https://learn.microsoft.com/dotnet/communitytoolkit/maui/native-library-interop/get-started");
-			await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
-		}
-		catch (Exception ex)
-		{
-			throw new Exception("Browser failed to launch", ex);
-		}
+		count++;
+
+		if (count == 1)
+			CounterBtn.Text = $"Clicked {count} time";
+		else
+			CounterBtn.Text = $"Clicked {count} times";
+
+		SemanticScreenReader.Announce(CounterBtn.Text);
 	}
 }
 

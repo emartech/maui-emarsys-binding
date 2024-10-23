@@ -1,9 +1,8 @@
 ﻿using Android.App;
 using Android.Runtime;
-using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 using EmarsysPlugin = EmarsysAndroid.DotnetEmarsys;
 
-namespace MauiSample;
+namespace sample;
 
 [Application]
 public class MainApplication : MauiApplication
