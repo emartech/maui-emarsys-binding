@@ -7,7 +7,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 24
     }
 
     buildTypes {
@@ -31,14 +31,15 @@ configurations {
 }
 
 dependencies {
-
+    implementation("com.emarsys:emarsys-sdk:3.7.11")
+    implementation("com.emarsys:emarsys-firebase:3.7.11")
     // Add package dependency for binding library
     // Uncomment line below and replace {dependency.name.goes.here} with your dependency
     // implementation("{dependency.name.goes.here}")
 
     // Copy dependencies for binding library
     // Uncomment line below and replace {dependency.name.goes.here} with your dependency
-    // "copyDependencies"("{dependency.name.goes.here}")
+     "copyDependencies"("com.emarsys:emarsys-sdk:3.7.11")
 }
 
 // Copy dependencies for binding library
