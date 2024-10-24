@@ -1,15 +1,18 @@
 package com.emarsys.maui;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import com.emarsys.Emarsys;
 import com.emarsys.config.EmarsysConfig;
+import com.emarsys.service.EmarsysFirebaseMessagingServiceUtils;
+import com.google.firebase.messaging.RemoteMessage;
 
 public class DotnetEmarsys
 {
+    static String TAG = "EmarsysPlugin";
+
     public static String getString(String myString)
     {
         return myString + " from Java!";
@@ -25,5 +28,15 @@ public class DotnetEmarsys
                 .build();
 
         Emarsys.setup(config);
+    }
+
+    public static Boolean handleMessage(Context context, RemoteMessage message) {
+        Log.i(TAG, "handleMessage");
+        return EmarsysFirebaseMessagingServiceUtils.handleMessage(context, message);
+    }
+
+    public static void setPushToken(String token) {
+        Log.i(TAG, "Set push token " + token);
+        Emarsys.getPush().setPushToken(token);
     }
 }
