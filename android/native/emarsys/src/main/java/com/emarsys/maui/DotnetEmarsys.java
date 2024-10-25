@@ -8,14 +8,20 @@ import com.emarsys.Emarsys;
 import com.emarsys.config.EmarsysConfig;
 import com.emarsys.service.EmarsysFirebaseMessagingServiceUtils;
 import com.google.firebase.messaging.RemoteMessage;
+import org.json.JSONObject;
 
 public class DotnetEmarsys
 {
     static String TAG = "EmarsysPlugin";
 
-    public static String getString(String myString)
-    {
-        return myString + " from Java!";
+    public interface EmarsysEventListener {
+        void onEvent(Context context, String eventName, JSONObject payload);
+    }
+
+    private static EmarsysEventListener eventListener;
+
+    public static void setEventListener(EmarsysEventListener listener) {
+        eventListener = listener;
     }
 
     public static void setup(Application application, String applicationCode) {
@@ -28,6 +34,14 @@ public class DotnetEmarsys
                 .build();
 
         Emarsys.setup(config);
+
+        Emarsys.getPush().setNotificationEventHandler((context, eventName, payload) -> {
+            if (eventListener != null) {
+                eventListener.onEvent(context, eventName, payload);
+            }
+        });
+
+        Emarsys.setContact(3, "eduardo.zatoni@emarsys.com");
     }
 
     public static Boolean handleMessage(Context context, RemoteMessage message) {
