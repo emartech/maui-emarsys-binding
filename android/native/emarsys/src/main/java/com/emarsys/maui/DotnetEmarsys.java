@@ -10,9 +10,8 @@ import com.emarsys.service.EmarsysFirebaseMessagingServiceUtils;
 import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONObject;
 
-public class DotnetEmarsys
-{
-    static String TAG = "EmarsysPlugin";
+public class DotnetEmarsys {
+    static String TAG = "EmarsysBinding";
 
     public interface EmarsysEventListener {
         void onEvent(Context context, String eventName, JSONObject payload);

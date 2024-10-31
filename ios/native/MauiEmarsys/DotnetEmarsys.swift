@@ -5,8 +5,21 @@
 import Foundation
 import EmarsysSDK
 
+@objc
+public protocol EmarsysEventListener {
+    @objc(onEventWithEventName:payload:)
+    func onEvent(eventName: String, payload: [String: Any]?)
+}
+
 @objc(DotnetEmarsys)
-public class DotnetEmarsys : NSObject {
+public class DotnetEmarsys: NSObject {
+    
+    @objc public static var eventListener: EmarsysEventListener?
+    
+    @objc(setEmarsysEventListener:)
+    public static func setEventListener(_ listener: EmarsysEventListener) {
+        eventListener = listener
+    }
     
     @objc
     public static func setup(applicationCode: String, merchantId: String?) {
@@ -19,8 +32,9 @@ public class DotnetEmarsys : NSObject {
         Emarsys.setup(config: config)
         UNUserNotificationCenter.current().delegate = Emarsys.push
         Emarsys.push.notificationEventHandler = { name, payload in
-            print(name, payload ?? "")
-        }
+             print("Received event on native side: \(name), payload: \(payload ?? [:])")
+             eventListener?.onEvent(eventName: name, payload: payload)
+         }
     }
     
     @objc
