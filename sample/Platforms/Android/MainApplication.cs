@@ -38,12 +38,12 @@ public class MainApplication : MauiApplication, EmarsysPlugin.IEmarsysEventListe
 
     public void OnEvent(Context? context, string? eventName, JSONObject? payload)
     {
-				string payloadString = payload?.ToString();
+        string payloadString = payload?.ToString();
         MainThread.BeginInvokeOnMainThread(async () =>
         {
-					await MauiAppApplication.Current.MainPage.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}", "OK");
-					System.Diagnostics.Debug.WriteLine(eventName);
-					System.Diagnostics.Debug.WriteLine(payloadString);
+            await MauiAppApplication.Current.MainPage.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}", "OK");
+            System.Diagnostics.Debug.WriteLine(eventName);
+            System.Diagnostics.Debug.WriteLine(payloadString);
         });
     }
 

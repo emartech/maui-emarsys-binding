@@ -40,8 +40,6 @@ public class DotnetEmarsys
                 eventListener.onEvent(context, eventName, payload);
             }
         });
-
-        Emarsys.setContact(3, "eduardo.zatoni@emarsys.com");
     }
 
     public static Boolean handleMessage(Context context, RemoteMessage message) {
