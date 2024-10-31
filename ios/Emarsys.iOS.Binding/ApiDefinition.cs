@@ -8,10 +8,10 @@ namespace EmarsysBindingiOS
 	[BaseType (typeof(NSObject))]
 	interface DotnetEmarsys
 	{
-		// +(void)setEmarsysEventListener:(id<EmarsysEventListener> _Nonnull)listener;
-    [Static]
-    [Export("setEmarsysEventListener:")]
-    void SetEventListener(EmarsysEventListener listener);
+			// @property (copy, nonatomic, class) void (^ _Nullable)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable) pushEventHandler;
+		[Static]
+		[NullAllowed, Export ("pushEventHandler", ArgumentSemantic.Copy)]
+		Action<NSString, NSDictionary<NSString, NSObject>> PushEventHandler { get; set; }
 
 		// +(void)setupWithApplicationCode:(NSString * _Nonnull)applicationCode merchantId:(NSString * _Nullable)merchantId;
 		[Static]
@@ -27,15 +27,5 @@ namespace EmarsysBindingiOS
 		[Static]
 		[Export ("setContactWithContactFieldId:contactFieldValue:")]
 		void SetContact (nint contactFieldId, string contactFieldValue);
-	}
-
-	[BaseType(typeof(NSObject))]
-	[Model]
-	[Protocol]
-	interface EmarsysEventListener
-	{
-		[Abstract]
-		[Export("onEventWithEventName:payload:")]
-		void OnEvent(string eventName, [NullAllowed] NSDictionary payload);
 	}
 }
