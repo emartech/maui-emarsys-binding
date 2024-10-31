@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		83E34F572C21CB2B008AA950 /* MauiEmarsys.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E34F562C21CB2B008AA950 /* MauiEmarsys.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83E34F5E2C21CC53008AA950 /* DotnetEmarsys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E34F5D2C21CC53008AA950 /* DotnetEmarsys.swift */; };
+		C824337F2CD36AE900D2EDCD /* EmarsysNotificationExtensionLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = C824337E2CD36AE900D2EDCD /* EmarsysNotificationExtensionLibrary */; };
+		C82433812CD36AEC00D2EDCD /* EmarsysSDKLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = C82433802CD36AEC00D2EDCD /* EmarsysSDKLibrary */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C82433812CD36AEC00D2EDCD /* EmarsysSDKLibrary in Frameworks */,
+				C824337F2CD36AE900D2EDCD /* EmarsysNotificationExtensionLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,6 +36,7 @@
 			isa = PBXGroup;
 			children = (
 				83E34F552C21CB2B008AA950 /* MauiEmarsys */,
+				C824337D2CD36AE900D2EDCD /* Frameworks */,
 				83E34F542C21CB2B008AA950 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,6 +56,13 @@
 				83E34F5D2C21CC53008AA950 /* DotnetEmarsys.swift */,
 			);
 			path = MauiEmarsys;
+			sourceTree = "<group>";
+		};
+		C824337D2CD36AE900D2EDCD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -110,6 +122,7 @@
 			);
 			mainGroup = 83E34F492C21CB2B008AA950;
 			packageReferences = (
+				C824337C2CD369DD00D2EDCD /* XCRemoteSwiftPackageReference "ios-emarsys-sdk" */,
 			);
 			productRefGroup = 83E34F542C21CB2B008AA950 /* Products */;
 			projectDirPath = "";
@@ -375,6 +388,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C824337C2CD369DD00D2EDCD /* XCRemoteSwiftPackageReference "ios-emarsys-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/emartech/ios-emarsys-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.7.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C824337E2CD36AE900D2EDCD /* EmarsysNotificationExtensionLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C824337C2CD369DD00D2EDCD /* XCRemoteSwiftPackageReference "ios-emarsys-sdk" */;
+			productName = EmarsysNotificationExtensionLibrary;
+		};
+		C82433802CD36AEC00D2EDCD /* EmarsysSDKLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C824337C2CD369DD00D2EDCD /* XCRemoteSwiftPackageReference "ios-emarsys-sdk" */;
+			productName = EmarsysSDKLibrary;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83E34F4A2C21CB2B008AA950 /* Project object */;
 }

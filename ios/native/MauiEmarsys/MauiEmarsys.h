@@ -1,5 +1,5 @@
 //
-//  Created by .NET MAUI team on 6/18/24.
+//  Copyright © 2024 Emarsys. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
