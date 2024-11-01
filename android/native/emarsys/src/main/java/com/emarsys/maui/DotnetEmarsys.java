@@ -42,12 +42,14 @@ public class DotnetEmarsys {
     }
 
     public static Boolean handleMessage(Context context, RemoteMessage message) {
-        Log.i(TAG, "handleMessage");
         return EmarsysFirebaseMessagingServiceUtils.handleMessage(context, message);
     }
 
     public static void setPushToken(String token) {
-        Log.i(TAG, "Set push token " + token);
         Emarsys.getPush().setPushToken(token);
+    }
+
+    public static void setContact(int contactFieldId, String contactFieldValue) {
+        Emarsys.setContact(contactFieldId, contactFieldValue);
     }
 }
