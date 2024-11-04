@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+    <TargetFrameworks>net8.0-ios;</TargetFrameworks>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <IsBindingProject>true</IsBindingProject>
@@ -19,8 +19,8 @@
 
   <!-- Reference to Xcode project -->
   <ItemGroup>
-    <NLIXcodeProjectReference Include="../native/Emarsys/Emarsys.xcodeproj">
-      <SchemeName>Emarsys</SchemeName>
+    <NLIXcodeProjectReference Include="../native/MauiEmarsys.xcodeproj">
+      <SchemeName>MauiEmarsys</SchemeName>
       <SharpieNamespace>EmarsysiOS</SharpieNamespace>
       <SharpieBind>true</SharpieBind>
       <!-- Metadata applicable to @(NativeReference) will be used if set, otherwise the following defaults will be used:

@@ -1,4 +1,4 @@
-﻿namespace MauiSample;
+﻿namespace sample;
 
 #if IOS || MACCATALYST
 using Emarsys = EmarsysiOS.DotnetEmarsys;
@@ -10,27 +10,21 @@ using Emarsys = System.Object;
 
 public partial class MainPage : ContentPage
 {
+
 	public MainPage()
 	{
 		InitializeComponent();
-
-		// Call the native binding, which will append a platform specific string to the input string
-		var labelText = Emarsys.GetString("Community Toolkit");
-
-		sampleLabel.Text = "Hello, " + labelText;
 	}
 
-	async void OnDocsButtonClicked(object sender, EventArgs e)
+	private void OnSetContactClicked(object sender, EventArgs e)
 	{
-		try
-		{
-			Uri uri = new Uri("https://learn.microsoft.com/dotnet/communitytoolkit/maui/native-library-interop/get-started");
-			await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
-		}
-		catch (Exception ex)
-		{
-			throw new Exception("Browser failed to launch", ex);
-		}
+		Emarsys.SetContact(3, "eduardo.zatoni@emarsys.com");
+		Console.WriteLine("Set contact done!");
+	}
+
+	private void OnClearContactClicked(object sender, EventArgs e)
+	{
+		Emarsys.ClearContact();
+		Console.WriteLine("Clear contact done!");
 	}
 }
-

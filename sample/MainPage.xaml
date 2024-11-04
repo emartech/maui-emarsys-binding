@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiSample.MainPage">
+             x:Class="sample.MainPage">
 
     <ScrollView>
         <VerticalStackLayout
@@ -14,20 +14,27 @@
                 SemanticProperties.Description="dot net bot in a race car number eight" />
 
             <Label
-                x:Name="sampleLabel"
                 Text="Hello, World!"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" />
 
             <Label
-                Text="Create new bindings using Native Library Interop"
+                Text="Welcome to Emarsys MAUI Sample App"
                 Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2" />
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to Emarsys MAUI Sample App" />
 
             <Button
-                Text="Get Started" 
-                SemanticProperties.Hint="Navigates to getting started documentation"
-                Clicked="OnDocsButtonClicked"
+                x:Name="SetContactBtn"
+                Text="Set Contact" 
+                SemanticProperties.Hint="Set Contact"
+                Clicked="OnSetContactClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                x:Name="ClearContactBtn"
+                Text="Clear Contact"
+                SemanticProperties.Hint="Clear Contact"
+                Clicked="OnClearContactClicked"
                 HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
