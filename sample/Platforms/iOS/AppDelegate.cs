@@ -1,7 +1,7 @@
 ﻿using Foundation;
 using UIKit;
 using UserNotifications;
-using Emarsys = EmarsysBindingiOS.DotnetEmarsys;
+using Emarsys = EmarsysiOS.DotnetEmarsys;
 using MauiAppApplication = Microsoft.Maui.Controls.Application;
 
 namespace sample;

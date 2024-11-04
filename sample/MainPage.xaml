@@ -25,10 +25,16 @@
                 SemanticProperties.Description="Welcome to Emarsys MAUI Sample App" />
 
             <Button
-                x:Name="CounterBtn"
+                x:Name="SetContactBtn"
                 Text="Set Contact" 
                 SemanticProperties.Hint="Set Contact"
                 Clicked="OnSetContactClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                x:Name="ClearContactBtn"
+                Text="Clear Contact"
+                SemanticProperties.Hint="Clear Contact"
+                Clicked="OnClearContactClicked"
                 HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>

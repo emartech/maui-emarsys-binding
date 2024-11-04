@@ -52,4 +52,8 @@ public class DotnetEmarsys {
     public static void setContact(int contactFieldId, String contactFieldValue) {
         Emarsys.setContact(contactFieldId, contactFieldValue);
     }
+
+    public static void clearContact() {
+        Emarsys.clearContact();
+    }
 }

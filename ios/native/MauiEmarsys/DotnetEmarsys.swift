@@ -34,4 +34,9 @@ public class DotnetEmarsys: NSObject {
     public static func setContact(contactFieldId: Int, contactFieldValue: String) {
         Emarsys.setContact(contactFieldId: contactFieldId as NSNumber, contactFieldValue: contactFieldValue)
     }
+    
+    @objc
+    public static func clearContact() {
+        Emarsys.clearContact()
+    }
 }

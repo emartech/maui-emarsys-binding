@@ -1,7 +1,7 @@
 ﻿namespace sample;
 
 #if IOS || MACCATALYST
-using Emarsys = EmarsysBindingiOS.DotnetEmarsys;
+using Emarsys = EmarsysiOS.DotnetEmarsys;
 #elif ANDROID
 using Emarsys = EmarsysAndroid.DotnetEmarsys;
 #elif (NETSTANDARD || !PLATFORM) || (NET6_0_OR_GREATER && !IOS && !ANDROID)
@@ -21,5 +21,10 @@ public partial class MainPage : ContentPage
 		Emarsys.SetContact(3, "eduardo.zatoni@emarsys.com");
 		Console.WriteLine("Set contact done!");
 	}
-}
 
+	private void OnClearContactClicked(object sender, EventArgs e)
+	{
+		Emarsys.ClearContact();
+		Console.WriteLine("Clear contact done!");
+	}
+}
