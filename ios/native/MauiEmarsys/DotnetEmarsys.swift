@@ -5,10 +5,13 @@
 import Foundation
 import EmarsysSDK
 
+public typealias CompletionBlock = ((Error?) -> Void)
+public typealias EventHandlerBlock = ((String, [String: Any]?) -> Void)
+
 @objc(DotnetEmarsys)
 public class DotnetEmarsys: NSObject {
     
-    @objc public static var pushEventHandler: ((String, [String: Any]?) -> Void)?
+    @objc public static var pushEventHandler: EventHandlerBlock?
     
     @objc
     public static func setup(_ dotnetConfig: DotnetEMSConfig) {
@@ -40,13 +43,18 @@ public class DotnetEmarsys: NSObject {
     }
     
     @objc
-    public static func setPushToken(_ token: NSData) {
-        Emarsys.push.setPushToken(token as Data)
+    public static func setPushToken(_ token: Data) {
+        Emarsys.push.setPushToken(token)
     }
     
     @objc
     public static func setContact(_ contactFieldId: Int, _ contactFieldValue: String) {
         Emarsys.setContact(contactFieldId: contactFieldId as NSNumber, contactFieldValue: contactFieldValue)
+    }
+    
+    @objc
+    public static func setContact(_ contactFieldId: Int, _ contactFieldValue: String, _ completionBlock: CompletionBlock?) {
+        Emarsys.setContact(contactFieldId: contactFieldId as NSNumber, contactFieldValue: contactFieldValue, completionBlock: completionBlock)
     }
     
     @objc

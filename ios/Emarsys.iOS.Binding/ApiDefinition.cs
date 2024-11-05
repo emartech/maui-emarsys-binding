@@ -40,6 +40,11 @@ namespace EmarsysiOS
 		[Export ("setContact::")]
 		void SetContact (nint contactFieldId, string contactFieldValue);
 
+		// +(void)setContact:(NSInteger)contactFieldId :(NSString * _Nonnull)contactFieldValue :(void (^ _Nullable)(NSError * _Nullable))completionBlock;
+		[Static]
+		[Export ("setContact:::")]
+		void SetContact (nint contactFieldId, string contactFieldValue, [NullAllowed] Action<NSError> completionBlock);
+
 		// +(void)clearContact;
 		[Static]
 		[Export ("clearContact")]

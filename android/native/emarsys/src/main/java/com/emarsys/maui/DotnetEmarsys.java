@@ -2,7 +2,7 @@ package com.emarsys.maui;
 
 import android.app.Application;
 import android.content.Context;
-
+import androidx.annotation.Nullable;
 import com.emarsys.Emarsys;
 import com.emarsys.config.EmarsysConfig;
 import com.emarsys.service.EmarsysFirebaseMessagingServiceUtils;
@@ -16,6 +16,10 @@ public class DotnetEmarsys {
 
     public interface EmarsysEventListener {
         void onEvent(Context context, String eventName, JSONObject payload);
+    }
+
+    public interface CompletionListener {
+        void onCompleted(@Nullable Throwable errorCause);
     }
 
     private static EmarsysEventListener eventListener;
@@ -65,8 +69,15 @@ public class DotnetEmarsys {
         Emarsys.setContact(contactFieldId, contactFieldValue);
     }
 
+    public static void setContact(int contactFieldId, String contactFieldValue, @Nullable CompletionListener completionListener) {
+        Emarsys.setContact(contactFieldId, contactFieldValue, (errorCause) -> {
+            if (completionListener != null) {
+                completionListener.onCompleted(errorCause);
+            }
+        });
+    }
+
     public static void clearContact() {
         Emarsys.clearContact();
     }
 }
-
