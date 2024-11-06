@@ -26,7 +26,8 @@ public class MainApplication : MauiApplication, EmarsysPlugin.IEmarsysEventListe
     {
         base.OnCreate();
 
-        EmarsysPlugin.Setup(this, "EMSF3-5F5C2");
+        var config = EmarsysPlugin.Config(this, "EMSF3-5F5C2",  "102F6519FC312033", null, true);
+        EmarsysPlugin.Setup(config);
 
         EmarsysPlugin.SetEventListener(this);
 

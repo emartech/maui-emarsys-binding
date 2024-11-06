@@ -4,6 +4,13 @@ using ObjCRuntime;
 
 namespace EmarsysiOS
 {
+	// @interface DotnetEMSConfig : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface DotnetEMSConfig
+	{
+	}
+
 	// @interface DotnetEmarsys : NSObject
 	[BaseType (typeof(NSObject))]
 	interface DotnetEmarsys
@@ -13,19 +20,24 @@ namespace EmarsysiOS
 		[NullAllowed, Export ("pushEventHandler", ArgumentSemantic.Copy)]
 		Action<NSString, NSDictionary<NSString, NSObject>> PushEventHandler { get; set; }
 
-		// +(void)setupWithApplicationCode:(NSString * _Nonnull)applicationCode merchantId:(NSString * _Nullable)merchantId;
+		// +(void)setup:(DotnetEMSConfig * _Nonnull)config;
 		[Static]
-		[Export ("setupWithApplicationCode:merchantId:")]
-		void Setup (string applicationCode, [NullAllowed] string merchantId);
+		[Export ("setup:")]
+		void Setup (DotnetEMSConfig config);
 
-		// +(void)setPushTokenWithToken:(NSData * _Nonnull)token;
+		// +(DotnetEMSConfig * _Nonnull)config:(NSString * _Nullable)applicationCode :(NSString * _Nullable)merchantId :(NSString * _Nullable)sharedKeychainAccessGroup :(BOOL)enableLogs __attribute__((warn_unused_result("")));
 		[Static]
-		[Export ("setPushTokenWithToken:")]
+		[Export ("config::::")]
+		DotnetEMSConfig Config ([NullAllowed] string applicationCode, [NullAllowed] string merchantId, [NullAllowed] string sharedKeychainAccessGroup, bool enableLogs);
+
+		// +(void)setPushToken:(NSData * _Nonnull)token;
+		[Static]
+		[Export ("setPushToken:")]
 		void SetPushToken (NSData token);
 
-		// +(void)setContactWithContactFieldId:(NSInteger)contactFieldId contactFieldValue:(NSString * _Nonnull)contactFieldValue;
+		// +(void)setContact:(NSInteger)contactFieldId :(NSString * _Nonnull)contactFieldValue;
 		[Static]
-		[Export ("setContactWithContactFieldId:contactFieldValue:")]
+		[Export ("setContact::")]
 		void SetContact (nint contactFieldId, string contactFieldValue);
 
 		// +(void)clearContact;

@@ -13,7 +13,9 @@ public class AppDelegate : MauiUIApplicationDelegate
 
 	public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 	{
-		Emarsys.Setup("EMSF3-5F5C2", "102F6519FC312033");
+		var config = Emarsys.Config("EMSF3-5F5C2", "102F6519FC312033", null, true);
+		Emarsys.Setup(config);
+
 		Emarsys.PushEventHandler = (eventName, payload) =>
 		{
 			var payloadString = payload?.Description ?? "No payload";

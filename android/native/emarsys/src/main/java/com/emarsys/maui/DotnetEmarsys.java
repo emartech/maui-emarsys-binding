@@ -2,13 +2,14 @@ package com.emarsys.maui;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 
 import com.emarsys.Emarsys;
 import com.emarsys.config.EmarsysConfig;
 import com.emarsys.service.EmarsysFirebaseMessagingServiceUtils;
 import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONObject;
+
+import java.util.Collections;
 
 public class DotnetEmarsys {
     static String TAG = "EmarsysBinding";
@@ -23,15 +24,22 @@ public class DotnetEmarsys {
         eventListener = listener;
     }
 
-    public static void setup(Application application, String applicationCode) {
-        Log.i(TAG, "Emarsys setup with app code " + applicationCode);
+    public static void setup(DotnetEMSConfig dotnetConfig) {
+        EmarsysConfig.Builder builder = new EmarsysConfig.Builder();
+        builder.application(dotnetConfig.getApplication());
+        if (dotnetConfig.getApplicationCode() != null && !dotnetConfig.getApplicationCode().isEmpty()) {
+            builder.applicationCode(dotnetConfig.getApplicationCode());
+        }
+        if (dotnetConfig.getMerchantId() != null && !dotnetConfig.getMerchantId().isEmpty()) {
+            builder.merchantId(dotnetConfig.getMerchantId());
+        }
+        if (dotnetConfig.getSharedKeychainAccessGroup() != null && !dotnetConfig.getSharedKeychainAccessGroup().isEmpty()) {
+            builder.sharedPackageNames(Collections.singletonList(dotnetConfig.getSharedKeychainAccessGroup()));        }
+        if (dotnetConfig.getEnableLogs() != null && dotnetConfig.getEnableLogs()) {
+            builder.enableVerboseConsoleLogging();
+        }
 
-        EmarsysConfig config = new EmarsysConfig.Builder()
-                .application(application)
-                .applicationCode(applicationCode)
-                .enableVerboseConsoleLogging()
-                .build();
-
+        EmarsysConfig config = builder.build(); 
         Emarsys.setup(config);
 
         Emarsys.getPush().setNotificationEventHandler((context, eventName, payload) -> {
@@ -39,6 +47,10 @@ public class DotnetEmarsys {
                 eventListener.onEvent(context, eventName, payload);
             }
         });
+    }
+
+    public static DotnetEMSConfig config(Application application, String applicationCode, String merchantId, String sharedKeychainAccessGroup, boolean enableLogs) {
+        return new DotnetEMSConfig(application, applicationCode, merchantId, sharedKeychainAccessGroup, enableLogs);
     }
 
     public static Boolean handleMessage(Context context, RemoteMessage message) {
@@ -57,3 +69,4 @@ public class DotnetEmarsys {
         Emarsys.clearContact();
     }
 }
+
