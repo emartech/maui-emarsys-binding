@@ -1,11 +1,9 @@
 ﻿namespace sample;
 
-#if IOS || MACCATALYST
+#if IOS
 using Emarsys = EmarsysiOS.DotnetEmarsys;
 #elif ANDROID
 using Emarsys = EmarsysAndroid.DotnetEmarsys;
-#elif (NETSTANDARD || !PLATFORM) || (NET6_0_OR_GREATER && !IOS && !ANDROID)
-using Emarsys = System.Object;
 #endif
 
 public partial class MainPage : ContentPage
