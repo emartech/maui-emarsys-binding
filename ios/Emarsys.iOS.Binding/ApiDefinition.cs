@@ -30,24 +30,34 @@ namespace EmarsysiOS
 		[Export ("config::::")]
 		DotnetEMSConfig Config ([NullAllowed] string applicationCode, [NullAllowed] string merchantId, [NullAllowed] string sharedKeychainAccessGroup, bool enableLogs);
 
-		// +(void)setPushToken:(NSData * _Nonnull)token;
+		// +(void)setPushToken:(NSData * _Nonnull)pushToken;
 		[Static]
 		[Export ("setPushToken:")]
-		void SetPushToken (NSData token);
+		void SetPushToken (NSData pushToken);
+
+		// +(void)setPushToken:(NSData * _Nonnull)pushToken :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		[Static]
+		[Export ("setPushToken::")]
+		void SetPushToken (NSData pushToken, Action<NSError> completionBlock);
 
 		// +(void)setContact:(NSInteger)contactFieldId :(NSString * _Nonnull)contactFieldValue;
 		[Static]
 		[Export ("setContact::")]
 		void SetContact (nint contactFieldId, string contactFieldValue);
 
-		// +(void)setContact:(NSInteger)contactFieldId :(NSString * _Nonnull)contactFieldValue :(void (^ _Nullable)(NSError * _Nullable))completionBlock;
+		// +(void)setContact:(NSInteger)contactFieldId :(NSString * _Nonnull)contactFieldValue :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
 		[Static]
 		[Export ("setContact:::")]
-		void SetContact (nint contactFieldId, string contactFieldValue, [NullAllowed] Action<NSError> completionBlock);
+		void SetContact (nint contactFieldId, string contactFieldValue, Action<NSError> completionBlock);
 
 		// +(void)clearContact;
 		[Static]
 		[Export ("clearContact")]
 		void ClearContact ();
+
+		// +(void)clearContact:(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		[Static]
+		[Export ("clearContact:")]
+		void ClearContact (Action<NSError> completionBlock);
 	}
 }

@@ -37,18 +37,15 @@ public class MainApplication : MauiApplication, EmarsysPlugin.IEmarsysEventListe
         }
     }
 
-    public void OnEvent(Context? context, string? eventName, JSONObject? payload)
+    public void HandleEvent(Context? context, string? eventName, JSONObject? payload)
     {
-        string payloadString = payload?.ToString();
-        MainThread.BeginInvokeOnMainThread(async () =>
-        {
-            await MauiAppApplication.Current.MainPage.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}", "OK");
-        });
+        string payloadString = payload?.ToString() ?? "No payload";
+        Utils.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}");
     }
 
     private void CreateNotificationChannels()
     {
-#pragma warning disable CA1416
+        #pragma warning disable CA1416
         var channel1 = new NotificationChannel("ems_sample_news", "News", NotificationImportance.High)
         {
             Description = "News"
@@ -64,6 +61,6 @@ public class MainApplication : MauiApplication, EmarsysPlugin.IEmarsysEventListe
             manager.CreateNotificationChannel(channel1);
             manager.CreateNotificationChannel(channel2);
         }
-#pragma warning restore CA1416
+        #pragma warning restore CA1416
     }
 }

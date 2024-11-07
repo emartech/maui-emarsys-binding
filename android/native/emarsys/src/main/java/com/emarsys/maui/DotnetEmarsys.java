@@ -15,7 +15,7 @@ public class DotnetEmarsys {
     static String TAG = "EmarsysBinding";
 
     public interface EmarsysEventListener {
-        void onEvent(Context context, String eventName, JSONObject payload);
+        void handleEvent(Context context, String eventName, @Nullable JSONObject payload);
     }
 
     public interface CompletionListener {
@@ -48,7 +48,7 @@ public class DotnetEmarsys {
 
         Emarsys.getPush().setNotificationEventHandler((context, eventName, payload) -> {
             if (eventListener != null) {
-                eventListener.onEvent(context, eventName, payload);
+                eventListener.handleEvent(context, eventName, payload);
             }
         });
     }
@@ -61,23 +61,28 @@ public class DotnetEmarsys {
         return EmarsysFirebaseMessagingServiceUtils.handleMessage(context, message);
     }
 
-    public static void setPushToken(String token) {
-        Emarsys.getPush().setPushToken(token);
+    public static void setPushToken(String pushToken) {
+        Emarsys.getPush().setPushToken(pushToken);
+    }
+
+    public static void setPushToken(String pushToken, CompletionListener completionListener) {
+        Emarsys.getPush().setPushToken(pushToken, completionListener::onCompleted);
     }
 
     public static void setContact(int contactFieldId, String contactFieldValue) {
         Emarsys.setContact(contactFieldId, contactFieldValue);
     }
 
-    public static void setContact(int contactFieldId, String contactFieldValue, @Nullable CompletionListener completionListener) {
-        Emarsys.setContact(contactFieldId, contactFieldValue, (errorCause) -> {
-            if (completionListener != null) {
-                completionListener.onCompleted(errorCause);
-            }
-        });
+    public static void setContact(int contactFieldId, String contactFieldValue, CompletionListener completionListener) {
+        Emarsys.setContact(contactFieldId, contactFieldValue, completionListener::onCompleted);
     }
 
     public static void clearContact() {
         Emarsys.clearContact();
     }
+
+    public static void clearContact(CompletionListener completionListener) {
+        Emarsys.clearContact(completionListener::onCompleted);
+    }
+
 }

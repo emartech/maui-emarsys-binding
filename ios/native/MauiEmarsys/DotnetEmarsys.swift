@@ -43,8 +43,13 @@ public class DotnetEmarsys: NSObject {
     }
     
     @objc
-    public static func setPushToken(_ token: Data) {
-        Emarsys.push.setPushToken(token)
+    public static func setPushToken(_ pushToken: Data) {
+        Emarsys.push.setPushToken(pushToken)
+    }
+    
+    @objc
+    public static func setPushToken(_ pushToken: Data, _ completionBlock: @escaping CompletionBlock) {
+        Emarsys.push.setPushToken(pushToken: pushToken, completionBlock: completionBlock)
     }
     
     @objc
@@ -53,7 +58,7 @@ public class DotnetEmarsys: NSObject {
     }
     
     @objc
-    public static func setContact(_ contactFieldId: Int, _ contactFieldValue: String, _ completionBlock: CompletionBlock?) {
+    public static func setContact(_ contactFieldId: Int, _ contactFieldValue: String, _ completionBlock: @escaping CompletionBlock) {
         Emarsys.setContact(contactFieldId: contactFieldId as NSNumber, contactFieldValue: contactFieldValue, completionBlock: completionBlock)
     }
     
@@ -61,4 +66,10 @@ public class DotnetEmarsys: NSObject {
     public static func clearContact() {
         Emarsys.clearContact()
     }
+    
+    @objc
+    public static func clearContact(_ completionBlock: @escaping CompletionBlock) {
+        Emarsys.clearContact(completionBlock: completionBlock)
+    }
+    
 }

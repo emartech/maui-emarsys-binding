@@ -19,25 +19,17 @@ public class AppDelegate : MauiUIApplicationDelegate
 		Emarsys.PushEventHandler = (eventName, payload) =>
 		{
 			var payloadString = payload?.Description ?? "No payload";
-			MainThread.BeginInvokeOnMainThread(async () =>
-			{
-				await MauiAppApplication.Current.MainPage.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}", "OK");
-			});
+			Utils.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}");
 		};
 
+		UIApplication.SharedApplication.RegisterForRemoteNotifications();
 		UNUserNotificationCenter.Current.RequestAuthorization(
 			UNAuthorizationOptions.Alert | UNAuthorizationOptions.Sound | UNAuthorizationOptions.Badge,
 			(approved, err) =>
 			{
-				if (approved)
-				{
-					InvokeOnMainThread(UIApplication.SharedApplication.RegisterForRemoteNotifications);
-				}
-				else
-				{
-					Console.WriteLine("Push notification permission denied");
-				}
-			});
+				Console.WriteLine("Push notification permission " + (approved ? "approved" : "denied"));
+			}
+		);
 
 		return base.FinishedLaunching(application, launchOptions);
 	}
