@@ -1,10 +1,46 @@
 ﻿namespace EmarsysCommon;
 
+#if ANDROID
+using Java.Lang;
+using Android.Content;
+using Org.Json;
+
+public class CompletionListener : Object, EmarsysAndroid.ICompletionListener
+{
+	private readonly Action<Throwable?> onInvoked;
+
+	public CompletionListener (Action<Throwable?> onInvoked)
+	{
+		this.onInvoked = onInvoked;
+	}
+
+	public void OnCompleted (Throwable? errorCause)
+	{
+		onInvoked?.Invoke(errorCause);
+	}
+}
+
+public class EventHandler : Object, EmarsysAndroid.IEventHandler
+{
+	private readonly Action<Context, string, JSONObject?> onInvoked;
+
+	public EventHandler (Action<Context, string, JSONObject?> onInvoked)
+	{
+		this.onInvoked = onInvoked;
+	}
+
+	public void HandleEvent (Context context, string eventName, JSONObject? payload)
+	{
+		onInvoked?.Invoke(context, eventName, payload);
+	}
+}
+#endif
+
 public class Utils
 {
 
 	#if ANDROID
-	public static CompletionListener OnCompleted (Action<Java.Lang.Throwable?> onInvoked)
+	public static CompletionListener OnCompleted (Action<Throwable?> onInvoked)
 	{
 		return new CompletionListener (onInvoked);
 	}
@@ -16,20 +52,3 @@ public class Utils
 	#endif
 
 }
-
-#if ANDROID
-public class CompletionListener : Java.Lang.Object, EmarsysAndroid.DotnetEmarsys.ICompletionListener
-{
-	private readonly Action<Java.Lang.Throwable?> onInvoked;
-
-	public CompletionListener (Action<Java.Lang.Throwable?> onInvoked)
-	{
-		this.onInvoked = onInvoked;
-	}
-
-	public void OnCompleted (Java.Lang.Throwable? errorCause)
-	{
-		onInvoked?.Invoke(errorCause);
-	}
-}
-#endif

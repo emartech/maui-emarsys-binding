@@ -2,7 +2,6 @@
 using UIKit;
 using UserNotifications;
 using Emarsys = EmarsysiOS.DotnetEmarsys;
-using MauiAppApplication = Microsoft.Maui.Controls.Application;
 
 namespace sample;
 
@@ -15,12 +14,12 @@ public class AppDelegate : MauiUIApplicationDelegate
 	{
 		var config = Emarsys.Config("EMSF3-5F5C2", "102F6519FC312033", null, true);
 		Emarsys.Setup(config);
-
-		Emarsys.PushEventHandler = (eventName, payload) =>
+		Emarsys.Push.SetDelegate();
+		Emarsys.Push.SetEventHandler((eventName, payload) =>
 		{
-			var payloadString = payload?.Description ?? "No payload";
+			string payloadString = payload?.Description ?? "No payload";
 			Utils.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}");
-		};
+		});
 
 		UIApplication.SharedApplication.RegisterForRemoteNotifications();
 		UNUserNotificationCenter.Current.RequestAuthorization(
@@ -38,7 +37,7 @@ public class AppDelegate : MauiUIApplicationDelegate
 	public void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
 	{
 		Console.WriteLine("Received native push token");
-		Emarsys.SetPushToken(deviceToken);
+		Emarsys.Push.SetPushToken(deviceToken);
 	}
 
 

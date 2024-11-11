@@ -1,34 +1,19 @@
 package com.emarsys.maui;
 
 import android.app.Application;
-import android.content.Context;
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import com.emarsys.Emarsys;
 import com.emarsys.config.EmarsysConfig;
-import com.emarsys.service.EmarsysFirebaseMessagingServiceUtils;
-import com.google.firebase.messaging.RemoteMessage;
-import org.json.JSONObject;
-
-import java.util.Collections;
+import java.util.List;
 
 public class DotnetEmarsys {
-    static String TAG = "EmarsysBinding";
 
-    public interface EmarsysEventListener {
-        void handleEvent(Context context, String eventName, @Nullable JSONObject payload);
+    public static @NonNull DotnetEMSConfig config(@NonNull Application application, String applicationCode, String merchantId,
+                                         List<String> sharedPackageNames, String sharedSecret, boolean enableConsoleLogging) {
+        return new DotnetEMSConfig(application, applicationCode, merchantId, sharedPackageNames, sharedSecret, enableConsoleLogging);
     }
 
-    public interface CompletionListener {
-        void onCompleted(@Nullable Throwable errorCause);
-    }
-
-    private static EmarsysEventListener eventListener;
-
-    public static void setEventListener(EmarsysEventListener listener) {
-        eventListener = listener;
-    }
-
-    public static void setup(DotnetEMSConfig dotnetConfig) {
+    public static void setup(@NonNull DotnetEMSConfig dotnetConfig) {
         EmarsysConfig.Builder builder = new EmarsysConfig.Builder();
         builder.application(dotnetConfig.getApplication());
         if (dotnetConfig.getApplicationCode() != null && !dotnetConfig.getApplicationCode().isEmpty()) {
@@ -37,43 +22,24 @@ public class DotnetEmarsys {
         if (dotnetConfig.getMerchantId() != null && !dotnetConfig.getMerchantId().isEmpty()) {
             builder.merchantId(dotnetConfig.getMerchantId());
         }
-        if (dotnetConfig.getSharedKeychainAccessGroup() != null && !dotnetConfig.getSharedKeychainAccessGroup().isEmpty()) {
-            builder.sharedPackageNames(Collections.singletonList(dotnetConfig.getSharedKeychainAccessGroup()));        }
-        if (dotnetConfig.getEnableLogs() != null && dotnetConfig.getEnableLogs()) {
+        if (dotnetConfig.getSharedPackageNames() != null && !dotnetConfig.getSharedPackageNames().isEmpty()) {
+            builder.sharedPackageNames(dotnetConfig.getSharedPackageNames());
+        }
+        if (dotnetConfig.getSharedSecret() != null && !dotnetConfig.getSharedSecret().isEmpty()) {
+            builder.sharedSecret(dotnetConfig.getSharedSecret());
+        }
+        if (dotnetConfig.isEnableConsoleLogging()) {
             builder.enableVerboseConsoleLogging();
         }
-
-        EmarsysConfig config = builder.build(); 
+        EmarsysConfig config = builder.build();
         Emarsys.setup(config);
-
-        Emarsys.getPush().setNotificationEventHandler((context, eventName, payload) -> {
-            if (eventListener != null) {
-                eventListener.handleEvent(context, eventName, payload);
-            }
-        });
     }
 
-    public static DotnetEMSConfig config(Application application, String applicationCode, String merchantId, String sharedKeychainAccessGroup, boolean enableLogs) {
-        return new DotnetEMSConfig(application, applicationCode, merchantId, sharedKeychainAccessGroup, enableLogs);
-    }
-
-    public static Boolean handleMessage(Context context, RemoteMessage message) {
-        return EmarsysFirebaseMessagingServiceUtils.handleMessage(context, message);
-    }
-
-    public static void setPushToken(String pushToken) {
-        Emarsys.getPush().setPushToken(pushToken);
-    }
-
-    public static void setPushToken(String pushToken, CompletionListener completionListener) {
-        Emarsys.getPush().setPushToken(pushToken, completionListener::onCompleted);
-    }
-
-    public static void setContact(int contactFieldId, String contactFieldValue) {
+    public static void setContact(int contactFieldId, @NonNull String contactFieldValue) {
         Emarsys.setContact(contactFieldId, contactFieldValue);
     }
 
-    public static void setContact(int contactFieldId, String contactFieldValue, CompletionListener completionListener) {
+    public static void setContact(int contactFieldId, @NonNull String contactFieldValue, @NonNull CompletionListener completionListener) {
         Emarsys.setContact(contactFieldId, contactFieldValue, completionListener::onCompleted);
     }
 
@@ -81,8 +47,12 @@ public class DotnetEmarsys {
         Emarsys.clearContact();
     }
 
-    public static void clearContact(CompletionListener completionListener) {
+    public static void clearContact(@NonNull CompletionListener completionListener) {
         Emarsys.clearContact(completionListener::onCompleted);
+    }
+
+    public static @NonNull DotnetEmarsysPush getPush() {
+        return new DotnetEmarsysPush();
     }
 
 }

@@ -41,4 +41,9 @@ public class Task
 		return cs.Task;
 	}
 
+	public static TaskPush GetPush ()
+	{
+		return new TaskPush();
+	}
+
 }
