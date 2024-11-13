@@ -3,7 +3,7 @@
 class Utils
 {
 
-	public static void DisplayAlert (string title, string message = "", string cancel = "OK")
+	public static void DisplayAlert(string title, string message = "", string cancel = "OK")
 	{
 		MainThread.BeginInvokeOnMainThread(async () =>
 		{
@@ -16,9 +16,9 @@ class Utils
 	}
 
 	#if ANDROID
-	public static void LogResult (string method, Java.Lang.Throwable? error)
+	public static void LogResult(string method, Java.Lang.Throwable? error)
 	#elif IOS
-	public static void LogResult (string method, Foundation.NSError? error)
+	public static void LogResult(string method, Foundation.NSError? error)
 	#endif
 	{
 		if (error == null)

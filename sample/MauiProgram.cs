@@ -13,6 +13,10 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+			})
+			.ConfigureMauiHandlers(handlers =>
+			{
+				handlers.AddHandler(typeof(EmarsysCommon.InlineInAppView), typeof(EmarsysCommon.InlineInAppViewHandler));
 			});
 
 #if DEBUG

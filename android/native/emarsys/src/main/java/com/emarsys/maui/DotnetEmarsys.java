@@ -55,4 +55,8 @@ public class DotnetEmarsys {
         return new DotnetEmarsysPush();
     }
 
+    public static @NonNull DotnetEmarsysInApp getInApp() {
+        return new DotnetEmarsysInApp();
+    }
+
 }

@@ -8,6 +8,10 @@
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
+  </ItemGroup>
+
   <!-- Reference to iOS Binding project -->
   <ItemGroup Condition="$(TargetFramework.Contains('ios'))">
     <ProjectReference Include="..\ios\Emarsys.iOS.Binding\Emarsys.iOS.Binding.csproj" />
@@ -20,8 +24,6 @@
 
   <!-- Reference the Android binding dependencies -->
   <ItemGroup Condition="$(TargetFramework.Contains('android'))">
-    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
-
     <AndroidLibrary Include="..\android\native\emarsys\bin\Release\net8.0-android\outputs\deps\emarsys-3.7.11.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
     <AndroidLibrary Include="..\android\native\emarsys\bin\Release\net8.0-android\outputs\deps\emarsys-sdk-3.7.11.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
     <AndroidLibrary Include="..\android\native\emarsys\bin\Release\net8.0-android\outputs\deps\common-3.7.11.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>

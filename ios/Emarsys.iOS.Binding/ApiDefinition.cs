@@ -1,5 +1,6 @@
 using System;
 using Foundation;
+using UIKit;
 
 namespace EmarsysiOS
 {
@@ -48,6 +49,36 @@ namespace EmarsysiOS
 		[Static]
 		[Export ("getPush")]
 		DotnetEmarsysPush Push { get; }
+
+		// +(DotnetEmarsysInApp * _Nonnull)getInApp __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("getInApp")]
+		DotnetEmarsysInApp InApp { get; }
+	}
+
+	// @interface DotnetEmarsysInApp : NSObject
+	[BaseType (typeof(NSObject))]
+	interface DotnetEmarsysInApp
+	{
+		// -(UIView * _Nonnull)InlineInAppView __attribute__((warn_unused_result("")));
+		[Export ("InlineInAppView")]
+		UIView InlineInAppView ();
+
+		// -(void)setInlineInAppEventHandler:(UIView * _Nonnull)view :(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		[Export ("setInlineInAppEventHandler::")]
+		void SetInlineInAppEventHandler (UIView view, Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
+
+		// -(void)setInlineInAppCompletionBlock:(UIView * _Nonnull)view :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		[Export ("setInlineInAppCompletionBlock::")]
+		void SetInlineInAppCompletionBlock (UIView view, Action<NSError> completionBlock);
+
+		// -(void)setInlineInAppCloseBlock:(UIView * _Nonnull)view :(void (^ _Nonnull)(void))closeBlock;
+		[Export ("setInlineInAppCloseBlock::")]
+		void SetInlineInAppCloseBlock (UIView view, Action closeBlock);
+
+		// -(void)loadInlineInApp:(UIView * _Nonnull)view :(NSString * _Nonnull)viewId;
+		[Export ("loadInlineInApp::")]
+		void LoadInlineInApp (UIView view, string viewId);
 	}
 
 	// @interface DotnetEmarsysPush : NSObject
