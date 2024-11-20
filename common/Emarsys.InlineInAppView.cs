@@ -1,7 +1,7 @@
-﻿using Microsoft.Maui.Handlers;
-using Microsoft.Maui.Platform;
+﻿namespace EmarsysCommon;
 
-namespace EmarsysCommon;
+using Microsoft.Maui.Handlers;
+using Microsoft.Maui.Platform;
 
 #if ANDROID
 using Java.Lang;

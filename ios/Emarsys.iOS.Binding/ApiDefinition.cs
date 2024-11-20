@@ -1,5 +1,6 @@
 using System;
 using Foundation;
+using ObjCRuntime;
 using UIKit;
 
 namespace EmarsysiOS
@@ -45,14 +46,14 @@ namespace EmarsysiOS
 		[Export ("clearContact:")]
 		void ClearContact (Action<NSError> completionBlock);
 
-		// +(DotnetEmarsysPush * _Nonnull)getPush __attribute__((warn_unused_result("")));
+		// @property (readonly, nonatomic, strong, class) DotnetEmarsysPush * _Nonnull push;
 		[Static]
-		[Export ("getPush")]
+		[Export ("push", ArgumentSemantic.Strong)]
 		DotnetEmarsysPush Push { get; }
 
-		// +(DotnetEmarsysInApp * _Nonnull)getInApp __attribute__((warn_unused_result("")));
+		// @property (readonly, nonatomic, strong, class) DotnetEmarsysInApp * _Nonnull inApp;
 		[Static]
-		[Export ("getInApp")]
+		[Export ("inApp", ArgumentSemantic.Strong)]
 		DotnetEmarsysInApp InApp { get; }
 	}
 
@@ -89,6 +90,10 @@ namespace EmarsysiOS
 		[Export ("setDelegate")]
 		void SetDelegate ();
 
+		// -(void)setEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		[Export ("setEventHandler:")]
+		void SetEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
+
 		// -(void)setPushToken:(NSData * _Nonnull)pushToken;
 		[Export ("setPushToken:")]
 		void SetPushToken (NSData pushToken);
@@ -97,9 +102,17 @@ namespace EmarsysiOS
 		[Export ("setPushToken::")]
 		void SetPushToken (NSData pushToken, Action<NSError> completionBlock);
 
-		// -(void)setEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
-		[Export ("setEventHandler:")]
-		void SetEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
+		// -(void)clearPushToken;
+		[Export ("clearPushToken")]
+		void ClearPushToken ();
+
+		// -(void)clearPushToken:(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		[Export ("clearPushToken:")]
+		void ClearPushToken (Action<NSError> completionBlock);
+
+		// -(NSString * _Nullable)getPushToken __attribute__((warn_unused_result("")));
+		[NullAllowed, Export ("getPushToken")]
+		string PushToken { get; }
 
 		// -(void)handleMessage:(NSDictionary * _Nonnull)userInfo;
 		[Export ("handleMessage:")]

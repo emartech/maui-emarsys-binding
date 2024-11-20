@@ -18,7 +18,23 @@ public class TaskPush
 	{
 		var cs = new TaskCompletionSource<Foundation.NSError?>();
 	#endif
-		Emarsys.Push.SetPushToken(pushToken, Utils.OnCompleted((error) =>
+		Emarsys.Push.SetPushToken(pushToken, Utils.CompletionListener((error) =>
+		{
+			cs.SetResult(error);
+		}));
+		return cs.Task;
+	}
+
+	#if ANDROID
+	public Task<Java.Lang.Throwable?> ClearPushToken()
+	{
+		var cs = new TaskCompletionSource<Java.Lang.Throwable?>();
+	#elif IOS
+	public Task<Foundation.NSError?> ClearPushToken()
+	{
+		var cs = new TaskCompletionSource<Foundation.NSError?>();
+	#endif
+		Emarsys.Push.ClearPushToken(Utils.CompletionListener((error) =>
 		{
 			cs.SetResult(error);
 		}));

@@ -18,7 +18,7 @@ public class Task
 	{
 		var cs = new TaskCompletionSource<Foundation.NSError?>();
 	#endif
-		Emarsys.SetContact(contactFieldId, contactFieldValue, Utils.OnCompleted((error) =>
+		Emarsys.SetContact(contactFieldId, contactFieldValue, Utils.CompletionListener((error) =>
 		{
 			cs.SetResult(error);
 		}));
@@ -34,16 +34,13 @@ public class Task
 	{
 		var cs = new TaskCompletionSource<Foundation.NSError?>();
 	#endif
-		Emarsys.ClearContact(Utils.OnCompleted((error) =>
+		Emarsys.ClearContact(Utils.CompletionListener((error) =>
 		{
 			cs.SetResult(error);
 		}));
 		return cs.Task;
 	}
 
-	public static TaskPush GetPush()
-	{
-		return new TaskPush();
-	}
+	public static TaskPush Push = new TaskPush();
 
 }

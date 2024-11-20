@@ -14,6 +14,11 @@ public class DotnetEmarsysPush: NSObject {
     }
     
     @objc
+    public func setEventHandler(_ eventHandler: @escaping EventHandler) {
+        Emarsys.push.notificationEventHandler = eventHandler
+    }
+    
+    @objc
     public func setPushToken(_ pushToken: Data) {
         Emarsys.push.setPushToken(pushToken)
     }
@@ -24,8 +29,19 @@ public class DotnetEmarsysPush: NSObject {
     }
     
     @objc
-    public func setEventHandler(_ eventHandler: @escaping EventHandler) {
-        Emarsys.push.notificationEventHandler = eventHandler
+    public func clearPushToken() {
+        Emarsys.push.clearPushToken()
+    }
+    
+    @objc
+    public func clearPushToken(_ completionBlock: @escaping CompletionBlock) {
+        Emarsys.push.clearPushToken(completionBlock: completionBlock)
+    }
+    
+    @objc
+    public func getPushToken() -> String? {
+        guard let token = Emarsys.push.pushToken() else { return nil }
+        return token.map { data in String(format: "%02.2hhx", data) }.joined()
     }
     
     @objc

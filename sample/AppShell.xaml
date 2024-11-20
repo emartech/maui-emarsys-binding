@@ -15,7 +15,7 @@
         <ShellContent
             Title="Push"
             Icon="message.png"
-            ContentTemplate="{DataTemplate local:MainPage}" />
+            ContentTemplate="{DataTemplate local:PushPage}" />
         <ShellContent
             Title="InApp"
             Icon="note.png"

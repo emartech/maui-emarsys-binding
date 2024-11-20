@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="sample.PushPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Button
+                Text="Set Push Token"
+                SemanticProperties.Hint="Set Push Token"
+                Clicked="OnSetPushTokenClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Clear Push Token"
+                SemanticProperties.Hint="Clear Push Token"
+                Clicked="OnClearPushTokenClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Get Push Token"
+                SemanticProperties.Hint="Get Push Token"
+                Clicked="OnGetPushTokenClicked"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
