@@ -22,7 +22,7 @@ public partial class PushPage : ContentPage
 	{
 		#if ANDROID
 		var pushToken = FirebaseMessaging.Instance.GetToken().Result.ToString();
-		switch (Utils.EmarsysResultMode) 
+		switch (Utils.EmarsysResultMode)
 		{
 			case Utils.ResultMode.Task:
 				var error = await EmarsysTask.Push.SetPushToken(pushToken);
@@ -46,7 +46,7 @@ public partial class PushPage : ContentPage
 
 	private async void OnClearPushTokenClicked(object sender, EventArgs e)
 	{
-		switch (Utils.EmarsysResultMode) 
+		switch (Utils.EmarsysResultMode)
 		{
 			case Utils.ResultMode.Task:
 				var error = await EmarsysTask.Push.ClearPushToken();

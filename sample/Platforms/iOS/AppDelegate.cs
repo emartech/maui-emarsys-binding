@@ -14,7 +14,7 @@ public class AppDelegate : MauiUIApplicationDelegate
 
 	public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 	{
-		var config = Emarsys.Config("EMSF3-5F5C2", "102F6519FC312033", null, true);
+		var config = Emarsys.Config("EMS12-04EC1", "1DF86BF95CBE8F19", null, true);
 		Emarsys.Setup(config);
 		Emarsys.Push.SetDelegate();
 		Emarsys.Push.SetEventHandler((eventName, payload) =>
@@ -48,7 +48,7 @@ public class AppDelegate : MauiUIApplicationDelegate
 	public async void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
 	{
 		Console.WriteLine("Received native push token");
-		switch (Utils.EmarsysResultMode) 
+		switch (Utils.EmarsysResultMode)
 		{
 			case Utils.ResultMode.Task:
 				var error = await EmarsysTask.Push.SetPushToken(deviceToken);

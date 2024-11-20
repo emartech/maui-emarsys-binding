@@ -11,7 +11,7 @@
         <ShellContent
             Title="Config"
             Icon="gear.png"
-            ContentTemplate="{DataTemplate local:MainPage}" />
+            ContentTemplate="{DataTemplate local:ConfigPage}" />
         <ShellContent
             Title="Push"
             Icon="message.png"
@@ -23,7 +23,7 @@
         <ShellContent
             Title="Predict"
             Icon="tag.png"
-            ContentTemplate="{DataTemplate local:MainPage}" />
+            ContentTemplate="{DataTemplate local:ConfigPage}" />
     </TabBar>
 
 </Shell>

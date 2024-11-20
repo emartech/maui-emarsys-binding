@@ -1,8 +1,10 @@
 ﻿namespace EmarsysCommon;
 
 #if ANDROID
+using Java.Lang;
 using Emarsys = EmarsysAndroid.DotnetEmarsys;
 #elif IOS
+using Foundation;
 using Emarsys = EmarsysiOS.DotnetEmarsys;
 #endif
 
@@ -10,13 +12,13 @@ public class Task
 {
 
 	#if ANDROID
-	public static Task<Java.Lang.Throwable?> SetContact(int contactFieldId, string contactFieldValue)
+	public static Task<Throwable?> SetContact(int contactFieldId, string contactFieldValue)
 	{
-		var cs = new TaskCompletionSource<Java.Lang.Throwable?>();
+		var cs = new TaskCompletionSource<Throwable?>();
 	#elif IOS
-	public static Task<Foundation.NSError?> SetContact(int contactFieldId, string contactFieldValue)
+	public static Task<NSError?> SetContact(int contactFieldId, string contactFieldValue)
 	{
-		var cs = new TaskCompletionSource<Foundation.NSError?>();
+		var cs = new TaskCompletionSource<NSError?>();
 	#endif
 		Emarsys.SetContact(contactFieldId, contactFieldValue, Utils.CompletionListener((error) =>
 		{
@@ -26,13 +28,13 @@ public class Task
 	}
 
 	#if ANDROID
-	public static Task<Java.Lang.Throwable?> ClearContact()
+	public static Task<Throwable?> ClearContact()
 	{
-		var cs = new TaskCompletionSource<Java.Lang.Throwable?>();
+		var cs = new TaskCompletionSource<Throwable?>();
 	#elif IOS
-	public static Task<Foundation.NSError?> ClearContact()
+	public static Task<NSError?> ClearContact()
 	{
-		var cs = new TaskCompletionSource<Foundation.NSError?>();
+		var cs = new TaskCompletionSource<NSError?>();
 	#endif
 		Emarsys.ClearContact(Utils.CompletionListener((error) =>
 		{
