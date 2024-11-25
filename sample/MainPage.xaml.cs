@@ -1,10 +1,6 @@
 ﻿namespace sample;
 
-#if IOS
-using Emarsys = EmarsysiOS.DotnetEmarsys;
-#elif ANDROID
-using Emarsys = EmarsysAndroid.DotnetEmarsys;
-#endif
+using EmarsysTask = EmarsysCommon.Task;
 
 public partial class MainPage : ContentPage
 {
@@ -14,15 +10,21 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 	}
 
-	private void OnSetContactClicked(object sender, EventArgs e)
+	private async void OnSetContactClicked(object sender, EventArgs e)
 	{
-		Emarsys.SetContact(3, "eduardo.zatoni@emarsys.com");
-		Console.WriteLine("Set contact done!");
+		// #if ANDROID
+		// Java.Lang.Throwable? error =
+		// #elif IOS
+		// Foundation.NSError? error =
+		// #endif
+		// 	await EmarsysTask.SetContact(3, "eduardo.zatoni@emarsys.com");
+		var error = await EmarsysTask.SetContact(3, "eduardo.zatoni@emarsys.com");
+		Utils.LogResult("SetContact", error);
 	}
 
-	private void OnClearContactClicked(object sender, EventArgs e)
+	private async void OnClearContactClicked(object sender, EventArgs e)
 	{
-		Emarsys.ClearContact();
-		Console.WriteLine("Clear contact done!");
+		var error = await EmarsysTask.ClearContact();
+		Utils.LogResult("ClearContact", error);
 	}
 }

@@ -39,8 +39,8 @@ dependencies {
 
     // Copy dependencies for binding library
     // Uncomment line below and replace {dependency.name.goes.here} with your dependency
-     "copyDependencies"("com.emarsys:emarsys-sdk:3.7.11")
-     "copyDependencies"("com.emarsys:emarsys-firebase:3.7.11")
+    "copyDependencies"("com.emarsys:emarsys-sdk:3.7.11")
+    "copyDependencies"("com.emarsys:emarsys-firebase:3.7.11")
 }
 
 // Copy dependencies for binding library

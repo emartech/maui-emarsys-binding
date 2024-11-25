@@ -9,16 +9,18 @@
 /* Begin PBXBuildFile section */
 		83E34F572C21CB2B008AA950 /* MauiEmarsys.h in Headers */ = {isa = PBXBuildFile; fileRef = 83E34F562C21CB2B008AA950 /* MauiEmarsys.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83E34F5E2C21CC53008AA950 /* DotnetEmarsys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E34F5D2C21CC53008AA950 /* DotnetEmarsys.swift */; };
+		84494A3D2CE20914007C8007 /* DotnetEmarsysPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84494A3C2CE20914007C8007 /* DotnetEmarsysPush.swift */; };
+		84494A3F2CE20956007C8007 /* DotnetEmarsysTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84494A3E2CE20956007C8007 /* DotnetEmarsysTypes.swift */; };
 		C824337F2CD36AE900D2EDCD /* EmarsysNotificationExtensionLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = C824337E2CD36AE900D2EDCD /* EmarsysNotificationExtensionLibrary */; };
 		C82433812CD36AEC00D2EDCD /* EmarsysSDKLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = C82433802CD36AEC00D2EDCD /* EmarsysSDKLibrary */; };
-		C8D2522A2CDBAD2200488FD1 /* DotnetEMSConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D252292CDBAD2000488FD1 /* DotnetEMSConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		83E34F532C21CB2B008AA950 /* MauiEmarsys.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MauiEmarsys.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E34F562C21CB2B008AA950 /* MauiEmarsys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MauiEmarsys.h; sourceTree = "<group>"; };
 		83E34F5D2C21CC53008AA950 /* DotnetEmarsys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotnetEmarsys.swift; sourceTree = "<group>"; };
-		C8D252292CDBAD2000488FD1 /* DotnetEMSConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotnetEMSConfig.swift; sourceTree = "<group>"; };
+		84494A3C2CE20914007C8007 /* DotnetEmarsysPush.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotnetEmarsysPush.swift; sourceTree = "<group>"; };
+		84494A3E2CE20956007C8007 /* DotnetEmarsysTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotnetEmarsysTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,8 @@
 			children = (
 				83E34F562C21CB2B008AA950 /* MauiEmarsys.h */,
 				83E34F5D2C21CC53008AA950 /* DotnetEmarsys.swift */,
-				C8D252292CDBAD2000488FD1 /* DotnetEMSConfig.swift */,
+				84494A3E2CE20956007C8007 /* DotnetEmarsysTypes.swift */,
+				84494A3C2CE20914007C8007 /* DotnetEmarsysPush.swift */,
 			);
 			path = MauiEmarsys;
 			sourceTree = "<group>";
@@ -151,8 +154,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84494A3D2CE20914007C8007 /* DotnetEmarsysPush.swift in Sources */,
 				83E34F5E2C21CC53008AA950 /* DotnetEmarsys.swift in Sources */,
-				C8D2522A2CDBAD2200488FD1 /* DotnetEMSConfig.swift in Sources */,
+				84494A3F2CE20956007C8007 /* DotnetEmarsysTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

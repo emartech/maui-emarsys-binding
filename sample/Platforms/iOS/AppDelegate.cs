@@ -2,7 +2,6 @@
 using UIKit;
 using UserNotifications;
 using Emarsys = EmarsysiOS.DotnetEmarsys;
-using MauiAppApplication = Microsoft.Maui.Controls.Application;
 
 namespace sample;
 
@@ -15,29 +14,21 @@ public class AppDelegate : MauiUIApplicationDelegate
 	{
 		var config = Emarsys.Config("EMSF3-5F5C2", "102F6519FC312033", null, true);
 		Emarsys.Setup(config);
-
-		Emarsys.PushEventHandler = (eventName, payload) =>
+		Emarsys.Push.SetDelegate();
+		Emarsys.Push.SetEventHandler((eventName, payload) =>
 		{
-			var payloadString = payload?.Description ?? "No payload";
-			MainThread.BeginInvokeOnMainThread(async () =>
-			{
-				await MauiAppApplication.Current.MainPage.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}", "OK");
-			});
-		};
+			string payloadString = payload?.Description ?? "No payload";
+			Utils.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}");
+		});
 
+		UIApplication.SharedApplication.RegisterForRemoteNotifications();
 		UNUserNotificationCenter.Current.RequestAuthorization(
 			UNAuthorizationOptions.Alert | UNAuthorizationOptions.Sound | UNAuthorizationOptions.Badge,
 			(approved, err) =>
 			{
-				if (approved)
-				{
-					InvokeOnMainThread(UIApplication.SharedApplication.RegisterForRemoteNotifications);
-				}
-				else
-				{
-					Console.WriteLine("Push notification permission denied");
-				}
-			});
+				Console.WriteLine("Push notification permission " + (approved ? "approved" : "denied"));
+			}
+		);
 
 		return base.FinishedLaunching(application, launchOptions);
 	}
@@ -46,7 +37,7 @@ public class AppDelegate : MauiUIApplicationDelegate
 	public void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
 	{
 		Console.WriteLine("Received native push token");
-		Emarsys.SetPushToken(deviceToken);
+		Emarsys.Push.SetPushToken(deviceToken);
 	}
 
 

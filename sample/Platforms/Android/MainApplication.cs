@@ -2,18 +2,17 @@
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using EmarsysPlugin = EmarsysAndroid.DotnetEmarsys;
-using Org.Json;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.ApplicationModel;
 using System.Collections.Generic;
-using MauiAppApplication = Microsoft.Maui.Controls.Application;
+using EmarsysBinding = EmarsysAndroid.DotnetEmarsys;
+using EmarsysEventHandler = EmarsysCommon.EventHandler;
 
 namespace sample;
 
 [Application]
-public class MainApplication : MauiApplication, EmarsysPlugin.IEmarsysEventListener
+public class MainApplication : MauiApplication
 {
     public MainApplication(IntPtr handle, JniHandleOwnership ownership)
         : base(handle, ownership)
@@ -26,10 +25,13 @@ public class MainApplication : MauiApplication, EmarsysPlugin.IEmarsysEventListe
     {
         base.OnCreate();
 
-        var config = EmarsysPlugin.Config(this, "EMSF3-5F5C2",  "102F6519FC312033", null, true);
-        EmarsysPlugin.Setup(config);
-
-        EmarsysPlugin.SetEventListener(this);
+        var config = EmarsysBinding.Config(this, "EMSF3-5F5C2",  "102F6519FC312033", null, null, true);
+        EmarsysBinding.Setup(config);
+        EmarsysBinding.Push.SetEventHandler(new EmarsysEventHandler((context, eventName, payload) =>
+        {
+            string payloadString = payload?.ToString() ?? "No payload";
+            Utils.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}");
+        }));
 
         if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
         {
@@ -37,18 +39,9 @@ public class MainApplication : MauiApplication, EmarsysPlugin.IEmarsysEventListe
         }
     }
 
-    public void OnEvent(Context? context, string? eventName, JSONObject? payload)
-    {
-        string payloadString = payload?.ToString();
-        MainThread.BeginInvokeOnMainThread(async () =>
-        {
-            await MauiAppApplication.Current.MainPage.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}", "OK");
-        });
-    }
-
     private void CreateNotificationChannels()
     {
-#pragma warning disable CA1416
+        #pragma warning disable CA1416
         var channel1 = new NotificationChannel("ems_sample_news", "News", NotificationImportance.High)
         {
             Description = "News"
@@ -64,6 +57,6 @@ public class MainApplication : MauiApplication, EmarsysPlugin.IEmarsysEventListe
             manager.CreateNotificationChannel(channel1);
             manager.CreateNotificationChannel(channel2);
         }
-#pragma warning restore CA1416
+        #pragma warning restore CA1416
     }
 }
