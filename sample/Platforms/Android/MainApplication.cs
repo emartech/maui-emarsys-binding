@@ -25,7 +25,7 @@ public class MainApplication : MauiApplication
     {
         base.OnCreate();
 
-        var config = EmarsysBinding.Config(this, "EMSF3-5F5C2",  "102F6519FC312033", null, null, true);
+        var config = EmarsysBinding.Config(this, "EMS12-04EC1", "1DF86BF95CBE8F19", null, null, true);
         EmarsysBinding.Setup(config);
         EmarsysBinding.Push.SetEventHandler(new EmarsysEventHandler((context, eventName, payload) =>
         {

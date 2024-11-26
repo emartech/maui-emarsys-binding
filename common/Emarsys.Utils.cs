@@ -12,12 +12,12 @@ public class Utils
 {
 
 	#if ANDROID
-	public static CompletionListener OnCompleted(Action<Throwable?> onInvoked)
+	public static CompletionListener CompletionListener(Action<Throwable?> onInvoked)
 	{
 		return new CompletionListener(onInvoked);
 	}
 	#elif IOS
-	public static Action<NSError?> OnCompleted(Action<NSError?> onInvoked)
+	public static Action<NSError?> CompletionListener(Action<NSError?> onInvoked)
 	{
 		return onInvoked;
 	}

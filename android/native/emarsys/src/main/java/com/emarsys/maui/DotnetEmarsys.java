@@ -51,12 +51,7 @@ public class DotnetEmarsys {
         Emarsys.clearContact(completionListener::onCompleted);
     }
 
-    public static @NonNull DotnetEmarsysPush getPush() {
-        return new DotnetEmarsysPush();
-    }
-
-    public static @NonNull DotnetEmarsysInApp getInApp() {
-        return new DotnetEmarsysInApp();
-    }
+    public static @NonNull DotnetEmarsysPush push = new DotnetEmarsysPush();
+    public static @NonNull DotnetEmarsysInApp inApp = new DotnetEmarsysInApp();
 
 }

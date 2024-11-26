@@ -20,7 +20,7 @@ public partial class InAppPage : ContentPage
 			}
 			else
 			{
-				Console.WriteLine($"InlineInApp error: {error}");
+				Utils.LogResult("InlineInApp", error);
 			}
 		});
 		inlineInAppView.SetCloseListener(() =>

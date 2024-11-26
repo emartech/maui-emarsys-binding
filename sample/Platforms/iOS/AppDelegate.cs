@@ -2,6 +2,8 @@
 using UIKit;
 using UserNotifications;
 using Emarsys = EmarsysiOS.DotnetEmarsys;
+using EmarsysTask = EmarsysCommon.Task;
+using EmarsysUtils = EmarsysCommon.Utils;
 
 namespace sample;
 
@@ -12,7 +14,7 @@ public class AppDelegate : MauiUIApplicationDelegate
 
 	public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 	{
-		var config = Emarsys.Config("EMSF3-5F5C2", "102F6519FC312033", null, true);
+		var config = Emarsys.Config("EMS12-04EC1", "1DF86BF95CBE8F19", null, true);
 		Emarsys.Setup(config);
 		Emarsys.Push.SetDelegate();
 		Emarsys.Push.SetEventHandler((eventName, payload) =>
@@ -21,25 +23,49 @@ public class AppDelegate : MauiUIApplicationDelegate
 			Utils.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}");
 		});
 
-		UIApplication.SharedApplication.RegisterForRemoteNotifications();
-		UNUserNotificationCenter.Current.RequestAuthorization(
-			UNAuthorizationOptions.Alert | UNAuthorizationOptions.Sound | UNAuthorizationOptions.Badge,
-			(approved, err) =>
+		UNUserNotificationCenter.Current.GetNotificationSettings((settings) =>
+		{
+			MainThread.BeginInvokeOnMainThread(() =>
 			{
-				Console.WriteLine("Push notification permission " + (approved ? "approved" : "denied"));
-			}
-		);
+				if (settings.AuthorizationStatus == UNAuthorizationStatus.NotDetermined)
+				{
+					UIApplication.SharedApplication.RegisterForRemoteNotifications();
+				}
+				UNUserNotificationCenter.Current.RequestAuthorization(
+					UNAuthorizationOptions.Alert | UNAuthorizationOptions.Sound | UNAuthorizationOptions.Badge,
+					(approved, err) =>
+					{
+						Console.WriteLine("Push notification permission " + (approved ? "approved" : "denied"));
+					}
+				);
+			});
+		});
 
 		return base.FinishedLaunching(application, launchOptions);
 	}
 
 	[Export("application:didRegisterForRemoteNotificationsWithDeviceToken:")]
-	public void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+	public async void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
 	{
 		Console.WriteLine("Received native push token");
-		Emarsys.Push.SetPushToken(deviceToken);
+		switch (Utils.EmarsysResultMode)
+		{
+			case Utils.ResultMode.Task:
+				var error = await EmarsysTask.Push.SetPushToken(deviceToken);
+				Utils.LogResult("SetPushToken T", error);
+				break;
+			case Utils.ResultMode.CompletionListener:
+				Emarsys.Push.SetPushToken(deviceToken, EmarsysUtils.CompletionListener((error) =>
+				{
+					Utils.LogResult("SetPushToken CL", error);
+				}));
+				break;
+			case Utils.ResultMode.Ignore:
+				Emarsys.Push.SetPushToken(deviceToken);
+				Utils.LogResult("SetPushToken");
+				break;
+		}
 	}
-
 
 	[Export("application:didFailToRegisterForRemoteNotificationsWithError:")]
 	public void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
