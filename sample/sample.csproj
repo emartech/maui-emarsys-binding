@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
 
@@ -20,8 +19,8 @@
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">24.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.0</SupportedOSPlatformVersion>
 
 		<CodesignKey>Apple Development: (4J5FXBB97U)</CodesignKey>
 		<CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
@@ -56,6 +55,12 @@
 		<PackageReference Include="Xamarin.AndroidX.Fragment.Ktx" Version="1.8.4" />
 		<PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime.Ktx" Version="2.8.6" />
 		<PackageReference Include="Xamarin.AndroidX.Lifecycle.Runtime" Version="2.8.6" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$(TargetFramework.Contains('ios'))">
+		<ProjectReference Include="..\sampleNotificationService\sampleNotificationService.csproj">
+			<IsAppExtension>true</IsAppExtension>
+		</ProjectReference>
 	</ItemGroup>
 
 	<!-- Reference to Emarsys Binding project -->
