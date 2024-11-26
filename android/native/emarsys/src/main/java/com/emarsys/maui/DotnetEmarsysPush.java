@@ -32,7 +32,7 @@ public class DotnetEmarsysPush {
         return Emarsys.getPush().getPushToken();
     }
 
-    public Boolean handleMessage(@NonNull Context context, @NonNull RemoteMessage message) {
+    public boolean handleMessage(@NonNull Context context, @NonNull RemoteMessage message) {
         return EmarsysFirebaseMessagingServiceUtils.handleMessage(context, message);
     }
 
