@@ -4,5 +4,5 @@
 
 import Foundation
 
-public typealias CompletionBlock = ((Error?) -> Void)
-public typealias EventHandler = ((String, [String: Any]?) -> Void)
+public typealias CompletionBlock = (Error?) -> Void
+public typealias EventHandler = (String, [String: Any]?) -> Void

@@ -10,11 +10,11 @@ public class TaskPush
 {
 
 	#if ANDROID
-	public Task<Java.Lang.Throwable?> SetPushToken (string pushToken)
+	public Task<Java.Lang.Throwable?> SetPushToken(string pushToken)
 	{
 		var cs = new TaskCompletionSource<Java.Lang.Throwable?>();
 	#elif IOS
-	public Task<Foundation.NSError?> SetPushToken (Foundation.NSData pushToken)
+	public Task<Foundation.NSError?> SetPushToken(Foundation.NSData pushToken)
 	{
 		var cs = new TaskCompletionSource<Foundation.NSError?>();
 	#endif

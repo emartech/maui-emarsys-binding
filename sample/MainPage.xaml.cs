@@ -27,4 +27,5 @@ public partial class MainPage : ContentPage
 		var error = await EmarsysTask.ClearContact();
 		Utils.LogResult("ClearContact", error);
 	}
+
 }

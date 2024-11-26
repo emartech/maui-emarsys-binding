@@ -58,4 +58,9 @@ public class DotnetEmarsys: NSObject {
         return DotnetEmarsysPush()
     }
     
+    @objc
+    public static func getInApp() -> DotnetEmarsysInApp {
+        return DotnetEmarsysInApp()
+    }
+    
 }

@@ -7,9 +7,23 @@
     Shell.FlyoutBehavior="Disabled"
     Title="sample">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Config"
+            Icon="gear.png"
+            ContentTemplate="{DataTemplate local:MainPage}" />
+        <ShellContent
+            Title="Push"
+            Icon="message.png"
+            ContentTemplate="{DataTemplate local:MainPage}" />
+        <ShellContent
+            Title="InApp"
+            Icon="note.png"
+            ContentTemplate="{DataTemplate local:InAppPage}" />
+        <ShellContent
+            Title="Predict"
+            Icon="tag.png"
+            ContentTemplate="{DataTemplate local:MainPage}" />
+    </TabBar>
 
 </Shell>

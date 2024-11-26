@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ems="clr-namespace:EmarsysCommon;assembly=Emarsys.Binding"
+             x:Class="sample.InAppPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Button
+                Text="Load Inline InApp"
+                SemanticProperties.Hint="Load Inline InApp"
+                Clicked="OnLoadInlineInAppClicked"
+                HorizontalOptions="Fill" />
+            <ems:InlineInAppView
+                x:Name="inlineInAppView"
+                HorizontalOptions="Fill"
+                HeightRequest="0" />
+
+            <BoxView HeightRequest="1" Color="Grey"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -7,31 +7,12 @@
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a race car number eight" />
-
-            <Label
-                Text="Hello, World!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
-
-            <Label
-                Text="Welcome to Emarsys MAUI Sample App"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to Emarsys MAUI Sample App" />
-
             <Button
-                x:Name="SetContactBtn"
                 Text="Set Contact" 
                 SemanticProperties.Hint="Set Contact"
                 Clicked="OnSetContactClicked"
                 HorizontalOptions="Fill" />
             <Button
-                x:Name="ClearContactBtn"
                 Text="Clear Contact"
                 SemanticProperties.Hint="Clear Contact"
                 Clicked="OnClearContactClicked"

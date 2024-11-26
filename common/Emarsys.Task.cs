@@ -10,11 +10,11 @@ public class Task
 {
 
 	#if ANDROID
-	public static Task<Java.Lang.Throwable?> SetContact (int contactFieldId, string contactFieldValue)
+	public static Task<Java.Lang.Throwable?> SetContact(int contactFieldId, string contactFieldValue)
 	{
 		var cs = new TaskCompletionSource<Java.Lang.Throwable?>();
 	#elif IOS
-	public static Task<Foundation.NSError?> SetContact (int contactFieldId, string contactFieldValue)
+	public static Task<Foundation.NSError?> SetContact(int contactFieldId, string contactFieldValue)
 	{
 		var cs = new TaskCompletionSource<Foundation.NSError?>();
 	#endif
@@ -26,11 +26,11 @@ public class Task
 	}
 
 	#if ANDROID
-	public static Task<Java.Lang.Throwable?> ClearContact ()
+	public static Task<Java.Lang.Throwable?> ClearContact()
 	{
 		var cs = new TaskCompletionSource<Java.Lang.Throwable?>();
 	#elif IOS
-	public static Task<Foundation.NSError?> ClearContact ()
+	public static Task<Foundation.NSError?> ClearContact()
 	{
 		var cs = new TaskCompletionSource<Foundation.NSError?>();
 	#endif
@@ -41,7 +41,7 @@ public class Task
 		return cs.Task;
 	}
 
-	public static TaskPush GetPush ()
+	public static TaskPush GetPush()
 	{
 		return new TaskPush();
 	}
