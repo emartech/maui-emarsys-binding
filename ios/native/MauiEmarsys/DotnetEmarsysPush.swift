@@ -49,4 +49,17 @@ public class DotnetEmarsysPush: NSObject {
         Emarsys.push.handleMessage(userInfo: userInfo)
     }
     
+    @objc
+    private let notificationService = EMSNotificationService()
+    
+    @objc
+    public func didReceiveNotificationRequest(_ request: UNNotificationRequest, _ contentHandler: @escaping (UNNotificationContent) -> Void) {
+        notificationService.didReceive(request, withContentHandler: contentHandler)
+    }
+    
+    @objc
+    public func timeWillExpire() {
+        notificationService.serviceExtensionTimeWillExpire()
+    }
+    
 }

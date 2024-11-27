@@ -2,6 +2,7 @@ using System;
 using Foundation;
 using ObjCRuntime;
 using UIKit;
+using UserNotifications;
 
 namespace EmarsysiOS
 {
@@ -117,5 +118,13 @@ namespace EmarsysiOS
 		// -(void)handleMessage:(NSDictionary * _Nonnull)userInfo;
 		[Export ("handleMessage:")]
 		void HandleMessage (NSDictionary userInfo);
+
+		// -(void)didReceiveNotificationRequest:(UNNotificationRequest * _Nonnull)request :(void (^ _Nonnull)(UNNotificationContent * _Nonnull))contentHandler;
+		[Export ("didReceiveNotificationRequest::")]
+		void DidReceiveNotificationRequest (UNNotificationRequest request, Action<UNNotificationContent> contentHandler);
+
+		// -(void)timeWillExpire;
+		[Export ("timeWillExpire")]
+		void TimeWillExpire ();
 	}
 }

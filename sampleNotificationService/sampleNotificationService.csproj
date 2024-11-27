@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-ios</TargetFrameworks>
+
+		<OutputType>Library</OutputType>
+		<RootNamespace>sampleNotificationService</RootNamespace>
+		<IsAppExtension>true</IsAppExtension>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<ApplicationId>com.emarsys.maui.sample.sampleNotificationService</ApplicationId>
+
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.0</SupportedOSPlatformVersion>
+
+		<CodesignKey>Apple Development: (4J5FXBB97U)</CodesignKey>
+		<CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="Info.plist" />
+	</ItemGroup>
+
+	<!-- Reference to Emarsys Binding project -->
+	<ItemGroup>
+		<ProjectReference Include="..\common\Emarsys.Binding.csproj" />
+	</ItemGroup>
+</Project>
