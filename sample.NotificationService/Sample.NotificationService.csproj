@@ -3,7 +3,7 @@
 		<TargetFrameworks>net8.0-ios</TargetFrameworks>
 
 		<OutputType>Library</OutputType>
-		<RootNamespace>sample.NotificationService</RootNamespace>
+		<RootNamespace>Sample.NotificationService</RootNamespace>
 		<IsAppExtension>true</IsAppExtension>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>

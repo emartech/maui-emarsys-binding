@@ -1,23 +1,36 @@
-﻿namespace EmarsysCommon;
+﻿namespace EmarsysBinding;
 
 #if ANDROID
 using Java.Lang;
 using Android.Content;
 using Org.Json;
+using EmarsysAndroid;
 #elif IOS
 using Foundation;
 #endif
 
-public class Utils
+class Utils
 {
 
 	#if ANDROID
-	public static CompletionListener CompletionListener(Action<Throwable?> onInvoked)
+	public static CompletionListener CompletionListener(Action<Throwable?>? onInvoked)
 	{
 		return new CompletionListener(onInvoked);
 	}
 	#elif IOS
-	public static Action<NSError?> CompletionListener(Action<NSError?> onInvoked)
+	public static Action<NSError?>? CompletionListener(Action<NSError?>? onInvoked)
+	{
+		return onInvoked;
+	}
+	#endif
+
+	#if ANDROID
+	public static EventHandler EventHandler(Action<Context, string, JSONObject?> onInvoked)
+	{
+		return new EventHandler(onInvoked);
+	}
+	#elif IOS
+	public static Action<NSString, NSDictionary<NSString, NSObject>> EventHandler(Action<NSString, NSDictionary<NSString, NSObject>> onInvoked)
 	{
 		return onInvoked;
 	}
@@ -26,11 +39,11 @@ public class Utils
 }
 
 #if ANDROID
-public class CompletionListener : Object, EmarsysAndroid.ICompletionListener
+class CompletionListener : Object, ICompletionListener
 {
-	private readonly Action<Throwable?> onInvoked;
+	private readonly Action<Throwable?>? onInvoked;
 
-	public CompletionListener(Action<Throwable?> onInvoked)
+	public CompletionListener(Action<Throwable?>? onInvoked)
 	{
 		this.onInvoked = onInvoked;
 	}
@@ -41,7 +54,7 @@ public class CompletionListener : Object, EmarsysAndroid.ICompletionListener
 	}
 }
 
-public class EventHandler : Object, EmarsysAndroid.IEventHandler
+class EventHandler : Object, IEventHandler
 {
 	private readonly Action<Context, string, JSONObject?> onInvoked;
 

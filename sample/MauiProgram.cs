@@ -1,4 +1,4 @@
-﻿namespace sample;
+﻿namespace Sample;
 
 using Microsoft.Extensions.Logging;
 
@@ -16,7 +16,7 @@ public static class MauiProgram
 			})
 			.ConfigureMauiHandlers(handlers =>
 			{
-				handlers.AddHandler(typeof(EmarsysCommon.InlineInAppView), typeof(EmarsysCommon.InlineInAppViewHandler));
+				handlers.AddHandler(typeof(EmarsysBinding.InlineInAppView), typeof(EmarsysBinding.InlineInAppViewHandler));
 			});
 
 #if DEBUG

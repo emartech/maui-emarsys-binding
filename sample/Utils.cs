@@ -1,4 +1,4 @@
-﻿namespace sample;
+﻿namespace Sample;
 
 class Utils
 {

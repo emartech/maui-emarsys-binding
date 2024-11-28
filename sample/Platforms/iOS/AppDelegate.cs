@@ -1,11 +1,9 @@
 ﻿using Foundation;
 using UIKit;
 using UserNotifications;
-using Emarsys = EmarsysiOS.DotnetEmarsys;
-using EmarsysTask = EmarsysCommon.Task;
-using EmarsysUtils = EmarsysCommon.Utils;
+using EmarsysBinding;
 
-namespace sample;
+namespace Sample;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate
@@ -55,10 +53,10 @@ public class AppDelegate : MauiUIApplicationDelegate
 				Utils.LogResult("SetPushToken T", error);
 				break;
 			case Utils.ResultMode.CompletionListener:
-				Emarsys.Push.SetPushToken(deviceToken, EmarsysUtils.CompletionListener((error) =>
+				Emarsys.Push.SetPushToken(deviceToken, (error) =>
 				{
 					Utils.LogResult("SetPushToken CL", error);
-				}));
+				});
 				break;
 			case Utils.ResultMode.Ignore:
 				Emarsys.Push.SetPushToken(deviceToken);

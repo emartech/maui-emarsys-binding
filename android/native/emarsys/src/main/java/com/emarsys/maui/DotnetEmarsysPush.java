@@ -12,16 +12,8 @@ public class DotnetEmarsysPush {
         Emarsys.getPush().setNotificationEventHandler(eventHandler::handleEvent);
     }
 
-    public void setPushToken(@NonNull String pushToken) {
-        Emarsys.getPush().setPushToken(pushToken);
-    }
-
     public void setPushToken(@NonNull String pushToken, @NonNull CompletionListener completionListener) {
         Emarsys.getPush().setPushToken(pushToken, completionListener::onCompleted);
-    }
-
-    public void clearPushToken() {
-        Emarsys.getPush().clearPushToken();
     }
 
     public void clearPushToken(@NonNull CompletionListener completionListener) {
