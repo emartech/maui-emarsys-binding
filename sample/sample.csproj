@@ -58,7 +58,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="$(TargetFramework.Contains('ios'))">
-		<ProjectReference Include="..\sampleNotificationService\sampleNotificationService.csproj">
+		<ProjectReference Include="..\sample.NotificationService\sample.NotificationService.csproj">
 			<IsAppExtension>true</IsAppExtension>
 		</ProjectReference>
 	</ItemGroup>
