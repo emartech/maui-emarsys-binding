@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.emarsys.Emarsys;
 import com.emarsys.config.EmarsysConfig;
 import java.util.List;
+import java.util.Map;
 
 public class DotnetEmarsys {
 
@@ -33,6 +34,7 @@ public class DotnetEmarsys {
         }
         EmarsysConfig config = builder.build();
         Emarsys.setup(config);
+        Emarsys.trackCustomEvent("wrapper:init", Map.of("type", "maui"));
     }
 
     public static void setContact(int contactFieldId, @NonNull String contactFieldValue) {
@@ -51,7 +53,16 @@ public class DotnetEmarsys {
         Emarsys.clearContact(completionListener::onCompleted);
     }
 
+    public static void trackCustomEvent(@NonNull String eventName, Map<String, String> eventAttributes) {
+        Emarsys.trackCustomEvent(eventName, eventAttributes);
+    }
+
+    public static void trackCustomEvent(@NonNull String eventName, Map<String, String> eventAttributes, @NonNull CompletionListener completionListener) {
+        Emarsys.trackCustomEvent(eventName, eventAttributes, completionListener::onCompleted);
+    }
+
     public static @NonNull DotnetEmarsysPush push = new DotnetEmarsysPush();
+
     public static @NonNull DotnetEmarsysInApp inApp = new DotnetEmarsysInApp();
 
 }

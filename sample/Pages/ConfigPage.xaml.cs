@@ -4,6 +4,8 @@
 using Emarsys = EmarsysAndroid.DotnetEmarsys;
 #elif IOS
 using Emarsys = EmarsysiOS.DotnetEmarsys;
+using UIKit;
+using Foundation;
 #endif
 using EmarsysTask = EmarsysCommon.Task;
 using EmarsysUtils = EmarsysCommon.Utils;
@@ -64,6 +66,39 @@ public partial class ConfigPage : ContentPage
 			case Utils.ResultMode.Ignore:
 				Emarsys.ClearContact();
 				Utils.LogResult("ClearContact");
+				break;
+		}
+	}
+
+	private async void OnTrackCustomEventClicked(object sender, EventArgs e)
+	{
+		string eventName = "testingEventName";
+		#if ANDROID
+		Dictionary<string, string> eventAttributes = new Dictionary<string, string>
+		{
+			{ "key1", "value1" },
+			{ "key2", "value2" }
+		};
+		#elif IOS
+		NSDictionary<NSString, NSString> eventAttributes = 
+				new NSDictionary<NSString, NSString>(new NSString("param1"), new NSString("value1"));
+		#endif
+		
+		switch (Utils.EmarsysResultMode)
+		{
+			case Utils.ResultMode.Task:
+				var error = await EmarsysTask.TrackCustomEvent(eventName, eventAttributes);
+				Utils.LogResult("TrackCustomEvent T", error);
+				break;
+			case Utils.ResultMode.CompletionListener:
+				Emarsys.TrackCustomEvent(eventName, eventAttributes, EmarsysUtils.CompletionListener((error) =>
+				{
+					Utils.LogResult("TrackCustomEvent CL", error);
+				}));
+				break;
+			case Utils.ResultMode.Ignore:
+				Emarsys.TrackCustomEvent(eventName, eventAttributes);
+				Utils.LogResult("TrackCustomEvent");
 				break;
 		}
 	}

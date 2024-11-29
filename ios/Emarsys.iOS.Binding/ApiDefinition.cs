@@ -47,6 +47,16 @@ namespace EmarsysiOS
 		[Export ("clearContact:")]
 		void ClearContact (Action<NSError> completionBlock);
 
+		// +(void)trackCustomEvent:(NSString * _Nonnull)eventName :(NSDictionary<NSString *,NSString *> * _Nonnull)eventAttributes;
+		[Static]
+		[Export ("trackCustomEvent::")]
+		void TrackCustomEvent (string eventName, NSDictionary<NSString, NSString> eventAttributes);
+
+		// +(void)trackCustomEvent:(NSString * _Nonnull)eventName :(NSDictionary<NSString *,NSString *> * _Nonnull)eventAttributes :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		[Static]
+		[Export ("trackCustomEvent:::")]
+		void TrackCustomEvent (string eventName, NSDictionary<NSString, NSString> eventAttributes, Action<NSError> completionBlock);
+
 		// @property (readonly, nonatomic, strong, class) DotnetEmarsysPush * _Nonnull push;
 		[Static]
 		[Export ("push", ArgumentSemantic.Strong)]

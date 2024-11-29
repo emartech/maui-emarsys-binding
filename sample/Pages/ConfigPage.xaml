@@ -17,6 +17,11 @@
                 SemanticProperties.Hint="Clear Contact"
                 Clicked="OnClearContactClicked"
                 HorizontalOptions="Fill" />
+            <Button
+                Text="Track Custom Event"
+                SemanticProperties.Hint="Track Custom Event"
+                Clicked="OnTrackCustomEventClicked"
+                HorizontalOptions="Fill" />
 
             <BoxView HeightRequest="1" Color="Grey"/>
 
