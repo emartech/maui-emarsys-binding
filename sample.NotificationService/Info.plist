@@ -5,13 +5,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>sampleNotificationService</string>
+	<string>sample.NotificationService</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.emarsys.maui.sample.sampleNotificationService</string>
+	<string>com.emarsys.maui.sample.NotificationService</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>sampleNotificationService</string>
+	<string>sample.NotificationService</string>
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>

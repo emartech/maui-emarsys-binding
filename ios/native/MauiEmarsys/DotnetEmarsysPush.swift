@@ -9,32 +9,17 @@ import EmarsysSDK
 public class DotnetEmarsysPush: NSObject {
     
     @objc
-    public func setDelegate() {
-        UNUserNotificationCenter.current().delegate = Emarsys.push
-    }
-    
-    @objc
     public func setEventHandler(_ eventHandler: @escaping EventHandler) {
         Emarsys.push.notificationEventHandler = eventHandler
     }
     
     @objc
-    public func setPushToken(_ pushToken: Data) {
-        Emarsys.push.setPushToken(pushToken)
-    }
-    
-    @objc
-    public func setPushToken(_ pushToken: Data, _ completionBlock: @escaping CompletionBlock) {
+    public func setPushToken(_ pushToken: Data, _ completionBlock: CompletionBlock?) {
         Emarsys.push.setPushToken(pushToken: pushToken, completionBlock: completionBlock)
     }
     
     @objc
-    public func clearPushToken() {
-        Emarsys.push.clearPushToken()
-    }
-    
-    @objc
-    public func clearPushToken(_ completionBlock: @escaping CompletionBlock) {
+    public func clearPushToken(_ completionBlock: CompletionBlock?) {
         Emarsys.push.clearPushToken(completionBlock: completionBlock)
     }
     
@@ -47,6 +32,11 @@ public class DotnetEmarsysPush: NSObject {
     @objc
     public func handleMessage(_ userInfo: [AnyHashable : Any]) {
         Emarsys.push.handleMessage(userInfo: userInfo)
+    }
+    
+    @objc
+    public func setDelegate() {
+        UNUserNotificationCenter.current().delegate = Emarsys.push
     }
     
     @objc

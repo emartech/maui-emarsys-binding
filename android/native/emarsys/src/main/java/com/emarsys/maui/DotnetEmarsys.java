@@ -10,7 +10,7 @@ import java.util.Map;
 public class DotnetEmarsys {
 
     public static @NonNull DotnetEMSConfig config(@NonNull Application application, String applicationCode, String merchantId,
-                                         List<String> sharedPackageNames, String sharedSecret, boolean enableConsoleLogging) {
+                                                  List<String> sharedPackageNames, String sharedSecret, boolean enableConsoleLogging) {
         return new DotnetEMSConfig(application, applicationCode, merchantId, sharedPackageNames, sharedSecret, enableConsoleLogging);
     }
 
@@ -37,16 +37,8 @@ public class DotnetEmarsys {
         Emarsys.trackCustomEvent("wrapper:init", Map.of("type", "maui"));
     }
 
-    public static void setContact(int contactFieldId, @NonNull String contactFieldValue) {
-        Emarsys.setContact(contactFieldId, contactFieldValue);
-    }
-
     public static void setContact(int contactFieldId, @NonNull String contactFieldValue, @NonNull CompletionListener completionListener) {
         Emarsys.setContact(contactFieldId, contactFieldValue, completionListener::onCompleted);
-    }
-
-    public static void clearContact() {
-        Emarsys.clearContact();
     }
 
     public static void clearContact(@NonNull CompletionListener completionListener) {

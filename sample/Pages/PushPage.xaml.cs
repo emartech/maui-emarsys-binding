@@ -1,14 +1,11 @@
-﻿namespace sample;
+﻿namespace Sample;
 
 #if ANDROID
 using Firebase.Messaging;
-using Emarsys = EmarsysAndroid.DotnetEmarsys;
 #elif IOS
 using UIKit;
-using Emarsys = EmarsysiOS.DotnetEmarsys;
 #endif
-using EmarsysTask = EmarsysCommon.Task;
-using EmarsysUtils = EmarsysCommon.Utils;
+using EmarsysBinding;
 
 public partial class PushPage : ContentPage
 {
@@ -29,13 +26,13 @@ public partial class PushPage : ContentPage
 				Utils.LogResult("SetPushToken T", error);
 				break;
 			case Utils.ResultMode.CompletionListener:
-				Emarsys.Push.SetPushToken(pushToken, EmarsysUtils.CompletionListener((error) =>
+				Emarsys.Push.SetPushToken(pushToken, (error) =>
 				{
 					Utils.LogResult("SetPushToken CL", error);
-				}));
+				});
 				break;
 			case Utils.ResultMode.Ignore:
-				Emarsys.Push.PushToken = pushToken;
+				Emarsys.Push.SetPushToken(pushToken);
 				Utils.LogResult("SetPushToken");
 				break;
 		}
@@ -53,10 +50,10 @@ public partial class PushPage : ContentPage
 				Utils.LogResult("ClearPushToken T", error);
 				break;
 			case Utils.ResultMode.CompletionListener:
-				Emarsys.Push.ClearPushToken(EmarsysUtils.CompletionListener((error) =>
+				Emarsys.Push.ClearPushToken((error) =>
 				{
 					Utils.LogResult("ClearPushToken CL", error);
-				}));
+				});
 				break;
 			case Utils.ResultMode.Ignore:
 				Emarsys.Push.ClearPushToken();
@@ -67,7 +64,7 @@ public partial class PushPage : ContentPage
 
 	private void OnGetPushTokenClicked(object sender, EventArgs e)
 	{
-		var pushToken = Emarsys.Push.PushToken;
+		var pushToken = Emarsys.Push.GetPushToken();
 		Utils.LogResult("GetPushToken", null, pushToken);
 	}
 

@@ -1,4 +1,4 @@
-﻿namespace EmarsysCommon;
+﻿namespace EmarsysBinding;
 
 using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Platform;
@@ -7,10 +7,10 @@ using Microsoft.Maui.Platform;
 using Java.Lang;
 using Kotlin;
 using Org.Json;
-using Emarsys = EmarsysAndroid.DotnetEmarsys;
+using EmarsysAndroid;
 #elif IOS
 using Foundation;
-using Emarsys = EmarsysiOS.DotnetEmarsys;
+using EmarsysiOS;
 #endif
 
 public class InlineInAppView : View
@@ -105,12 +105,12 @@ public partial class InlineInAppViewHandler
 		#if ANDROID
 		if (handler.PlatformView is Android.Views.View && args is Action<string?, JSONObject?>)
 		{
-			Emarsys.InApp.SetInlineInAppEventHandler((Android.Views.View) handler.PlatformView, new InlineInAppEventHandler((Action<string?, JSONObject?>) args));
+			DotnetEmarsys.InApp.SetInlineInAppEventHandler((Android.Views.View) handler.PlatformView, new InlineInAppEventHandler((Action<string?, JSONObject?>) args));
 		}
 		#elif IOS
 		if (handler.PlatformView is UIKit.UIView && args is Action<NSString?, NSDictionary<NSString, NSObject>?>)
 		{
-			Emarsys.InApp.SetInlineInAppEventHandler((UIKit.UIView) handler.PlatformView, (Action<NSString?, NSDictionary<NSString, NSObject>?>) args);
+			DotnetEmarsys.InApp.SetInlineInAppEventHandler((UIKit.UIView) handler.PlatformView, (Action<NSString?, NSDictionary<NSString, NSObject>?>) args);
 		}
 		#endif
 		else
@@ -124,12 +124,12 @@ public partial class InlineInAppViewHandler
 		#if ANDROID
 		if (handler.PlatformView is Android.Views.View && args is Action<Throwable?>)
 		{
-			Emarsys.InApp.SetInlineInAppCompletionListener((Android.Views.View) handler.PlatformView, new CompletionListener((Action<Throwable?>) args));
+			DotnetEmarsys.InApp.SetInlineInAppCompletionListener((Android.Views.View) handler.PlatformView, new CompletionListener((Action<Throwable?>) args));
 		}
 		#elif IOS
 		if (handler.PlatformView is UIKit.UIView && args is Action<NSError?>)
 		{
-			Emarsys.InApp.SetInlineInAppCompletionBlock((UIKit.UIView) handler.PlatformView, (Action<NSError?>) args);
+			DotnetEmarsys.InApp.SetInlineInAppCompletionBlock((UIKit.UIView) handler.PlatformView, (Action<NSError?>) args);
 		}
 		#endif
 		else
@@ -143,12 +143,12 @@ public partial class InlineInAppViewHandler
 		#if ANDROID
 		if (handler.PlatformView is Android.Views.View && args is Action)
 		{
-			Emarsys.InApp.SetInlineInAppCloseListener((Android.Views.View) handler.PlatformView, new InlineInAppCloseListener((Action) args));
+			DotnetEmarsys.InApp.SetInlineInAppCloseListener((Android.Views.View) handler.PlatformView, new InlineInAppCloseListener((Action) args));
 		}
 		#elif IOS
 		if (handler.PlatformView is UIKit.UIView && args is Action)
 		{
-			Emarsys.InApp.SetInlineInAppCloseBlock((UIKit.UIView) handler.PlatformView, (Action) args);
+			DotnetEmarsys.InApp.SetInlineInAppCloseBlock((UIKit.UIView) handler.PlatformView, (Action) args);
 		}
 		#endif
 		else
@@ -162,12 +162,12 @@ public partial class InlineInAppViewHandler
 		#if ANDROID
 		if (handler.PlatformView is Android.Views.View && args is string)
 		{
-			Emarsys.InApp.LoadInlineInApp((Android.Views.View) handler.PlatformView, (string) args);
+			DotnetEmarsys.InApp.LoadInlineInApp((Android.Views.View) handler.PlatformView, (string) args);
 		}
 		#elif IOS
 		if (handler.PlatformView is UIKit.UIView && args is string)
 		{
-			Emarsys.InApp.LoadInlineInApp((UIKit.UIView) handler.PlatformView, (string) args);
+			DotnetEmarsys.InApp.LoadInlineInApp((UIKit.UIView) handler.PlatformView, (string) args);
 		}
 		#endif
 		else
@@ -183,7 +183,7 @@ public partial class InlineInAppViewHandler : ViewHandler<InlineInAppView, Andro
 {
 	protected override Android.Views.View CreatePlatformView()
 	{
-		return Emarsys.InApp.InlineInAppView(Platform.AppContext);
+		return DotnetEmarsys.InApp.InlineInAppView(Platform.AppContext);
 	}
 }
 #elif IOS
@@ -191,13 +191,13 @@ public partial class InlineInAppViewHandler : ViewHandler<InlineInAppView, UIKit
 {
 	protected override UIKit.UIView CreatePlatformView()
 	{
-		return Emarsys.InApp.InlineInAppView();
+		return DotnetEmarsys.InApp.InlineInAppView();
 	}
 }
 #endif
 
 #if ANDROID
-public class InlineInAppEventHandler : Object, EmarsysAndroid.DotnetEmarsysInApp.IInlineInAppEventHandler
+public class InlineInAppEventHandler : Object, DotnetEmarsysInApp.IInlineInAppEventHandler
 {
 	private readonly Action<string?, JSONObject?> onInvoked;
 
@@ -212,7 +212,7 @@ public class InlineInAppEventHandler : Object, EmarsysAndroid.DotnetEmarsysInApp
 	}
 }
 
-public class InlineInAppCloseListener : Object, EmarsysAndroid.DotnetEmarsysInApp.IInlineInAppCloseListener
+public class InlineInAppCloseListener : Object, DotnetEmarsysInApp.IInlineInAppCloseListener
 {
 	private readonly Action onInvoked;
 

@@ -8,7 +8,7 @@
 
 // using Android.App;
 // using Firebase.Messaging;
-// using EmarsysBinding = EmarsysAndroid.DotnetEmarsys;
+// using EmarsysB = EmarsysBinding.Emarsys;
 
 // [Service(Exported = true)]
 // [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
@@ -21,14 +21,15 @@
 //     {
 //         base.OnNewToken(token);
         
-//         EmarsysBinding.Push.PushToken = token;
+//         EmarsysB.Push.SetPushToken(token);
 //     }
 
 //     public override void OnMessageReceived(RemoteMessage message)
 //     {
 //         base.OnMessageReceived(message);
 
-//         bool handledByEmarsysSDK = (bool) EmarsysBinding.Push.HandleMessage(this, message);
+//         bool handledByEmarsysSDK = EmarsysB.Push.HandleMessage(this, message);
+        // Console.WriteLine($"handledByEmarsysSDK done: {handledByEmarsysSDK} .");
 //         if (!handledByEmarsysSDK) {
 //           // handle your message here
 //         }

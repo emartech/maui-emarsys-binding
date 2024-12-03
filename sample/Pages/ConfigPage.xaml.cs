@@ -1,14 +1,6 @@
-﻿namespace sample;
+﻿namespace Sample;
 
-#if ANDROID
-using Emarsys = EmarsysAndroid.DotnetEmarsys;
-#elif IOS
-using Emarsys = EmarsysiOS.DotnetEmarsys;
-using UIKit;
-using Foundation;
-#endif
-using EmarsysTask = EmarsysCommon.Task;
-using EmarsysUtils = EmarsysCommon.Utils;
+using EmarsysBinding;
 
 public partial class ConfigPage : ContentPage
 {
@@ -37,10 +29,10 @@ public partial class ConfigPage : ContentPage
 				Utils.LogResult("SetContact T", error);
 				break;
 			case Utils.ResultMode.CompletionListener:
-				Emarsys.SetContact(contactFieldId, contactFieldValue, EmarsysUtils.CompletionListener((error) =>
+				Emarsys.SetContact(contactFieldId, contactFieldValue, (error) =>
 				{
 					Utils.LogResult("SetContact CL", error);
-				}));
+				});
 				break;
 			case Utils.ResultMode.Ignore:
 				Emarsys.SetContact(contactFieldId, contactFieldValue);
@@ -58,10 +50,10 @@ public partial class ConfigPage : ContentPage
 				Utils.LogResult("ClearContact T", error);
 				break;
 			case Utils.ResultMode.CompletionListener:
-				Emarsys.ClearContact(EmarsysUtils.CompletionListener((error) =>
+				Emarsys.ClearContact((error) =>
 				{
 					Utils.LogResult("ClearContact CL", error);
-				}));
+				});
 				break;
 			case Utils.ResultMode.Ignore:
 				Emarsys.ClearContact();

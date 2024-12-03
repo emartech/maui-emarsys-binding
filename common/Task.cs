@@ -1,14 +1,14 @@
-﻿namespace EmarsysCommon;
+﻿namespace EmarsysBinding;
 
 #if ANDROID
 using Java.Lang;
-using Emarsys = EmarsysAndroid.DotnetEmarsys;
+using EmarsysAndroid;
 #elif IOS
 using Foundation;
-using Emarsys = EmarsysiOS.DotnetEmarsys;
+using EmarsysiOS;
 #endif
 
-public class Task
+public class EmarsysTask
 {
 
 	#if ANDROID
@@ -20,7 +20,7 @@ public class Task
 	{
 		var cs = new TaskCompletionSource<NSError?>();
 	#endif
-		Emarsys.SetContact(contactFieldId, contactFieldValue, Utils.CompletionListener((error) =>
+		DotnetEmarsys.SetContact(contactFieldId, contactFieldValue, Utils.CompletionListener((error) =>
 		{
 			cs.SetResult(error);
 		}));
@@ -36,7 +36,7 @@ public class Task
 	{
 		var cs = new TaskCompletionSource<NSError?>();
 	#endif
-		Emarsys.ClearContact(Utils.CompletionListener((error) =>
+		DotnetEmarsys.ClearContact(Utils.CompletionListener((error) =>
 		{
 			cs.SetResult(error);
 		}));

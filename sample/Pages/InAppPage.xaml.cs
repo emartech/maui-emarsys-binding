@@ -1,4 +1,4 @@
-﻿namespace sample;
+﻿namespace Sample;
 
 public partial class InAppPage : ContentPage
 {
