@@ -52,6 +52,18 @@ public class Emarsys
 		DotnetEmarsys.ClearContact(Utils.CompletionListener(onCompleted));
 	}
 
+	#if ANDROID
+	public static void TrackCustomEvent(string eventName, Dictionary<string, string>? eventAttributes, Action<Throwable?>? onCompleted = null)
+	{
+		DotnetEmarsys.TrackCustomEvent(eventName, eventAttributes, Utils.CompletionListener(onCompleted));
+	}
+	#elif IOS
+	public static void TrackCustomEvent(string eventName, Dictionary<string, string>? eventAttributes, Action<NSError?>? onCompleted = null)
+	{
+		DotnetEmarsys.TrackCustomEvent(eventName, Utils.ToNSDictionary(eventAttributes), Utils.CompletionListener(onCompleted));
+	}
+	#endif
+
 	public static Push Push = new Push();
 
 }

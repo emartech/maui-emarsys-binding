@@ -45,10 +45,6 @@ public class DotnetEmarsys {
         Emarsys.clearContact(completionListener::onCompleted);
     }
 
-    public static void trackCustomEvent(@NonNull String eventName, Map<String, String> eventAttributes) {
-        Emarsys.trackCustomEvent(eventName, eventAttributes);
-    }
-
     public static void trackCustomEvent(@NonNull String eventName, Map<String, String> eventAttributes, @NonNull CompletionListener completionListener) {
         Emarsys.trackCustomEvent(eventName, eventAttributes, completionListener::onCompleted);
     }

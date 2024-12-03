@@ -65,16 +65,11 @@ public partial class ConfigPage : ContentPage
 	private async void OnTrackCustomEventClicked(object sender, EventArgs e)
 	{
 		string eventName = "testingEventName";
-		#if ANDROID
 		Dictionary<string, string> eventAttributes = new Dictionary<string, string>
 		{
 			{ "key1", "value1" },
 			{ "key2", "value2" }
 		};
-		#elif IOS
-		NSDictionary<NSString, NSString> eventAttributes = 
-				new NSDictionary<NSString, NSString>(new NSString("param1"), new NSString("value1"));
-		#endif
 		
 		switch (Utils.EmarsysResultMode)
 		{
@@ -83,10 +78,10 @@ public partial class ConfigPage : ContentPage
 				Utils.LogResult("TrackCustomEvent T", error);
 				break;
 			case Utils.ResultMode.CompletionListener:
-				Emarsys.TrackCustomEvent(eventName, eventAttributes, EmarsysUtils.CompletionListener((error) =>
+				Emarsys.TrackCustomEvent(eventName, eventAttributes, (error) =>
 				{
 					Utils.LogResult("TrackCustomEvent CL", error);
-				}));
+				});
 				break;
 			case Utils.ResultMode.Ignore:
 				Emarsys.TrackCustomEvent(eventName, eventAttributes);

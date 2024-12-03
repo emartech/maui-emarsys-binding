@@ -36,6 +36,18 @@ class Utils
 	}
 	#endif
 
+	#if IOS
+	public static NSDictionary<NSString, NSString> ToNSDictionary(Dictionary<string, string> dictionary)
+	{
+    if (dictionary == null) {
+        return null;
+		}
+
+    var keys = dictionary.Keys.Select(key => new NSString(key)).ToArray();
+    var values = dictionary.Values.Select(value => new NSString(value)).ToArray();
+    return NSDictionary<NSString, NSString>.FromObjectsAndKeys(values, keys);
+	}
+	#endif
 }
 
 #if ANDROID

@@ -47,17 +47,23 @@ public class EmarsysTask
 	public static Task<Throwable?> TrackCustomEvent(string eventName, Dictionary<string, string>? eventAttributes)
 	{
 		var cs = new TaskCompletionSource<Throwable?>();
-	#elif IOS
-	public static Task<NSError?> TrackCustomEvent(string eventName, NSDictionary<NSString, NSString> eventAttributes)
-	{
-		var cs = new TaskCompletionSource<NSError?>();
-	#endif
-		Emarsys.TrackCustomEvent(eventName, eventAttributes, Utils.CompletionListener((error) =>
+		DotnetEmarsys.TrackCustomEvent(eventName, eventAttributes, Utils.CompletionListener((error) =>
 		{
 			cs.SetResult(error);
 		}));
 		return cs.Task;
 	}
+	#elif IOS
+	public static Task<NSError?> TrackCustomEvent(string eventName, Dictionary<string, string>? eventAttributes)
+	{
+		var cs = new TaskCompletionSource<NSError?>();
+		DotnetEmarsys.TrackCustomEvent(eventName, Utils.ToNSDictionary(eventAttributes), Utils.CompletionListener((error) =>
+		{
+			cs.SetResult(error);
+		}));
+		return cs.Task;
+	}
+	#endif
 
 	public static TaskPush Push = new TaskPush();
 
