@@ -34,22 +34,12 @@ public class DotnetEmarsys: NSObject {
     }
     
     @objc
-    public static func setContact(_ contactFieldId: Int, _ contactFieldValue: String) {
-        Emarsys.setContact(contactFieldId: contactFieldId as NSNumber, contactFieldValue: contactFieldValue)
-    }
-    
-    @objc
-    public static func setContact(_ contactFieldId: Int, _ contactFieldValue: String, _ completionBlock: @escaping CompletionBlock) {
+    public static func setContact(_ contactFieldId: Int, _ contactFieldValue: String, _ completionBlock: CompletionBlock?) {
         Emarsys.setContact(contactFieldId: contactFieldId as NSNumber, contactFieldValue: contactFieldValue, completionBlock: completionBlock)
     }
     
     @objc
-    public static func clearContact() {
-        Emarsys.clearContact()
-    }
-    
-    @objc
-    public static func clearContact(_ completionBlock: @escaping CompletionBlock) {
+    public static func clearContact(_ completionBlock: CompletionBlock?) {
         Emarsys.clearContact(completionBlock: completionBlock)
     }
     

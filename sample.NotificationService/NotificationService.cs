@@ -1,9 +1,9 @@
 using Foundation;
 using ObjCRuntime;
 using UserNotifications;
-using Emarsys = EmarsysiOS.DotnetEmarsys;
+using EmarsysBinding;
 
-namespace sampleNotificationService;
+namespace Sample.NotificationService;
 
 [Register("NotificationService")]
 public class NotificationService : UNNotificationServiceExtension

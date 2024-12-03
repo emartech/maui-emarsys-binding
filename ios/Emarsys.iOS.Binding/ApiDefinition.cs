@@ -11,6 +11,17 @@ namespace EmarsysiOS
 	[DisableDefaultCtor]
 	interface EMSConfig
 	{
+		// @property (nonatomic, readonly) NSString * applicationCode;
+		[Export ("applicationCode")]
+		string ApplicationCode { get; }
+
+		// @property (nonatomic, readonly) NSString * merchantId;
+		[Export ("merchantId")]
+		string MerchantId { get; }
+
+		// @property (nonatomic, readonly) NSString * sharedKeychainAccessGroup;
+		[Export ("sharedKeychainAccessGroup")]
+		string SharedKeychainAccessGroup { get; }
 	}
 
 	// @interface DotnetEmarsys : NSObject
@@ -27,25 +38,15 @@ namespace EmarsysiOS
 		[Export ("setup:")]
 		void Setup (EMSConfig config);
 
-		// +(void)setContact:(NSInteger)contactFieldId :(NSString * _Nonnull)contactFieldValue;
-		[Static]
-		[Export ("setContact::")]
-		void SetContact (nint contactFieldId, string contactFieldValue);
-
-		// +(void)setContact:(NSInteger)contactFieldId :(NSString * _Nonnull)contactFieldValue :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		// +(void)setContact:(NSInteger)contactFieldId :(NSString * _Nonnull)contactFieldValue :(void (^ _Nullable)(NSError * _Nullable))completionBlock;
 		[Static]
 		[Export ("setContact:::")]
-		void SetContact (nint contactFieldId, string contactFieldValue, Action<NSError> completionBlock);
+		void SetContact (nint contactFieldId, string contactFieldValue, [NullAllowed] Action<NSError> completionBlock);
 
-		// +(void)clearContact;
-		[Static]
-		[Export ("clearContact")]
-		void ClearContact ();
-
-		// +(void)clearContact:(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		// +(void)clearContact:(void (^ _Nullable)(NSError * _Nullable))completionBlock;
 		[Static]
 		[Export ("clearContact:")]
-		void ClearContact (Action<NSError> completionBlock);
+		void ClearContact ([NullAllowed] Action<NSError> completionBlock);
 
 		// @property (readonly, nonatomic, strong, class) DotnetEmarsysPush * _Nonnull push;
 		[Static]
@@ -87,29 +88,17 @@ namespace EmarsysiOS
 	[BaseType (typeof(NSObject))]
 	interface DotnetEmarsysPush
 	{
-		// -(void)setDelegate;
-		[Export ("setDelegate")]
-		void SetDelegate ();
-
 		// -(void)setEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
 		[Export ("setEventHandler:")]
 		void SetEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
 
-		// -(void)setPushToken:(NSData * _Nonnull)pushToken;
-		[Export ("setPushToken:")]
-		void SetPushToken (NSData pushToken);
-
-		// -(void)setPushToken:(NSData * _Nonnull)pushToken :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		// -(void)setPushToken:(NSData * _Nonnull)pushToken :(void (^ _Nullable)(NSError * _Nullable))completionBlock;
 		[Export ("setPushToken::")]
-		void SetPushToken (NSData pushToken, Action<NSError> completionBlock);
+		void SetPushToken (NSData pushToken, [NullAllowed] Action<NSError> completionBlock);
 
-		// -(void)clearPushToken;
-		[Export ("clearPushToken")]
-		void ClearPushToken ();
-
-		// -(void)clearPushToken:(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		// -(void)clearPushToken:(void (^ _Nullable)(NSError * _Nullable))completionBlock;
 		[Export ("clearPushToken:")]
-		void ClearPushToken (Action<NSError> completionBlock);
+		void ClearPushToken ([NullAllowed] Action<NSError> completionBlock);
 
 		// -(NSString * _Nullable)getPushToken __attribute__((warn_unused_result("")));
 		[NullAllowed, Export ("getPushToken")]
@@ -118,6 +107,10 @@ namespace EmarsysiOS
 		// -(void)handleMessage:(NSDictionary * _Nonnull)userInfo;
 		[Export ("handleMessage:")]
 		void HandleMessage (NSDictionary userInfo);
+
+		// -(void)setDelegate;
+		[Export ("setDelegate")]
+		void SetDelegate ();
 
 		// -(void)didReceiveNotificationRequest:(UNNotificationRequest * _Nonnull)request :(void (^ _Nonnull)(UNNotificationContent * _Nonnull))contentHandler;
 		[Export ("didReceiveNotificationRequest::")]
