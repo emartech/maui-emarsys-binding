@@ -4,6 +4,7 @@ using Xunit;
 using Xunit.Priority;
 #if ANDROID
 using Java.Lang;
+using Firebase.Messaging;
 #elif IOS
 using Foundation;
 #endif
@@ -56,6 +57,46 @@ public class PushTest
 		Assert.True(task.GetType().Equals(typeof(Task<NSError?>)));
 		#endif
 		Assert.Equal(TaskStatus.WaitingForActivation, task.Status);
+	}
+
+	[Fact]
+	public void ClearPushToken_ShouldWork()
+	{
+		Emarsys.Push.ClearPushToken();
+	}
+
+	[Fact]
+	public void ClearPushToken_ShouldWorkWithCompletionListener()
+	{
+		Emarsys.Push.ClearPushToken((error) => {});
+	}
+
+	[Fact]
+	public void ClearPushToken_ShouldWorkWithTask()
+	{
+		var task = EmarsysTask.Push.ClearPushToken();
+		#if ANDROID
+		Assert.True(task.GetType().Equals(typeof(Task<Throwable?>)));
+		#elif IOS
+		Assert.True(task.GetType().Equals(typeof(Task<NSError?>)));
+		#endif
+		Assert.Equal(TaskStatus.WaitingForActivation, task.Status);
+	}
+
+	[Fact]
+	public void GetPushToken_ShouldWork()
+	{
+		Emarsys.Push.GetPushToken();
+	}
+
+	[Fact]
+	public void HandleMessage_ShouldWork()
+	{
+		#if ANDROID
+		Emarsys.Push.HandleMessage(Platform.CurrentActivity!.ApplicationContext!, new RemoteMessage.Builder("test").Build());
+		#elif IOS
+		Emarsys.Push.HandleMessage(new NSDictionary());
+		#endif
 	}
 
 }
