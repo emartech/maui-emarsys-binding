@@ -1,6 +1,8 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Org.Json;
 using EmarsysB = EmarsysBinding.Emarsys; // Emarsys type conflicts with native SDK, use it with alias e.g. EmarsysB(inding)
 
 namespace Sample;
@@ -21,11 +23,15 @@ public class MainApplication : MauiApplication
 
         var config = EmarsysB.Config(this, "EMS12-04EC1", "1DF86BF95CBE8F19", null, null, true);
         EmarsysB.Setup(config);
-        EmarsysB.Push.SetEventHandler((context, eventName, payload) =>
+
+        Action<Context, string, JSONObject?> eventHandler = (context, eventName, payload) =>
         {
             string payloadString = payload?.ToString() ?? "No payload";
-            Utils.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}");
-        });
+            Utils.DisplayAlert("Handle event", $"Event: {eventName}\nPayload: {payloadString}");
+        };
+        EmarsysB.Push.SetEventHandler(eventHandler);
+        EmarsysB.InApp.SetEventHandler(eventHandler);
+        EmarsysB.InApp.SetOnEventActionEventHandler(eventHandler);
 
         if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
         {

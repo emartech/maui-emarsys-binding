@@ -9,6 +9,21 @@
             Padding="30,0"
             Spacing="25">
             <Button
+                Text="Pause"
+                SemanticProperties.Hint="Pause"
+                Clicked="OnPauseClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Resume"
+                SemanticProperties.Hint="Resume"
+                Clicked="OnResumeClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Get IsPaused"
+                SemanticProperties.Hint="Get IsPaused"
+                Clicked="OnGetIsPausedClicked"
+                HorizontalOptions="Fill" />
+            <Button
                 Text="Load Inline InApp"
                 SemanticProperties.Hint="Load Inline InApp"
                 Clicked="OnLoadInlineInAppClicked"

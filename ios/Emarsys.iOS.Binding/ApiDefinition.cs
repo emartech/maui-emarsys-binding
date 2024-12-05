@@ -68,6 +68,22 @@ namespace EmarsysiOS
 	[BaseType (typeof(NSObject))]
 	interface DotnetEmarsysInApp
 	{
+		// -(void)setEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		[Export ("setEventHandler:")]
+		void SetEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
+
+		// -(void)pause;
+		[Export ("pause")]
+		void Pause ();
+
+		// -(void)resume;
+		[Export ("resume")]
+		void Resume ();
+
+		// -(BOOL)isPaused __attribute__((warn_unused_result("")));
+		[Export ("isPaused")]
+		bool IsPaused { get; }
+
 		// -(UIView * _Nonnull)InlineInAppView __attribute__((warn_unused_result("")));
 		[Export ("InlineInAppView")]
 		UIView InlineInAppView ();
@@ -87,6 +103,10 @@ namespace EmarsysiOS
 		// -(void)loadInlineInApp:(UIView * _Nonnull)view :(NSString * _Nonnull)viewId;
 		[Export ("loadInlineInApp::")]
 		void LoadInlineInApp (UIView view, string viewId);
+
+		// -(void)setOnEventActionEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		[Export ("setOnEventActionEventHandler:")]
+		void SetOnEventActionEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
 	}
 
 	// @interface DotnetEmarsysPush : NSObject

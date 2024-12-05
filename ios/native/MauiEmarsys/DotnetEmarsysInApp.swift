@@ -9,6 +9,26 @@ import EmarsysSDK
 public class DotnetEmarsysInApp: NSObject {
     
     @objc
+    public func setEventHandler(_ eventHandler: @escaping EventHandler) {
+        Emarsys.inApp.eventHandler = eventHandler
+    }
+    
+    @objc
+    public func pause() {
+        Emarsys.inApp.pause()
+    }
+    
+    @objc
+    public func resume() {
+        Emarsys.inApp.resume()
+    }
+    
+    @objc
+    public func isPaused() -> Bool {
+        return Emarsys.inApp.isPaused()
+    }
+    
+    @objc
     public func InlineInAppView() -> UIView {
         return EMSInlineInAppView()
     }
@@ -31,6 +51,11 @@ public class DotnetEmarsysInApp: NSObject {
     @objc
     public func loadInlineInApp(_ view: UIView, _ viewId: String) {
         (view as? EMSInlineInAppView)?.loadInApp(viewId: viewId)
+    }
+    
+    @objc
+    public func setOnEventActionEventHandler(_ eventHandler: @escaping EventHandler) {
+        Emarsys.onEventAction.eventHandler = eventHandler
     }
     
 }

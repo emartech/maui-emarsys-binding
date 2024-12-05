@@ -66,4 +66,6 @@ public class Emarsys
 
 	public static Push Push = new Push();
 
+	public static InApp InApp = new InApp();
+
 }
