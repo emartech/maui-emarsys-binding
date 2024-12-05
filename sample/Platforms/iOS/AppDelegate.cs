@@ -15,11 +15,15 @@ public class AppDelegate : MauiUIApplicationDelegate
 		var config = Emarsys.Config("EMS12-04EC1", "1DF86BF95CBE8F19", null, true);
 		Emarsys.Setup(config);
 		Emarsys.Push.SetDelegate();
-		Emarsys.Push.SetEventHandler((eventName, payload) =>
+
+		Action<NSString, NSDictionary<NSString, NSObject>> eventHandler = (eventName, payload) =>
 		{
 			string payloadString = payload?.Description ?? "No payload";
-			Utils.DisplayAlert("Notification Event", $"Event: {eventName}\nData: {payloadString}");
-		});
+			Utils.DisplayAlert("Handle event", $"Event: {eventName}\nPayload: {payloadString}");
+		};
+		Emarsys.Push.SetEventHandler(eventHandler);
+		Emarsys.InApp.SetEventHandler(eventHandler);
+		Emarsys.InApp.SetOnEventActionEventHandler(eventHandler);
 
 		UNUserNotificationCenter.Current.GetNotificationSettings((settings) =>
 		{

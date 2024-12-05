@@ -3,11 +3,28 @@ package com.emarsys.maui;
 import android.content.Context;
 import android.view.View;
 import androidx.annotation.NonNull;
+import com.emarsys.Emarsys;
 import com.emarsys.inapp.ui.InlineInAppView;
 import org.json.JSONObject;
 import kotlin.Unit;
 
 public class DotnetEmarsysInApp {
+
+    public void setEventHandler(@NonNull EventHandler eventHandler) {
+        Emarsys.getInApp().setEventHandler(eventHandler::handleEvent);
+    }
+
+    public void pause() {
+        Emarsys.getInApp().pause();
+    }
+
+    public void resume() {
+        Emarsys.getInApp().resume();
+    }
+
+    public boolean isPaused() {
+        return Emarsys.getInApp().isPaused();
+    }
 
     public @NonNull View InlineInAppView(@NonNull Context context) {
         return new InlineInAppView(context);
@@ -41,6 +58,10 @@ public class DotnetEmarsysInApp {
 
     public void loadInlineInApp(@NonNull View view, @NonNull String viewId) {
         ((InlineInAppView) view).loadInApp(viewId);
+    }
+
+    public void setOnEventActionEventHandler(@NonNull EventHandler eventHandler) {
+        Emarsys.getOnEventAction().setOnEventActionEventHandler(eventHandler::handleEvent);
     }
 
 }
