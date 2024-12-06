@@ -31,6 +31,7 @@ public class DotnetEmarsys: NSObject {
     @objc
     public static func setup(_ config: EMSConfig) {
         Emarsys.setup(config: config)
+        Emarsys.trackCustomEvent(eventName: "wrapper:init", eventAttributes: ["type" : "maui"])
     }
     
     @objc
@@ -44,7 +45,13 @@ public class DotnetEmarsys: NSObject {
     }
     
     @objc
+    public static func trackCustomEvent(_ eventName: String, _ eventAttributes: [String: String]?, _ completionBlock: CompletionBlock?) {
+        Emarsys.trackCustomEvent(eventName: eventName, eventAttributes: eventAttributes, completionBlock: completionBlock)
+    }
+    
+    @objc
     public static let push = DotnetEmarsysPush()
+
     @objc
     public static let inApp = DotnetEmarsysInApp()
     

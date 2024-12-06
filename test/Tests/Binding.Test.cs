@@ -91,4 +91,45 @@ public class EmarsysTest
 		Assert.Equal(TaskStatus.WaitingForActivation, task.Status);
 	}
 
+	[Fact]
+	public void TrackCustomEvent_ShouldWork()
+	{
+		Dictionary<string, string> eventAttributes = new Dictionary<string, string>
+		{
+			{ "key", "value" }
+		};
+		Emarsys.TrackCustomEvent("test", eventAttributes);
+	}
+
+	[Fact]
+	public void TrackCustomEvent_ShouldWorkWithNullEventAttributes()
+	{
+		Emarsys.TrackCustomEvent("test", null);
+	}
+
+	[Fact]
+	public void TrackCustomEvent_ShouldWorkWithCompletionListener()
+	{
+		Dictionary<string, string> eventAttributes = new Dictionary<string, string>
+		{
+			{ "key", "value" }
+		};
+		Emarsys.TrackCustomEvent("test", eventAttributes, (error) => {});
+	}
+
+	[Fact]
+	public void TrackCustomEvent_ShouldWorkWithTask()
+	{
+		Dictionary<string, string> eventAttributes = new Dictionary<string, string>
+		{
+			{ "key", "value" }
+		};
+		var task = EmarsysTask.TrackCustomEvent("test", eventAttributes);
+		#if ANDROID
+		Assert.True(task.GetType().Equals(typeof(Task<Throwable?>)));
+		#elif IOS
+		Assert.True(task.GetType().Equals(typeof(Task<NSError?>)));
+		#endif
+		Assert.Equal(TaskStatus.WaitingForActivation, task.Status);
+	}
 }

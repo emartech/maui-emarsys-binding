@@ -62,6 +62,34 @@ public partial class ConfigPage : ContentPage
 		}
 	}
 
+	private async void OnTrackCustomEventClicked(object sender, EventArgs e)
+	{
+		string eventName = "testingEventName";
+		Dictionary<string, string> eventAttributes = new Dictionary<string, string>
+		{
+			{ "key1", "value1" },
+			{ "key2", "value2" }
+		};
+		
+		switch (Utils.EmarsysResultMode)
+		{
+			case Utils.ResultMode.Task:
+				var error = await EmarsysTask.TrackCustomEvent(eventName, eventAttributes);
+				Utils.LogResult("TrackCustomEvent T", error);
+				break;
+			case Utils.ResultMode.CompletionListener:
+				Emarsys.TrackCustomEvent(eventName, eventAttributes, (error) =>
+				{
+					Utils.LogResult("TrackCustomEvent CL", error);
+				});
+				break;
+			case Utils.ResultMode.Ignore:
+				Emarsys.TrackCustomEvent(eventName, eventAttributes);
+				Utils.LogResult("TrackCustomEvent");
+				break;
+		}
+	}
+
 	private void OnEmarsysResultModeClicked(object sender, EventArgs e)
 	{
 		switch (Utils.EmarsysResultMode)
