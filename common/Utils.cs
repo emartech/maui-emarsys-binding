@@ -1,10 +1,19 @@
-﻿namespace EmarsysBinding;
+﻿#if ANDROID
+global using EmarsysAndroid;
+global using EventHandlerAction = System.Action<Android.Content.Context, string, Org.Json.JSONObject?>;
+global using ErrorType = Java.Lang.Throwable;
+#elif IOS
+global using EmarsysiOS;
+global using EventHandlerAction = System.Action<Foundation.NSString, Foundation.NSDictionary<Foundation.NSString, Foundation.NSObject>>;
+global using ErrorType = Foundation.NSError;
+#endif
+
+namespace EmarsysBinding;
 
 #if ANDROID
 using Java.Lang;
 using Android.Content;
 using Org.Json;
-using EmarsysAndroid;
 #elif IOS
 using Foundation;
 #endif
@@ -13,39 +22,44 @@ class Utils
 {
 
 	#if ANDROID
-	public static CompletionListener CompletionListener(Action<Throwable?>? onInvoked)
+	public static CompletionListener CompletionListener(Action<Throwable?>? action)
 	{
-		return new CompletionListener(onInvoked);
+		return new CompletionListener(action);
 	}
 	#elif IOS
-	public static Action<NSError?>? CompletionListener(Action<NSError?>? onInvoked)
+	public static Action<NSError?>? CompletionListener(Action<NSError?>? action)
 	{
-		return onInvoked;
+		return action;
 	}
 	#endif
 
 	#if ANDROID
-	public static EventHandler EventHandler(Action<Context, string, JSONObject?> onInvoked)
+	public static EventHandler EventHandler(Action<Context, string, JSONObject?> action)
 	{
-		return new EventHandler(onInvoked);
+		return new EventHandler(action);
 	}
 	#elif IOS
-	public static Action<NSString, NSDictionary<NSString, NSObject>> EventHandler(Action<NSString, NSDictionary<NSString, NSObject>> onInvoked)
+	public static Action<NSString, NSDictionary<NSString, NSObject>> EventHandler(Action<NSString, NSDictionary<NSString, NSObject>> action)
 	{
-		return onInvoked;
+		return action;
 	}
 	#endif
 
-	#if IOS
-	public static NSDictionary<NSString, NSString> ToNSDictionary(Dictionary<string, string> dictionary)
+	#if ANDROID
+	public static Dictionary<string, string>? ToNativeDictionary(Dictionary<string, string>? dictionary)
 	{
-    if (dictionary == null) {
-        return null;
+		return dictionary;
+	}
+	#elif IOS
+	public static NSDictionary<NSString, NSString>? ToNativeDictionary(Dictionary<string, string>? dictionary)
+	{
+		if (dictionary == null) {
+			return null;
 		}
 
-    var keys = dictionary.Keys.Select(key => new NSString(key)).ToArray();
-    var values = dictionary.Values.Select(value => new NSString(value)).ToArray();
-    return NSDictionary<NSString, NSString>.FromObjectsAndKeys(values, keys);
+		var keys = dictionary.Keys.Select(key => new NSString(key)).ToArray();
+		var values = dictionary.Values.Select(value => new NSString(value)).ToArray();
+		return NSDictionary<NSString, NSString>.FromObjectsAndKeys(values, keys);
 	}
 	#endif
 }
@@ -53,31 +67,31 @@ class Utils
 #if ANDROID
 class CompletionListener : Object, ICompletionListener
 {
-	private readonly Action<Throwable?>? onInvoked;
+	private readonly Action<Throwable?>? action;
 
-	public CompletionListener(Action<Throwable?>? onInvoked)
+	public CompletionListener(Action<Throwable?>? action)
 	{
-		this.onInvoked = onInvoked;
+		this.action = action;
 	}
 
 	public void OnCompleted(Throwable? errorCause)
 	{
-		onInvoked?.Invoke(errorCause);
+		action?.Invoke(errorCause);
 	}
 }
 
 class EventHandler : Object, IEventHandler
 {
-	private readonly Action<Context, string, JSONObject?> onInvoked;
+	private readonly Action<Context, string, JSONObject?> action;
 
-	public EventHandler(Action<Context, string, JSONObject?> onInvoked)
+	public EventHandler(Action<Context, string, JSONObject?> action)
 	{
-		this.onInvoked = onInvoked;
+		this.action = action;
 	}
 
 	public void HandleEvent(Context context, string eventName, JSONObject? payload)
 	{
-		onInvoked?.Invoke(context, eventName, payload);
+		action?.Invoke(context, eventName, payload);
 	}
 }
 #endif

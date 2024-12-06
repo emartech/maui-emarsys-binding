@@ -74,4 +74,14 @@ public class AppDelegate : MauiUIApplicationDelegate
 	{
 		Console.WriteLine("Failed to receive native push token");
 	}
+
+	public override bool ContinueUserActivity (UIApplication application, NSUserActivity userActivity, UIApplicationRestorationHandler completionHandler)
+	{
+		base.ContinueUserActivity(application, userActivity, completionHandler);
+
+		return Emarsys.TrackDeepLink(userActivity, (source) =>
+		{
+			Utils.LogResult("TrackDeepLink", null, source);
+		});
+	}
 }

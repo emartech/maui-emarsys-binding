@@ -1,6 +1,8 @@
 package com.emarsys.maui;
 
+import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
 import androidx.annotation.NonNull;
 import com.emarsys.Emarsys;
 import com.emarsys.config.EmarsysConfig;
@@ -47,6 +49,10 @@ public class DotnetEmarsys {
 
     public static void trackCustomEvent(@NonNull String eventName, Map<String, String> eventAttributes, @NonNull CompletionListener completionListener) {
         Emarsys.trackCustomEvent(eventName, eventAttributes, completionListener::onCompleted);
+    }
+
+    public static void trackDeepLink(Activity activity, Intent intent, @NonNull CompletionListener completionListener) {
+        Emarsys.trackDeepLink(activity, intent, completionListener::onCompleted);
     }
 
     public static @NonNull DotnetEmarsysPush push = new DotnetEmarsysPush();

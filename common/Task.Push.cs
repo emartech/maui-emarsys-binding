@@ -1,45 +1,34 @@
 ﻿namespace EmarsysBinding;
 
 #if ANDROID
-using Java.Lang;
-using EmarsysAndroid;
 #elif IOS
 using Foundation;
-using EmarsysiOS;
 #endif
 
 public class TaskPush
 {
 
 	#if ANDROID
-	public Task<Throwable?> SetPushToken(string pushToken)
-	{
-		var cs = new TaskCompletionSource<Throwable?>();
+	public Task<ErrorType?> SetPushToken(string pushToken)
 	#elif IOS
-	public Task<NSError?> SetPushToken(NSData pushToken)
-	{
-		var cs = new TaskCompletionSource<NSError?>();
+	public Task<ErrorType?> SetPushToken(NSData pushToken)
 	#endif
-		DotnetEmarsys.Push.SetPushToken(pushToken, Utils.CompletionListener((error) =>
+	{
+		var cs = new TaskCompletionSource<ErrorType?>();
+		Emarsys.Push.SetPushToken(pushToken, (error) =>
 		{
 			cs.SetResult(error);
-		}));
+		});
 		return cs.Task;
 	}
 
-	#if ANDROID
-	public Task<Throwable?> ClearPushToken()
+	public Task<ErrorType?> ClearPushToken()
 	{
-		var cs = new TaskCompletionSource<Throwable?>();
-	#elif IOS
-	public Task<NSError?> ClearPushToken()
-	{
-		var cs = new TaskCompletionSource<NSError?>();
-	#endif
-		DotnetEmarsys.Push.ClearPushToken(Utils.CompletionListener((error) =>
+		var cs = new TaskCompletionSource<ErrorType?>();
+		Emarsys.Push.ClearPushToken((error) =>
 		{
 			cs.SetResult(error);
-		}));
+		});
 		return cs.Task;
 	}
 

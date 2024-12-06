@@ -53,6 +53,11 @@ namespace EmarsysiOS
 		[Export ("trackCustomEvent:::")]
 		void TrackCustomEvent (string eventName, [NullAllowed] NSDictionary<NSString, NSString> eventAttributes, [NullAllowed] Action<NSError> completionBlock);
 
+		// +(BOOL)trackDeepLink:(NSUserActivity * _Nonnull)userActivity :(void (^ _Nullable)(NSString * _Nonnull))sourceHandler __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("trackDeepLink::")]
+		bool TrackDeepLink (NSUserActivity userActivity, [NullAllowed] Action<NSString> sourceHandler);
+
 		// @property (readonly, nonatomic, strong, class) DotnetEmarsysPush * _Nonnull push;
 		[Static]
 		[Export ("push", ArgumentSemantic.Strong)]

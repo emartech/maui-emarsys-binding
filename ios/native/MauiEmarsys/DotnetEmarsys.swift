@@ -50,6 +50,11 @@ public class DotnetEmarsys: NSObject {
     }
     
     @objc
+    public static func trackDeepLink(_ userActivity: NSUserActivity, _ sourceHandler: ((String) -> Void)?) -> Bool {
+        return Emarsys.trackDeepLink(userActivity: userActivity, sourceHandler: sourceHandler)
+    }
+    
+    @objc
     public static let push = DotnetEmarsysPush()
 
     @objc

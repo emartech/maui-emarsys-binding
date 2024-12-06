@@ -1,8 +1,5 @@
 ﻿namespace Test;
 
-using Xunit;
-// using EmarsysBinding;
-
 public class Test
 {
 
