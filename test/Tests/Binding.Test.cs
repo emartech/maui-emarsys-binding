@@ -1,9 +1,6 @@
 ﻿namespace Test;
 
-using Xunit;
-using Xunit.Priority;
 #if ANDROID
-using Java.Lang;
 #elif IOS
 using Foundation;
 #endif
@@ -52,18 +49,14 @@ public class EmarsysTest
 	[Fact]
 	public void SetContact_ShouldWorkWithCompletionListener()
 	{
-		Emarsys.SetContact(123, "test", (error) => {});
+		Emarsys.SetContact(123, "test", Utils.CompletionListener());
 	}
 
 	[Fact]
 	public void SetContact_ShouldWorkWithTask()
 	{
 		var task = EmarsysTask.SetContact(123, "test");
-		#if ANDROID
-		Assert.True(task.GetType().Equals(typeof(Task<Throwable?>)));
-		#elif IOS
-		Assert.True(task.GetType().Equals(typeof(Task<NSError?>)));
-		#endif
+		Assert.True(task.GetType().Equals(typeof(Task<ErrorType?>)));
 		Assert.Equal(TaskStatus.WaitingForActivation, task.Status);
 	}
 
@@ -76,18 +69,14 @@ public class EmarsysTest
 	[Fact]
 	public void ClearContact_ShouldWorkWithCompletionListener()
 	{
-		Emarsys.ClearContact((error) => {});
+		Emarsys.ClearContact(Utils.CompletionListener());
 	}
 
 	[Fact]
 	public void ClearContact_ShouldWorkWithTask()
 	{
 		var task = EmarsysTask.ClearContact();
-		#if ANDROID
-		Assert.True(task.GetType().Equals(typeof(Task<Throwable?>)));
-		#elif IOS
-		Assert.True(task.GetType().Equals(typeof(Task<NSError?>)));
-		#endif
+		Assert.True(task.GetType().Equals(typeof(Task<ErrorType?>)));
 		Assert.Equal(TaskStatus.WaitingForActivation, task.Status);
 	}
 
@@ -104,7 +93,7 @@ public class EmarsysTest
 	[Fact]
 	public void TrackCustomEvent_ShouldWorkWithNullEventAttributes()
 	{
-		Emarsys.TrackCustomEvent("test", null);
+		Emarsys.TrackCustomEvent("test");
 	}
 
 	[Fact]
@@ -114,7 +103,7 @@ public class EmarsysTest
 		{
 			{ "key", "value" }
 		};
-		Emarsys.TrackCustomEvent("test", eventAttributes, (error) => {});
+		Emarsys.TrackCustomEvent("test", eventAttributes, Utils.CompletionListener());
 	}
 
 	[Fact]
@@ -125,11 +114,20 @@ public class EmarsysTest
 			{ "key", "value" }
 		};
 		var task = EmarsysTask.TrackCustomEvent("test", eventAttributes);
-		#if ANDROID
-		Assert.True(task.GetType().Equals(typeof(Task<Throwable?>)));
-		#elif IOS
-		Assert.True(task.GetType().Equals(typeof(Task<NSError?>)));
-		#endif
+		Assert.True(task.GetType().Equals(typeof(Task<ErrorType?>)));
 		Assert.Equal(TaskStatus.WaitingForActivation, task.Status);
 	}
+
+	[Fact]
+	public void TrackDeepLink_ShouldWork()
+	{
+		#if ANDROID
+		Emarsys.TrackDeepLink(Platform.CurrentActivity!, Platform.CurrentActivity!.Intent!);
+		#elif IOS
+		var userActivity = new NSUserActivity(NSUserActivityType.BrowsingWeb);
+		userActivity.WebPageUrl = new NSUrl("http://test");
+		Emarsys.TrackDeepLink(userActivity);
+		#endif
+	}
+
 }

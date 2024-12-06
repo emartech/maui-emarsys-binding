@@ -7,10 +7,8 @@ using Microsoft.Maui.Platform;
 using Java.Lang;
 using Kotlin;
 using Org.Json;
-using EmarsysAndroid;
 #elif IOS
 using Foundation;
-using EmarsysiOS;
 #endif
 
 public class InlineInAppView : View
@@ -31,13 +29,8 @@ public class InlineInAppView : View
 		});
 	}
 
-	#if ANDROID
-	public event EventHandler<Action<Throwable?>>? _SetCompletionListener;
-	public void SetCompletionListener(Action<Throwable?> completionListener)
-	#elif IOS
-	public event EventHandler<Action<NSError?>>? _SetCompletionListener;
-	public void SetCompletionListener(Action<NSError?> completionListener)
-	#endif
+	public event EventHandler<Action<ErrorType?>>? _SetCompletionListener;
+	public void SetCompletionListener(Action<ErrorType?> completionListener)
 	{
 		_SetCompletionListener?.Invoke(this, completionListener);
 		WaitForHandler(() =>

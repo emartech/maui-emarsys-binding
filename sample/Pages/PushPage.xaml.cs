@@ -1,10 +1,5 @@
 ﻿namespace Sample;
 
-#if ANDROID
-using Firebase.Messaging;
-#elif IOS
-using UIKit;
-#endif
 using EmarsysBinding;
 
 public partial class PushPage : ContentPage
@@ -18,7 +13,7 @@ public partial class PushPage : ContentPage
 	private async void OnSetPushTokenClicked(object sender, EventArgs e)
 	{
 		#if ANDROID
-		var pushToken = FirebaseMessaging.Instance.GetToken().Result.ToString();
+		var pushToken = Firebase.Messaging.FirebaseMessaging.Instance.GetToken().Result.ToString();
 		switch (Utils.EmarsysResultMode)
 		{
 			case Utils.ResultMode.Task:
@@ -37,7 +32,7 @@ public partial class PushPage : ContentPage
 				break;
 		}
 		#elif IOS
-		UIApplication.SharedApplication.RegisterForRemoteNotifications();
+		UIKit.UIApplication.SharedApplication.RegisterForRemoteNotifications();
 		#endif
 	}
 

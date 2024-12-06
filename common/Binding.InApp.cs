@@ -1,13 +1,5 @@
 ﻿namespace EmarsysBinding;
 
-#if ANDROID
-using EmarsysAndroid;
-using EventHandlerAction = Action<Android.Content.Context, string, Org.Json.JSONObject?>;
-#elif IOS
-using EmarsysiOS;
-using EventHandlerAction = Action<Foundation.NSString, Foundation.NSDictionary<Foundation.NSString, Foundation.NSObject>>;
-#endif
-
 public class InApp
 {
 

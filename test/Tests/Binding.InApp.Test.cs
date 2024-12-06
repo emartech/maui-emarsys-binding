@@ -1,7 +1,5 @@
 ﻿namespace Test;
 
-using Xunit;
-using Xunit.Priority;
 using EmarsysBinding;
 
 [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
@@ -9,14 +7,9 @@ public class InAppTest
 {
 
 	[Fact, Priority(0)]
-	public void Setup() // to ensure sdk is ready before other tests
+	public void Setup()
 	{
-		#if ANDROID
-		var config = Emarsys.Config(Platform.CurrentActivity!.Application!, null, null, null, null, true);
-		#elif IOS
-		var config = Emarsys.Config(null, null, null, true);
-		#endif
-		Emarsys.Setup(config);
+		Utils.SetupTest();
 	}
 
 	[Fact]
