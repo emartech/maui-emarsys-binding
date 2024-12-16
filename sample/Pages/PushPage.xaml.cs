@@ -14,23 +14,8 @@ public partial class PushPage : ContentPage
 	{
 		#if ANDROID
 		var pushToken = Firebase.Messaging.FirebaseMessaging.Instance.GetToken().Result.ToString();
-		switch (Utils.EmarsysResultMode)
-		{
-			case Utils.ResultMode.Task:
-				var error = await EmarsysTask.Push.SetPushToken(pushToken);
-				Utils.LogResult("SetPushToken T", error);
-				break;
-			case Utils.ResultMode.CompletionListener:
-				Emarsys.Push.SetPushToken(pushToken, (error) =>
-				{
-					Utils.LogResult("SetPushToken CL", error);
-				});
-				break;
-			case Utils.ResultMode.Ignore:
-				Emarsys.Push.SetPushToken(pushToken);
-				Utils.LogResult("SetPushToken");
-				break;
-		}
+		var error = await Emarsys.Push.SetPushToken(pushToken);
+		Utils.LogResult("SetPushToken", error);
 		#elif IOS
 		UIKit.UIApplication.SharedApplication.RegisterForRemoteNotifications();
 		#endif

@@ -16,50 +16,20 @@ public partial class ConfigPage : ContentPage
 	{
 		int contactFieldId = 100009769;
 		string contactFieldValue = "B8mau1nMO8PilvTp6P"; // demoapp@emarsys.com
-		switch (Utils.EmarsysResultMode)
-		{
-			case Utils.ResultMode.Task:
-				// #if ANDROID
-				// Java.Lang.Throwable? error =
-				// #elif IOS
-				// Foundation.NSError? error =
-				// #endif
-				// 	await EmarsysTask.SetContact(contactFieldId, contactFieldValue);
-				var error = await EmarsysTask.SetContact(contactFieldId, contactFieldValue);
-				Utils.LogResult("SetContact T", error);
-				break;
-			case Utils.ResultMode.CompletionListener:
-				Emarsys.SetContact(contactFieldId, contactFieldValue, (error) =>
-				{
-					Utils.LogResult("SetContact CL", error);
-				});
-				break;
-			case Utils.ResultMode.Ignore:
-				Emarsys.SetContact(contactFieldId, contactFieldValue);
-				Utils.LogResult("SetContact");
-				break;
-		}
+		// #if ANDROID
+		// Java.Lang.Throwable? error =
+		// #elif IOS
+		// Foundation.NSError? error =
+		// #endif
+		// 	await Emarsys.SetContact(contactFieldId, contactFieldValue);
+		var error = await Emarsys.SetContact(contactFieldId, contactFieldValue);
+		Utils.LogResult("SetContact", error);
 	}
 
 	private async void OnClearContactClicked(object sender, EventArgs e)
 	{
-		switch (Utils.EmarsysResultMode)
-		{
-			case Utils.ResultMode.Task:
-				var error = await EmarsysTask.ClearContact();
-				Utils.LogResult("ClearContact T", error);
-				break;
-			case Utils.ResultMode.CompletionListener:
-				Emarsys.ClearContact((error) =>
-				{
-					Utils.LogResult("ClearContact CL", error);
-				});
-				break;
-			case Utils.ResultMode.Ignore:
-				Emarsys.ClearContact();
-				Utils.LogResult("ClearContact");
-				break;
-		}
+		var error = await Emarsys.ClearContact();
+		Utils.LogResult("ClearContact", error);
 	}
 
 	private async void OnTrackCustomEventClicked(object sender, EventArgs e)

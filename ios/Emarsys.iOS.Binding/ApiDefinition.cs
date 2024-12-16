@@ -11,28 +11,12 @@ namespace EmarsysiOS
 	[DisableDefaultCtor]
 	interface EMSConfig
 	{
-		// @property (nonatomic, readonly) NSString * applicationCode;
-		[Export ("applicationCode")]
-		string ApplicationCode { get; }
-
-		// @property (nonatomic, readonly) NSString * merchantId;
-		[Export ("merchantId")]
-		string MerchantId { get; }
-
-		// @property (nonatomic, readonly) NSString * sharedKeychainAccessGroup;
-		[Export ("sharedKeychainAccessGroup")]
-		string SharedKeychainAccessGroup { get; }
 	}
 
 	// @interface DotnetEmarsys : NSObject
 	[BaseType (typeof(NSObject))]
 	interface DotnetEmarsys
 	{
-		// +(EMSConfig * _Nonnull)config:(NSString * _Nullable)applicationCode :(NSString * _Nullable)merchantId :(NSString * _Nullable)sharedKeychainAccessGroup :(BOOL)enableConsoleLogging __attribute__((warn_unused_result("")));
-		[Static]
-		[Export ("config::::")]
-		EMSConfig Config ([NullAllowed] string applicationCode, [NullAllowed] string merchantId, [NullAllowed] string sharedKeychainAccessGroup, bool enableConsoleLogging);
-
 		// +(void)setup:(EMSConfig * _Nonnull)config;
 		[Static]
 		[Export ("setup:")]
@@ -67,6 +51,16 @@ namespace EmarsysiOS
 		[Static]
 		[Export ("inApp", ArgumentSemantic.Strong)]
 		DotnetEmarsysInApp InApp { get; }
+	}
+
+	// @interface DotnetEmarsysConfig : NSObject
+	[BaseType (typeof(NSObject))]
+	interface DotnetEmarsysConfig
+	{
+		// +(EMSConfig * _Nonnull)build:(NSString * _Nullable)applicationCode :(NSString * _Nullable)merchantId :(NSString * _Nullable)sharedKeychainAccessGroup :(BOOL)enableConsoleLogging __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("build::::")]
+		EMSConfig Build ([NullAllowed] string applicationCode, [NullAllowed] string merchantId, [NullAllowed] string sharedKeychainAccessGroup, bool enableConsoleLogging);
 	}
 
 	// @interface DotnetEmarsysInApp : NSObject
@@ -118,11 +112,13 @@ namespace EmarsysiOS
 	[BaseType (typeof(NSObject))]
 	interface DotnetEmarsysPush
 	{
-		// -(void)setEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		// +(void)setEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		[Static]
 		[Export ("setEventHandler:")]
 		void SetEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
 
-		// -(void)setPushToken:(NSData * _Nonnull)pushToken :(void (^ _Nullable)(NSError * _Nullable))completionBlock;
+		// +(void)setPushToken:(NSData * _Nonnull)pushToken :(void (^ _Nullable)(NSError * _Nullable))completionBlock;
+		[Static]
 		[Export ("setPushToken::")]
 		void SetPushToken (NSData pushToken, [NullAllowed] Action<NSError> completionBlock);
 

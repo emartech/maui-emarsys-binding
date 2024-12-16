@@ -1,22 +1,15 @@
 package com.emarsys.maui;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import com.emarsys.Emarsys;
 import com.emarsys.config.EmarsysConfig;
-import java.util.List;
 import java.util.Map;
 
 public class DotnetEmarsys {
 
-    public static @NonNull DotnetEMSConfig config(@NonNull Application application, String applicationCode, String merchantId,
-                                                  List<String> sharedPackageNames, String sharedSecret, boolean enableConsoleLogging) {
-        return new DotnetEMSConfig(application, applicationCode, merchantId, sharedPackageNames, sharedSecret, enableConsoleLogging);
-    }
-
-    public static void setup(@NonNull DotnetEMSConfig dotnetConfig) {
+    public static void setup(@NonNull EMSConfig dotnetConfig) {
         EmarsysConfig.Builder builder = new EmarsysConfig.Builder();
         builder.application(dotnetConfig.getApplication());
         if (dotnetConfig.getApplicationCode() != null && !dotnetConfig.getApplicationCode().isEmpty()) {
@@ -36,7 +29,6 @@ public class DotnetEmarsys {
         }
         EmarsysConfig config = builder.build();
         Emarsys.setup(config);
-        Emarsys.trackCustomEvent("wrapper:init", Map.of("type", "maui"));
     }
 
     public static void setContact(int contactFieldId, @NonNull String contactFieldValue, @NonNull CompletionListener completionListener) {

@@ -12,7 +12,7 @@ public class AppDelegate : MauiUIApplicationDelegate
 
 	public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 	{
-		var config = Emarsys.Config("EMS12-04EC1", "1DF86BF95CBE8F19", null, true);
+		var config = Emarsys.Config.Build("EMS12-04EC1", "1DF86BF95CBE8F19", null, true);
 		Emarsys.Setup(config);
 		Emarsys.Push.SetDelegate();
 
@@ -50,23 +50,8 @@ public class AppDelegate : MauiUIApplicationDelegate
 	public async void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
 	{
 		Console.WriteLine("Received native push token");
-		switch (Utils.EmarsysResultMode)
-		{
-			case Utils.ResultMode.Task:
-				var error = await EmarsysTask.Push.SetPushToken(deviceToken);
-				Utils.LogResult("SetPushToken T", error);
-				break;
-			case Utils.ResultMode.CompletionListener:
-				Emarsys.Push.SetPushToken(deviceToken, (error) =>
-				{
-					Utils.LogResult("SetPushToken CL", error);
-				});
-				break;
-			case Utils.ResultMode.Ignore:
-				Emarsys.Push.SetPushToken(deviceToken);
-				Utils.LogResult("SetPushToken");
-				break;
-		}
+		var error = await Emarsys.Push.SetPushToken(deviceToken);
+		Utils.LogResult("SetPushToken", error);
 	}
 
 	[Export("application:didFailToRegisterForRemoteNotificationsWithError:")]

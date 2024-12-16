@@ -9,12 +9,12 @@ import EmarsysSDK
 public class DotnetEmarsysPush: NSObject {
     
     @objc
-    public func setEventHandler(_ eventHandler: @escaping EventHandler) {
+    public static func setEventHandler(_ eventHandler: @escaping EventHandler) {
         Emarsys.push.notificationEventHandler = eventHandler
     }
     
     @objc
-    public func setPushToken(_ pushToken: Data, _ completionBlock: CompletionBlock?) {
+    public static func setPushToken(_ pushToken: Data, _ completionBlock: CompletionBlock?) {
         Emarsys.push.setPushToken(pushToken: pushToken, completionBlock: completionBlock)
     }
     

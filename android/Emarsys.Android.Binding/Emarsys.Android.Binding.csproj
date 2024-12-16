@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-android</TargetFramework>
+    <TargetFrameworks>net8.0-android</TargetFrameworks>
     <SupportedOSPlatformVersion>24</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -14,7 +14,7 @@
       To learn more, see: https://learn.microsoft.com/dotnet/maui/migration/android-binding-projects
     -->
   </PropertyGroup>
-  
+
   <!-- Reference to Android project -->
   <ItemGroup>
     <NLIGradleProjectReference Include="../native" >

@@ -8,11 +8,11 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class DotnetEmarsysPush {
 
-    public void setEventHandler(@NonNull EventHandler eventHandler) {
+    public static void setEventHandler(@NonNull EventHandler eventHandler) {
         Emarsys.getPush().setNotificationEventHandler(eventHandler::handleEvent);
     }
 
-    public void setPushToken(@NonNull String pushToken, @NonNull CompletionListener completionListener) {
+    public static void setPushToken(@NonNull String pushToken, @NonNull CompletionListener completionListener) {
         Emarsys.getPush().setPushToken(pushToken, completionListener::onCompleted);
     }
 

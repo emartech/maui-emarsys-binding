@@ -22,7 +22,7 @@ public class MainApplication : MauiApplication
     {
         base.OnCreate();
 
-        var config = Emarsys.Config(this, "EMS12-04EC1", "1DF86BF95CBE8F19", null, null, true);
+        var config = Emarsys.Config.Build(this, "EMS12-04EC1", "1DF86BF95CBE8F19", null, null, true);
         Emarsys.Setup(config);
 
         Action<Context, string, JSONObject?> eventHandler = (context, eventName, payload) =>
