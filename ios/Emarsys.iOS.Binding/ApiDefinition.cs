@@ -11,28 +11,12 @@ namespace EmarsysiOS
 	[DisableDefaultCtor]
 	interface EMSConfig
 	{
-		// @property (nonatomic, readonly) NSString * applicationCode;
-		[Export ("applicationCode")]
-		string ApplicationCode { get; }
-
-		// @property (nonatomic, readonly) NSString * merchantId;
-		[Export ("merchantId")]
-		string MerchantId { get; }
-
-		// @property (nonatomic, readonly) NSString * sharedKeychainAccessGroup;
-		[Export ("sharedKeychainAccessGroup")]
-		string SharedKeychainAccessGroup { get; }
 	}
 
 	// @interface DotnetEmarsys : NSObject
 	[BaseType (typeof(NSObject))]
 	interface DotnetEmarsys
 	{
-		// +(EMSConfig * _Nonnull)config:(NSString * _Nullable)applicationCode :(NSString * _Nullable)merchantId :(NSString * _Nullable)sharedKeychainAccessGroup :(BOOL)enableConsoleLogging __attribute__((warn_unused_result("")));
-		[Static]
-		[Export ("config::::")]
-		EMSConfig Config ([NullAllowed] string applicationCode, [NullAllowed] string merchantId, [NullAllowed] string sharedKeychainAccessGroup, bool enableConsoleLogging);
-
 		// +(void)setup:(EMSConfig * _Nonnull)config;
 		[Static]
 		[Export ("setup:")]
@@ -58,15 +42,20 @@ namespace EmarsysiOS
 		[Export ("trackDeepLink::")]
 		bool TrackDeepLink (NSUserActivity userActivity, [NullAllowed] Action<NSString> sourceHandler);
 
-		// @property (readonly, nonatomic, strong, class) DotnetEmarsysPush * _Nonnull push;
-		[Static]
-		[Export ("push", ArgumentSemantic.Strong)]
-		DotnetEmarsysPush Push { get; }
-
 		// @property (readonly, nonatomic, strong, class) DotnetEmarsysInApp * _Nonnull inApp;
 		[Static]
 		[Export ("inApp", ArgumentSemantic.Strong)]
 		DotnetEmarsysInApp InApp { get; }
+	}
+
+	// @interface DotnetEmarsysConfig : NSObject
+	[BaseType (typeof(NSObject))]
+	interface DotnetEmarsysConfig
+	{
+		// +(EMSConfig * _Nonnull)build:(NSString * _Nullable)applicationCode :(NSString * _Nullable)merchantId :(NSString * _Nullable)sharedKeychainAccessGroup :(BOOL)enableConsoleLogging __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("build::::")]
+		EMSConfig Build ([NullAllowed] string applicationCode, [NullAllowed] string merchantId, [NullAllowed] string sharedKeychainAccessGroup, bool enableConsoleLogging);
 	}
 
 	// @interface DotnetEmarsysInApp : NSObject
@@ -118,35 +107,43 @@ namespace EmarsysiOS
 	[BaseType (typeof(NSObject))]
 	interface DotnetEmarsysPush
 	{
-		// -(void)setEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
-		[Export ("setEventHandler:")]
-		void SetEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
-
-		// -(void)setPushToken:(NSData * _Nonnull)pushToken :(void (^ _Nullable)(NSError * _Nullable))completionBlock;
-		[Export ("setPushToken::")]
-		void SetPushToken (NSData pushToken, [NullAllowed] Action<NSError> completionBlock);
-
-		// -(void)clearPushToken:(void (^ _Nullable)(NSError * _Nullable))completionBlock;
-		[Export ("clearPushToken:")]
-		void ClearPushToken ([NullAllowed] Action<NSError> completionBlock);
-
-		// -(NSString * _Nullable)getPushToken __attribute__((warn_unused_result("")));
-		[NullAllowed, Export ("getPushToken")]
-		string PushToken { get; }
-
-		// -(void)handleMessage:(NSDictionary * _Nonnull)userInfo;
-		[Export ("handleMessage:")]
-		void HandleMessage (NSDictionary userInfo);
-
-		// -(void)setDelegate;
+		// +(void)setDelegate;
+		[Static]
 		[Export ("setDelegate")]
 		void SetDelegate ();
 
-		// -(void)didReceiveNotificationRequest:(UNNotificationRequest * _Nonnull)request :(void (^ _Nonnull)(UNNotificationContent * _Nonnull))contentHandler;
+		// +(void)setEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		[Static]
+		[Export ("setEventHandler:")]
+		void SetEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
+
+		// +(void)setPushToken:(NSData * _Nonnull)pushToken :(void (^ _Nullable)(NSError * _Nullable))completionBlock;
+		[Static]
+		[Export ("setPushToken::")]
+		void SetPushToken (NSData pushToken, [NullAllowed] Action<NSError> completionBlock);
+
+		// +(void)clearPushToken:(void (^ _Nullable)(NSError * _Nullable))completionBlock;
+		[Static]
+		[Export ("clearPushToken:")]
+		void ClearPushToken ([NullAllowed] Action<NSError> completionBlock);
+
+		// +(NSString * _Nullable)getPushToken __attribute__((warn_unused_result("")));
+		[Static]
+		[NullAllowed, Export ("getPushToken")]
+		string PushToken { get; }
+
+		// +(void)handleMessage:(NSDictionary * _Nonnull)userInfo;
+		[Static]
+		[Export ("handleMessage:")]
+		void HandleMessage (NSDictionary userInfo);
+
+		// +(void)didReceiveNotificationRequest:(UNNotificationRequest * _Nonnull)request :(void (^ _Nonnull)(UNNotificationContent * _Nonnull))contentHandler;
+		[Static]
 		[Export ("didReceiveNotificationRequest::")]
 		void DidReceiveNotificationRequest (UNNotificationRequest request, Action<UNNotificationContent> contentHandler);
 
-		// -(void)timeWillExpire;
+		// +(void)timeWillExpire;
+		[Static]
 		[Export ("timeWillExpire")]
 		void TimeWillExpire ();
 	}

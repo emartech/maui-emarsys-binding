@@ -24,13 +24,6 @@
                 HorizontalOptions="Fill" />
 
             <BoxView HeightRequest="1" Color="Grey"/>
-
-            <Button
-                x:Name="EmarsysResultModeBtn"
-                Text="EmarsysResultMode"
-                SemanticProperties.Hint="EmarsysResultMode"
-                Clicked="OnEmarsysResultModeClicked"
-                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 

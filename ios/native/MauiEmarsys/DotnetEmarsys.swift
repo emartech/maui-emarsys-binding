@@ -9,29 +9,8 @@ import EmarsysSDK
 public class DotnetEmarsys: NSObject {
     
     @objc
-    public static func config(_ applicationCode: String?, _ merchantId: String?,
-                              _ sharedKeychainAccessGroup: String?, _ enableConsoleLogging: Bool = false) -> EMSConfig {
-        let config = EMSConfig.make { (build) in
-            if let applicationCode = applicationCode, applicationCode != "" {
-                build.setMobileEngageApplicationCode(applicationCode)
-            }
-            if let merchantId = merchantId, merchantId != "" {
-                build.setMerchantId(merchantId)
-            }
-            if let sharedKeychainAccessGroup = sharedKeychainAccessGroup, sharedKeychainAccessGroup != "" {
-                build.setSharedKeychainAccessGroup(sharedKeychainAccessGroup)
-            }
-            if enableConsoleLogging {
-                build.enableConsoleLogLevels([EMSLogLevel.basic, EMSLogLevel.error, EMSLogLevel.info, EMSLogLevel.debug])
-            }
-        }
-        return config
-    }
-    
-    @objc
     public static func setup(_ config: EMSConfig) {
         Emarsys.setup(config: config)
-        Emarsys.trackCustomEvent(eventName: "wrapper:init", eventAttributes: ["type" : "maui"])
     }
     
     @objc
@@ -54,9 +33,6 @@ public class DotnetEmarsys: NSObject {
         return Emarsys.trackDeepLink(userActivity: userActivity, sourceHandler: sourceHandler)
     }
     
-    @objc
-    public static let push = DotnetEmarsysPush()
-
     @objc
     public static let inApp = DotnetEmarsysInApp()
     

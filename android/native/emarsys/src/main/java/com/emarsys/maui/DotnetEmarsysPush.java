@@ -8,23 +8,23 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class DotnetEmarsysPush {
 
-    public void setEventHandler(@NonNull EventHandler eventHandler) {
+    public static void setEventHandler(@NonNull EventHandler eventHandler) {
         Emarsys.getPush().setNotificationEventHandler(eventHandler::handleEvent);
     }
 
-    public void setPushToken(@NonNull String pushToken, @NonNull CompletionListener completionListener) {
+    public static void setPushToken(@NonNull String pushToken, @NonNull CompletionListener completionListener) {
         Emarsys.getPush().setPushToken(pushToken, completionListener::onCompleted);
     }
 
-    public void clearPushToken(@NonNull CompletionListener completionListener) {
+    public static void clearPushToken(@NonNull CompletionListener completionListener) {
         Emarsys.getPush().clearPushToken(completionListener::onCompleted);
     }
 
-    public String getPushToken() {
+    public static String getPushToken() {
         return Emarsys.getPush().getPushToken();
     }
 
-    public boolean handleMessage(@NonNull Context context, @NonNull RemoteMessage message) {
+    public static boolean handleMessage(@NonNull Context context, @NonNull RemoteMessage message) {
         return EmarsysFirebaseMessagingServiceUtils.handleMessage(context, message);
     }
 

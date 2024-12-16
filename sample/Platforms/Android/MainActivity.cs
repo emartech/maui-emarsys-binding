@@ -22,16 +22,14 @@ public class MainActivity : MauiAppCompatActivity
     }
   }
 
-  protected override void OnNewIntent (Android.Content.Intent? intent)
+  protected override async void OnNewIntent (Android.Content.Intent? intent)
   {
     base.OnNewIntent(intent);
 
     if (intent != null)
     {
-      Emarsys.TrackDeepLink(this, intent, (error) =>
-      {
-        Utils.LogResult("TrackDeepLink", error);
-      });
+      var error = await Emarsys.TrackDeepLink(this, intent);
+      Utils.LogResult("TrackDeepLink", error);
     }
   }
 
