@@ -13,4 +13,13 @@ public interface IPlatformAPI
 
 	public void ClearContact(OnCompletedAction? onCompleted);
 
+	public void TrackCustomEvent(string eventName, Dictionary<string, string>? eventAttributes, OnCompletedAction? onCompleted);
+
+	#if ANDROID
+	public void TrackDeepLink(Activity activity, Intent intent, Action<ErrorType?>? onCompleted);
+	#elif IOS
+	public bool TrackDeepLink(NSUserActivity userActivity, Action<NSString>? sourceHandler);
+	#else
+	public bool TrackDeepLink(string userActivity, Action<string?>? sourceHandler);
+	#endif
 }

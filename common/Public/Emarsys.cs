@@ -32,20 +32,20 @@ public class Emarsys
 		return _internal.ClearContact();
 	}
 
-	public static void TrackCustomEvent(string eventName, Dictionary<string, string>? eventAttributes = null, Action<ErrorType?>? onCompleted = null)
+	public static Task<ErrorType?> TrackCustomEvent(string eventName, Dictionary<string, string>? eventAttributes = null)
 	{
-		DotnetEmarsys.TrackCustomEvent(eventName, Utils.ToNativeDictionary(eventAttributes), Utils.CompletionListener(onCompleted));
+		return _internal.TrackCustomEvent(eventName, eventAttributes);
 	}
 
 	#if ANDROID
-	public static void TrackDeepLink(Activity activity, Intent intent, Action<ErrorType?>? onCompleted = null)
+	public static Task<ErrorType?> TrackDeepLink(Activity activity, Intent intent)
 	{
-		DotnetEmarsys.TrackDeepLink(activity, intent, Utils.CompletionListener(onCompleted));
+		return _internal.TrackDeepLink(activity, intent, onCompleted);
 	}
 	#elif IOS
-	public static bool TrackDeepLink(NSUserActivity userActivity, Action<NSString>? sourceHandler = null)
+	public static Task<ErrorType?> TrackDeepLink(NSUserActivity userActivity)
 	{
-		return DotnetEmarsys.TrackDeepLink(userActivity, sourceHandler);
+		return _internal.TrackDeepLink(userActivity, sourceHandler);
 	}
 	#endif
 

@@ -41,23 +41,8 @@ public partial class ConfigPage : ContentPage
 			{ "key2", "value2" }
 		};
 		
-		switch (Utils.EmarsysResultMode)
-		{
-			case Utils.ResultMode.Task:
-				var error = await EmarsysTask.TrackCustomEvent(eventName, eventAttributes);
-				Utils.LogResult("TrackCustomEvent T", error);
-				break;
-			case Utils.ResultMode.CompletionListener:
-				Emarsys.TrackCustomEvent(eventName, eventAttributes, (error) =>
-				{
-					Utils.LogResult("TrackCustomEvent CL", error);
-				});
-				break;
-			case Utils.ResultMode.Ignore:
-				Emarsys.TrackCustomEvent(eventName, eventAttributes);
-				Utils.LogResult("TrackCustomEvent");
-				break;
-		}
+		var error = await Emarsys.TrackCustomEvent(eventName, eventAttributes);
+		Utils.LogResult("TrackCustomEvent", error);
 	}
 
 	private void OnEmarsysResultModeClicked(object sender, EventArgs e)

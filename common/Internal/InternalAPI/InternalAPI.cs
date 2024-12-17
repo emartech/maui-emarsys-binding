@@ -30,4 +30,37 @@ public class InternalAPI(IPlatformAPI platform)
 		});
 	}
 
+	public Task<ErrorType?> TrackCustomEvent(string eventName, Dictionary<string, string>? eventAttributes)
+	{
+		return Utils.Task((onCompleted) =>
+		{
+			_platform.TrackCustomEvent(eventName, eventAttributes, onCompleted);
+		});
+	}
+
+	#if ANDROID
+	public Task<ErrorType?> TrackDeepLink(Activity activity, Intent intent)
+	{
+		return Utils.Task((onCompleted) =>
+		{
+			_platform.TrackDeepLink(activity, intent, onCompleted);
+		});
+	}
+	#elif IOS
+	public Task<ErrorType?> TrackDeepLink(NSUserActivity userActivity)
+	{
+		return Utils.Task((sourceHandler) =>
+		{
+			_platform.TrackDeepLink(userActivity, sourceHandler);
+		});
+	}
+	#else
+	public Task<ErrorType?> TrackDeepLink(string userActivity)
+	{
+		return Utils.Task((sourceHandler) =>
+		{
+			_platform.TrackDeepLink(userActivity, sourceHandler);
+		});
+	}
+	#endif
 }

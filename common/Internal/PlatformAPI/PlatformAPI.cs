@@ -18,4 +18,20 @@ public class PlatformAPI: IPlatformAPI
 		DotnetEmarsys.ClearContact(Utils.CompletionListener(onCompleted));
 	}
 
+	public void TrackCustomEvent(string eventName, Dictionary<string, string>? eventAttributes, OnCompletedAction? onCompleted)
+	{
+		DotnetEmarsys.TrackCustomEvent(eventName, Utils.ToNativeDictionary(eventAttributes), Utils.CompletionListener(onCompleted));
+	}
+
+	#if ANDROID
+	public void TrackDeepLink(Activity activity, Intent intent, Action<ErrorType?>? onCompleted)
+	{
+		DotnetEmarsys.TrackDeepLink(activity, intent, Utils.CompletionListener(onCompleted));
+	}
+	#elif IOS
+	public bool TrackDeepLink(NSUserActivity userActivity, Action<NSString>? sourceHandler)
+	{
+		return DotnetEmarsys.TrackDeepLink(userActivity, sourceHandler);
+	}
+	#endif
 }
