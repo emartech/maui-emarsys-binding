@@ -14,23 +14,8 @@ public partial class PushPage : ContentPage
 	{
 		#if ANDROID
 		var pushToken = Firebase.Messaging.FirebaseMessaging.Instance.GetToken().Result.ToString();
-		switch (Utils.EmarsysResultMode)
-		{
-			case Utils.ResultMode.Task:
-				var error = await EmarsysTask.Push.SetPushToken(pushToken);
-				Utils.LogResult("SetPushToken T", error);
-				break;
-			case Utils.ResultMode.CompletionListener:
-				Emarsys.Push.SetPushToken(pushToken, (error) =>
-				{
-					Utils.LogResult("SetPushToken CL", error);
-				});
-				break;
-			case Utils.ResultMode.Ignore:
-				Emarsys.Push.SetPushToken(pushToken);
-				Utils.LogResult("SetPushToken");
-				break;
-		}
+		var error = await Emarsys.Push.SetPushToken(pushToken);
+		Utils.LogResult("SetPushToken", error);
 		#elif IOS
 		UIKit.UIApplication.SharedApplication.RegisterForRemoteNotifications();
 		#endif
@@ -38,23 +23,8 @@ public partial class PushPage : ContentPage
 
 	private async void OnClearPushTokenClicked(object sender, EventArgs e)
 	{
-		switch (Utils.EmarsysResultMode)
-		{
-			case Utils.ResultMode.Task:
-				var error = await EmarsysTask.Push.ClearPushToken();
-				Utils.LogResult("ClearPushToken T", error);
-				break;
-			case Utils.ResultMode.CompletionListener:
-				Emarsys.Push.ClearPushToken((error) =>
-				{
-					Utils.LogResult("ClearPushToken CL", error);
-				});
-				break;
-			case Utils.ResultMode.Ignore:
-				Emarsys.Push.ClearPushToken();
-				Utils.LogResult("ClearPushToken");
-				break;
-		}
+		var error = await Emarsys.Push.ClearPushToken();
+		Utils.LogResult("ClearPushToken", error);
 	}
 
 	private void OnGetPushTokenClicked(object sender, EventArgs e)

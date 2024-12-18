@@ -3,9 +3,6 @@
 class Utils
 {
 
-	public enum ResultMode { Task, CompletionListener, Ignore }
-	public static ResultMode EmarsysResultMode = ResultMode.Task;
-
 	public static void DisplayAlert(string title, string message = "", string cancel = "OK")
 	{
 		MainThread.BeginInvokeOnMainThread(async () =>

@@ -12,6 +12,7 @@
 		84494A3D2CE20914007C8007 /* DotnetEmarsysPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84494A3C2CE20914007C8007 /* DotnetEmarsysPush.swift */; };
 		84494A3F2CE20956007C8007 /* DotnetEmarsysTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84494A3E2CE20956007C8007 /* DotnetEmarsysTypes.swift */; };
 		84494A412CE31D7D007C8007 /* DotnetEmarsysInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84494A402CE31D7D007C8007 /* DotnetEmarsysInApp.swift */; };
+		84C9A50A2D02DE7D0021FF59 /* DotnetEmarsysConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C9A5092D02DE7D0021FF59 /* DotnetEmarsysConfig.swift */; };
 		C824337F2CD36AE900D2EDCD /* EmarsysNotificationExtensionLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = C824337E2CD36AE900D2EDCD /* EmarsysNotificationExtensionLibrary */; };
 		C82433812CD36AEC00D2EDCD /* EmarsysSDKLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = C82433802CD36AEC00D2EDCD /* EmarsysSDKLibrary */; };
 /* End PBXBuildFile section */
@@ -23,6 +24,7 @@
 		84494A3C2CE20914007C8007 /* DotnetEmarsysPush.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotnetEmarsysPush.swift; sourceTree = "<group>"; };
 		84494A3E2CE20956007C8007 /* DotnetEmarsysTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotnetEmarsysTypes.swift; sourceTree = "<group>"; };
 		84494A402CE31D7D007C8007 /* DotnetEmarsysInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotnetEmarsysInApp.swift; sourceTree = "<group>"; };
+		84C9A5092D02DE7D0021FF59 /* DotnetEmarsysConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotnetEmarsysConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				83E34F5D2C21CC53008AA950 /* DotnetEmarsys.swift */,
 				84494A3E2CE20956007C8007 /* DotnetEmarsysTypes.swift */,
 				84494A3C2CE20914007C8007 /* DotnetEmarsysPush.swift */,
+				84C9A5092D02DE7D0021FF59 /* DotnetEmarsysConfig.swift */,
 				84494A402CE31D7D007C8007 /* DotnetEmarsysInApp.swift */,
 			);
 			path = MauiEmarsys;
@@ -158,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84494A412CE31D7D007C8007 /* DotnetEmarsysInApp.swift in Sources */,
+				84C9A50A2D02DE7D0021FF59 /* DotnetEmarsysConfig.swift in Sources */,
 				84494A3D2CE20914007C8007 /* DotnetEmarsysPush.swift in Sources */,
 				83E34F5E2C21CC53008AA950 /* DotnetEmarsys.swift in Sources */,
 				84494A3F2CE20956007C8007 /* DotnetEmarsysTypes.swift in Sources */,

@@ -65,6 +65,6 @@
 
 	<!-- Reference to Emarsys Binding project -->
 	<ItemGroup>
-		<ProjectReference Include="..\common\Emarsys.Binding.csproj" />
+		<ProjectReference Include="..\common\Public\Emarsys.Binding.csproj" />
 	</ItemGroup>
 </Project>
