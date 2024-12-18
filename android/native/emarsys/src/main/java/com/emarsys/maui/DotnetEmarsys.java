@@ -47,6 +47,4 @@ public class DotnetEmarsys {
         Emarsys.trackDeepLink(activity, intent, completionListener::onCompleted);
     }
 
-    public static @NonNull DotnetEmarsysInApp inApp = new DotnetEmarsysInApp();
-
 }

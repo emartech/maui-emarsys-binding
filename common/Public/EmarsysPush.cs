@@ -20,9 +20,9 @@ public class EmarsysPush
 	}
 	#endif
 
-	public void SetEventHandler(EventHandlerAction handleEvent)
+	public void SetEventHandler(EventHandlerAction eventHandler)
 	{
-		_internal.SetEventHandler(handleEvent);
+		_internal.SetEventHandler(eventHandler);
 	}
 
 	#if ANDROID

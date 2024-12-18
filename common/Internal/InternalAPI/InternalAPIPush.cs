@@ -20,20 +20,18 @@ public class InternalAPIPush(IPlatformAPIPush platform)
 	}
 	#endif
 
-	public void SetEventHandler(EventHandlerAction handleEvent)
+	public void SetEventHandler(EventHandlerAction eventHandler)
 	{
-		_platform.SetEventHandler(handleEvent);
+		_platform.SetEventHandler(eventHandler);
 	}
 
-	#if ANDROID
+	#if ANDROID || !IOS
 	public Task<ErrorType?> SetPushToken(string pushToken)
 	#elif IOS
 	public Task<ErrorType?> SetPushToken(NSData pushToken)
-	#else
-	public Task<ErrorType?> SetPushToken(string pushToken)
 	#endif
 	{
-		return Utils.Task((onCompleted) =>
+		return InternalUtils.Task((onCompleted) =>
 		{
 			_platform.SetPushToken(pushToken, onCompleted);
 		});
@@ -41,7 +39,7 @@ public class InternalAPIPush(IPlatformAPIPush platform)
 
 	public Task<ErrorType?> ClearPushToken()
 	{
-		return Utils.Task((onCompleted) =>
+		return InternalUtils.Task((onCompleted) =>
 		{
 			_platform.ClearPushToken(onCompleted);
 		});

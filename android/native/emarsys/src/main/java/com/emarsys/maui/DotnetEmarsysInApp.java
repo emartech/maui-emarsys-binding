@@ -10,23 +10,23 @@ import kotlin.Unit;
 
 public class DotnetEmarsysInApp {
 
-    public void setEventHandler(@NonNull EventHandler eventHandler) {
+    public static void setEventHandler(@NonNull EventHandler eventHandler) {
         Emarsys.getInApp().setEventHandler(eventHandler::handleEvent);
     }
 
-    public void pause() {
+    public static void pause() {
         Emarsys.getInApp().pause();
     }
 
-    public void resume() {
+    public static void resume() {
         Emarsys.getInApp().resume();
     }
 
-    public boolean isPaused() {
+    public static boolean isPaused() {
         return Emarsys.getInApp().isPaused();
     }
 
-    public @NonNull View InlineInAppView(@NonNull Context context) {
+    public static @NonNull View createInlineInAppView(@NonNull Context context) {
         return new InlineInAppView(context);
     }
 
@@ -34,14 +34,14 @@ public class DotnetEmarsysInApp {
         void handleEvent(String eventName, JSONObject payload);
     }
 
-    public void setInlineInAppEventHandler(@NonNull View view, @NonNull InlineInAppEventHandler eventHandler) {
+    public static void setInlineInAppEventHandler(@NonNull View view, @NonNull InlineInAppEventHandler eventHandler) {
         ((InlineInAppView) view).setOnAppEventListener((eventName, json) -> {
             eventHandler.handleEvent(eventName, json.optJSONObject("payload"));
             return Unit.INSTANCE;
         });
     }
 
-    public void setInlineInAppCompletionListener(@NonNull View view, @NonNull CompletionListener completionListener) {
+    public static void setInlineInAppCompletionListener(@NonNull View view, @NonNull CompletionListener completionListener) {
         ((InlineInAppView) view).setOnCompletionListener(completionListener::onCompleted);
     }
 
@@ -49,18 +49,18 @@ public class DotnetEmarsysInApp {
         void onClosed();
     }
 
-    public void setInlineInAppCloseListener(@NonNull View view, @NonNull InlineInAppCloseListener closeListener) {
+    public static void setInlineInAppCloseListener(@NonNull View view, @NonNull InlineInAppCloseListener closeListener) {
         ((InlineInAppView) view).setOnCloseListener(() -> {
             closeListener.onClosed();
             return Unit.INSTANCE;
         });
     }
 
-    public void loadInlineInApp(@NonNull View view, @NonNull String viewId) {
+    public static void loadInlineInApp(@NonNull View view, @NonNull String viewId) {
         ((InlineInAppView) view).loadInApp(viewId);
     }
 
-    public void setOnEventActionEventHandler(@NonNull EventHandler eventHandler) {
+    public static void setOnEventActionEventHandler(@NonNull EventHandler eventHandler) {
         Emarsys.getOnEventAction().setOnEventActionEventHandler(eventHandler::handleEvent);
     }
 

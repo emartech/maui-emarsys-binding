@@ -3,29 +3,31 @@
 public class EmarsysInApp
 {
 
+	private static InternalAPIInApp _internal = new InternalAPIInApp(new PlatformAPIInApp());
+
 	public void SetEventHandler(EventHandlerAction eventHandler)
 	{
-		DotnetEmarsys.InApp.SetEventHandler(Utils.EventHandler(eventHandler));
+		_internal.SetEventHandler(eventHandler);
 	}
 
 	public void Pause()
 	{
-		DotnetEmarsys.InApp.Pause();
+		_internal.Pause();
 	}
 
 	public void Resume()
 	{
-		DotnetEmarsys.InApp.Resume();
+		_internal.Resume();
 	}
 
 	public bool IsPaused()
 	{
-		return DotnetEmarsys.InApp.IsPaused;
+		return _internal.IsPaused();
 	}
 
 	public void SetOnEventActionEventHandler(EventHandlerAction eventHandler)
 	{
-		DotnetEmarsys.InApp.SetOnEventActionEventHandler(Utils.EventHandler(eventHandler));
+		_internal.SetOnEventActionEventHandler(eventHandler);
 	}
 
 }

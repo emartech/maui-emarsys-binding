@@ -4,23 +4,18 @@ using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Platform;
 
 #if ANDROID
-using Java.Lang;
-using Kotlin;
-using Org.Json;
+using PlatformView = Android.Views.View;
+using InlineInAppEventHandlerAction = System.Action<string?, Org.Json.JSONObject?>;
 #elif IOS
-using Foundation;
+using PlatformView = UIKit.UIView;
+using InlineInAppEventHandlerAction = System.Action<Foundation.NSString, Foundation.NSDictionary<Foundation.NSString, Foundation.NSObject>?>;
 #endif
 
 public class InlineInAppView : View
 {
 
-	#if ANDROID
-	public event EventHandler<Action<string?, JSONObject?>>? _SetEventHandler;
-	public void SetEventHandler(Action<string?, JSONObject?> eventHandler)
-	#elif IOS
-	public event EventHandler<Action<NSString?, NSDictionary<NSString, NSObject>?>>? _SetEventHandler;
-	public void SetEventHandler(Action<NSString?, NSDictionary<NSString, NSObject>?> eventHandler)
-	#endif
+	public event EventHandler<InlineInAppEventHandlerAction>? _SetEventHandler;
+	public void SetEventHandler(InlineInAppEventHandlerAction eventHandler)
 	{
 		_SetEventHandler?.Invoke(this, eventHandler);
 		WaitForHandler(() =>
@@ -29,13 +24,13 @@ public class InlineInAppView : View
 		});
 	}
 
-	public event EventHandler<Action<ErrorType?>>? _SetCompletionListener;
-	public void SetCompletionListener(Action<ErrorType?> completionListener)
+	public event EventHandler<OnCompletedAction>? _SetCompletionListener;
+	public void SetCompletionListener(OnCompletedAction onCompleted)
 	{
-		_SetCompletionListener?.Invoke(this, completionListener);
+		_SetCompletionListener?.Invoke(this, onCompleted);
 		WaitForHandler(() =>
 		{
-			Handler?.Invoke(nameof(InlineInAppView._SetCompletionListener), completionListener);
+			Handler?.Invoke(nameof(InlineInAppView._SetCompletionListener), onCompleted);
 		});
 	}
 
@@ -75,8 +70,10 @@ public class InlineInAppView : View
 
 }
 
-public partial class InlineInAppViewHandler
+public partial class InlineInAppViewHandler : ViewHandler<InlineInAppView, PlatformView>
 {
+
+	private static InternalAPIInApp _internal = new InternalAPIInApp(new PlatformAPIInApp());
 
 	public static IPropertyMapper<InlineInAppView, InlineInAppViewHandler> PropertyMapper = new PropertyMapper<InlineInAppView, InlineInAppViewHandler>(ViewHandler.ViewMapper)
 	{
@@ -93,130 +90,57 @@ public partial class InlineInAppViewHandler
 	{
 	}
 
+	protected override PlatformView CreatePlatformView()
+	{
+		return _internal.CreateInlineInAppView();
+	}
+
 	public static void SetEventHandler(InlineInAppViewHandler handler, InlineInAppView view, object? args)
 	{
-		#if ANDROID
-		if (handler.PlatformView is Android.Views.View && args is Action<string?, JSONObject?>)
+		if (args is InlineInAppEventHandlerAction)
 		{
-			DotnetEmarsys.InApp.SetInlineInAppEventHandler((Android.Views.View) handler.PlatformView, new InlineInAppEventHandler((Action<string?, JSONObject?>) args));
+			_internal.SetInlineInAppEventHandler(handler.PlatformView, (InlineInAppEventHandlerAction) args);
 		}
-		#elif IOS
-		if (handler.PlatformView is UIKit.UIView && args is Action<NSString?, NSDictionary<NSString, NSObject>?>)
-		{
-			DotnetEmarsys.InApp.SetInlineInAppEventHandler((UIKit.UIView) handler.PlatformView, (Action<NSString?, NSDictionary<NSString, NSObject>?>) args);
-		}
-		#endif
 		else
 		{
-			Console.WriteLine("Please provide valid InlineInAppView and eventHandler");
+			Console.WriteLine("Please provide valid eventHandler");
 		}
 	}
 
 	public static void SetCompletionListener(InlineInAppViewHandler handler, InlineInAppView view, object? args)
 	{
-		#if ANDROID
-		if (handler.PlatformView is Android.Views.View && args is Action<Throwable?>)
+		if (args is OnCompletedAction)
 		{
-			DotnetEmarsys.InApp.SetInlineInAppCompletionListener((Android.Views.View) handler.PlatformView, new CompletionListener((Action<Throwable?>) args));
+			_internal.SetInlineInAppCompletionListener(handler.PlatformView, (OnCompletedAction) args);
 		}
-		#elif IOS
-		if (handler.PlatformView is UIKit.UIView && args is Action<NSError?>)
-		{
-			DotnetEmarsys.InApp.SetInlineInAppCompletionBlock((UIKit.UIView) handler.PlatformView, (Action<NSError?>) args);
-		}
-		#endif
 		else
 		{
-			Console.WriteLine("Please provide valid InlineInAppView and completionListener");
+			Console.WriteLine("Please provide valid completionListener");
 		}
 	}
 
 	public static void SetCloseListener(InlineInAppViewHandler handler, InlineInAppView view, object? args)
 	{
-		#if ANDROID
-		if (handler.PlatformView is Android.Views.View && args is Action)
+		if (args is Action)
 		{
-			DotnetEmarsys.InApp.SetInlineInAppCloseListener((Android.Views.View) handler.PlatformView, new InlineInAppCloseListener((Action) args));
+			_internal.SetInlineInAppCloseListener(handler.PlatformView, (Action) args);
 		}
-		#elif IOS
-		if (handler.PlatformView is UIKit.UIView && args is Action)
-		{
-			DotnetEmarsys.InApp.SetInlineInAppCloseBlock((UIKit.UIView) handler.PlatformView, (Action) args);
-		}
-		#endif
 		else
 		{
-			Console.WriteLine("Please provide valid InlineInAppView and closeListener");
+			Console.WriteLine("Please provide valid closeListener");
 		}
 	}
 
 	public static void LoadInApp(InlineInAppViewHandler handler, InlineInAppView view, object? args)
 	{
-		#if ANDROID
-		if (handler.PlatformView is Android.Views.View && args is string)
+		if (args is string)
 		{
-			DotnetEmarsys.InApp.LoadInlineInApp((Android.Views.View) handler.PlatformView, (string) args);
+			_internal.LoadInlineInApp(handler.PlatformView, (string) args);
 		}
-		#elif IOS
-		if (handler.PlatformView is UIKit.UIView && args is string)
-		{
-			DotnetEmarsys.InApp.LoadInlineInApp((UIKit.UIView) handler.PlatformView, (string) args);
-		}
-		#endif
 		else
 		{
-			Console.WriteLine("Please provide valid InlineInAppView and viewId");
+			Console.WriteLine("Please provide valid viewId");
 		}
 	}
 
 }
-
-#if ANDROID
-public partial class InlineInAppViewHandler : ViewHandler<InlineInAppView, Android.Views.View>
-{
-	protected override Android.Views.View CreatePlatformView()
-	{
-		return DotnetEmarsys.InApp.InlineInAppView(Platform.AppContext);
-	}
-}
-#elif IOS
-public partial class InlineInAppViewHandler : ViewHandler<InlineInAppView, UIKit.UIView>
-{
-	protected override UIKit.UIView CreatePlatformView()
-	{
-		return DotnetEmarsys.InApp.InlineInAppView();
-	}
-}
-#endif
-
-#if ANDROID
-public class InlineInAppEventHandler : Object, DotnetEmarsysInApp.IInlineInAppEventHandler
-{
-	private readonly Action<string?, JSONObject?> onInvoked;
-
-	public InlineInAppEventHandler(Action<string?, JSONObject?> onInvoked)
-	{
-		this.onInvoked = onInvoked;
-	}
-
-	public void HandleEvent(string? eventName, JSONObject? payload)
-	{
-		onInvoked?.Invoke(eventName, payload);
-	}
-}
-
-public class InlineInAppCloseListener : Object, DotnetEmarsysInApp.IInlineInAppCloseListener
-{
-	private readonly Action onInvoked;
-
-	public InlineInAppCloseListener(Action onInvoked)
-	{
-		this.onInvoked = onInvoked;
-	}
-
-	public void OnClosed()
-	{
-		onInvoked?.Invoke();
-	}
-}
-#endif

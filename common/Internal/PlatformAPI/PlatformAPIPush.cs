@@ -18,23 +18,23 @@ public class PlatformAPIPush: IPlatformAPIPush
 	}
 	#endif
 
-	public void SetEventHandler(EventHandlerAction handleEvent)
+	public void SetEventHandler(EventHandlerAction eventHandler)
 	{
-		DotnetEmarsysPush.SetEventHandler(Utils.EventHandler(handleEvent));
+		DotnetEmarsysPush.SetEventHandler(PlatformUtils.EventHandler(eventHandler));
 	}
 
 	#if ANDROID
-	public void SetPushToken(string pushToken, OnCompletedAction? onCompleted)
+	public void SetPushToken(string pushToken, OnCompletedAction onCompleted)
 	#elif IOS
-	public void SetPushToken(NSData pushToken, OnCompletedAction? onCompleted)
+	public void SetPushToken(NSData pushToken, OnCompletedAction onCompleted)
 	#endif
 	{
-		DotnetEmarsysPush.SetPushToken(pushToken, Utils.CompletionListener(onCompleted));
+		DotnetEmarsysPush.SetPushToken(pushToken, PlatformUtils.CompletionListener(onCompleted));
 	}
 
-	public void ClearPushToken(OnCompletedAction? onCompleted)
+	public void ClearPushToken(OnCompletedAction onCompleted)
 	{
-		DotnetEmarsysPush.ClearPushToken(Utils.CompletionListener(onCompleted));
+		DotnetEmarsysPush.ClearPushToken(PlatformUtils.CompletionListener(onCompleted));
 	}
 
 	public string? GetPushToken()
