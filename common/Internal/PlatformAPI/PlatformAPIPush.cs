@@ -68,4 +68,8 @@ public class PlatformAPIPush: IPlatformAPIPush
 	}
 	#endif
 
+	public void SetSilentMessageEventHandler(EventHandlerAction eventHandler)
+	{
+		DotnetEmarsysPush.SetSilentMessageEventHandler(PlatformUtils.EventHandler(eventHandler));
+	}
 }

@@ -70,4 +70,8 @@ public class EmarsysPush
 	}
 	#endif
 
+	public void SetSilentMessageEventHandler(EventHandlerAction eventHandler)
+	{
+		_internal.SetSilentMessageEventHandler(eventHandler);
+	}
 }
