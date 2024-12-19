@@ -15,25 +15,25 @@ public class PlatformAPI: IPlatformAPI
 		DotnetEmarsys.Setup(config);
 	}
 
-	public void SetContact(int contactFieldId, string contactFieldValue, OnCompletedAction? onCompleted)
+	public void SetContact(int contactFieldId, string contactFieldValue, OnCompletedAction onCompleted)
 	{
-		DotnetEmarsys.SetContact(contactFieldId, contactFieldValue, Utils.CompletionListener(onCompleted));
+		DotnetEmarsys.SetContact(contactFieldId, contactFieldValue, PlatformUtils.CompletionListener(onCompleted));
 	}
 
-	public void ClearContact(OnCompletedAction? onCompleted)
+	public void ClearContact(OnCompletedAction onCompleted)
 	{
-		DotnetEmarsys.ClearContact(Utils.CompletionListener(onCompleted));
+		DotnetEmarsys.ClearContact(PlatformUtils.CompletionListener(onCompleted));
 	}
 
-	public void TrackCustomEvent(string eventName, Dictionary<string, string>? eventAttributes, OnCompletedAction? onCompleted)
+	public void TrackCustomEvent(string eventName, Dictionary<string, string>? eventAttributes, OnCompletedAction onCompleted)
 	{
-		DotnetEmarsys.TrackCustomEvent(eventName, Utils.ToNativeDictionary(eventAttributes), Utils.CompletionListener(onCompleted));
+		DotnetEmarsys.TrackCustomEvent(eventName, PlatformUtils.ToNativeDictionary(eventAttributes), PlatformUtils.CompletionListener(onCompleted));
 	}
 
 	#if ANDROID
-	public void TrackDeepLink(Activity activity, Intent intent, OnCompletedAction? onCompleted)
+	public void TrackDeepLink(Activity activity, Intent intent, OnCompletedAction onCompleted)
 	{
-		DotnetEmarsys.TrackDeepLink(activity, intent, Utils.CompletionListener(onCompleted));
+		DotnetEmarsys.TrackDeepLink(activity, intent, PlatformUtils.CompletionListener(onCompleted));
 	}
 	#elif IOS
 	public bool TrackDeepLink(NSUserActivity userActivity, Action<NSString>? sourceHandler)

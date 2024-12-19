@@ -1,6 +1,5 @@
 using System;
 using Foundation;
-using ObjCRuntime;
 using UIKit;
 using UserNotifications;
 
@@ -22,30 +21,25 @@ namespace EmarsysiOS
 		[Export ("setup:")]
 		void Setup (EMSConfig config);
 
-		// +(void)setContact:(NSInteger)contactFieldId :(NSString * _Nonnull)contactFieldValue :(void (^ _Nullable)(NSError * _Nullable))completionBlock;
+		// +(void)setContact:(NSInteger)contactFieldId :(NSString * _Nonnull)contactFieldValue :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
 		[Static]
 		[Export ("setContact:::")]
-		void SetContact (nint contactFieldId, string contactFieldValue, [NullAllowed] Action<NSError> completionBlock);
+		void SetContact (nint contactFieldId, string contactFieldValue, Action<NSError> completionBlock);
 
-		// +(void)clearContact:(void (^ _Nullable)(NSError * _Nullable))completionBlock;
+		// +(void)clearContact:(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
 		[Static]
 		[Export ("clearContact:")]
-		void ClearContact ([NullAllowed] Action<NSError> completionBlock);
+		void ClearContact (Action<NSError> completionBlock);
 
-		// +(void)trackCustomEvent:(NSString * _Nonnull)eventName :(NSDictionary<NSString *,NSString *> * _Nullable)eventAttributes :(void (^ _Nullable)(NSError * _Nullable))completionBlock;
+		// +(void)trackCustomEvent:(NSString * _Nonnull)eventName :(NSDictionary<NSString *,NSString *> * _Nullable)eventAttributes :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
 		[Static]
 		[Export ("trackCustomEvent:::")]
-		void TrackCustomEvent (string eventName, [NullAllowed] NSDictionary<NSString, NSString> eventAttributes, [NullAllowed] Action<NSError> completionBlock);
+		void TrackCustomEvent (string eventName, [NullAllowed] NSDictionary<NSString, NSString> eventAttributes, Action<NSError> completionBlock);
 
 		// +(BOOL)trackDeepLink:(NSUserActivity * _Nonnull)userActivity :(void (^ _Nullable)(NSString * _Nonnull))sourceHandler __attribute__((warn_unused_result("")));
 		[Static]
 		[Export ("trackDeepLink::")]
 		bool TrackDeepLink (NSUserActivity userActivity, [NullAllowed] Action<NSString> sourceHandler);
-
-		// @property (readonly, nonatomic, strong, class) DotnetEmarsysInApp * _Nonnull inApp;
-		[Static]
-		[Export ("inApp", ArgumentSemantic.Strong)]
-		DotnetEmarsysInApp InApp { get; }
 	}
 
 	// @interface DotnetEmarsysConfig : NSObject
@@ -62,43 +56,53 @@ namespace EmarsysiOS
 	[BaseType (typeof(NSObject))]
 	interface DotnetEmarsysInApp
 	{
-		// -(void)setEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		// +(void)setEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		[Static]
 		[Export ("setEventHandler:")]
 		void SetEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
 
-		// -(void)pause;
+		// +(void)pause;
+		[Static]
 		[Export ("pause")]
 		void Pause ();
 
-		// -(void)resume;
+		// +(void)resume;
+		[Static]
 		[Export ("resume")]
 		void Resume ();
 
-		// -(BOOL)isPaused __attribute__((warn_unused_result("")));
+		// +(BOOL)isPaused __attribute__((warn_unused_result("")));
+		[Static]
 		[Export ("isPaused")]
 		bool IsPaused { get; }
 
-		// -(UIView * _Nonnull)InlineInAppView __attribute__((warn_unused_result("")));
-		[Export ("InlineInAppView")]
-		UIView InlineInAppView ();
+		// +(UIView * _Nonnull)createInlineInAppView __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("createInlineInAppView")]
+		UIView CreateInlineInAppView ();
 
-		// -(void)setInlineInAppEventHandler:(UIView * _Nonnull)view :(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		// +(void)setInlineInAppEventHandler:(UIView * _Nonnull)view :(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		[Static]
 		[Export ("setInlineInAppEventHandler::")]
 		void SetInlineInAppEventHandler (UIView view, Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
 
-		// -(void)setInlineInAppCompletionBlock:(UIView * _Nonnull)view :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
-		[Export ("setInlineInAppCompletionBlock::")]
-		void SetInlineInAppCompletionBlock (UIView view, Action<NSError> completionBlock);
+		// +(void)setInlineInAppCompletionListener:(UIView * _Nonnull)view :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		[Static]
+		[Export ("setInlineInAppCompletionListener::")]
+		void SetInlineInAppCompletionListener (UIView view, Action<NSError> completionBlock);
 
-		// -(void)setInlineInAppCloseBlock:(UIView * _Nonnull)view :(void (^ _Nonnull)(void))closeBlock;
-		[Export ("setInlineInAppCloseBlock::")]
-		void SetInlineInAppCloseBlock (UIView view, Action closeBlock);
+		// +(void)setInlineInAppCloseListener:(UIView * _Nonnull)view :(void (^ _Nonnull)(void))closeBlock;
+		[Static]
+		[Export ("setInlineInAppCloseListener::")]
+		void SetInlineInAppCloseListener (UIView view, Action closeBlock);
 
-		// -(void)loadInlineInApp:(UIView * _Nonnull)view :(NSString * _Nonnull)viewId;
+		// +(void)loadInlineInApp:(UIView * _Nonnull)view :(NSString * _Nonnull)viewId;
+		[Static]
 		[Export ("loadInlineInApp::")]
 		void LoadInlineInApp (UIView view, string viewId);
 
-		// -(void)setOnEventActionEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		// +(void)setOnEventActionEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		[Static]
 		[Export ("setOnEventActionEventHandler:")]
 		void SetOnEventActionEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
 	}
@@ -117,15 +121,15 @@ namespace EmarsysiOS
 		[Export ("setEventHandler:")]
 		void SetEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
 
-		// +(void)setPushToken:(NSData * _Nonnull)pushToken :(void (^ _Nullable)(NSError * _Nullable))completionBlock;
+		// +(void)setPushToken:(NSData * _Nonnull)pushToken :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
 		[Static]
 		[Export ("setPushToken::")]
-		void SetPushToken (NSData pushToken, [NullAllowed] Action<NSError> completionBlock);
+		void SetPushToken (NSData pushToken, Action<NSError> completionBlock);
 
-		// +(void)clearPushToken:(void (^ _Nullable)(NSError * _Nullable))completionBlock;
+		// +(void)clearPushToken:(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
 		[Static]
 		[Export ("clearPushToken:")]
-		void ClearPushToken ([NullAllowed] Action<NSError> completionBlock);
+		void ClearPushToken (Action<NSError> completionBlock);
 
 		// +(NSString * _Nullable)getPushToken __attribute__((warn_unused_result("")));
 		[Static]

@@ -15,17 +15,15 @@ public interface IPlatformAPIPush
 	public void SetDelegate();
 	#endif
 
-	public void SetEventHandler(EventHandlerAction handleEvent);
+	public void SetEventHandler(EventHandlerAction eventHandler);
 
-	#if ANDROID
-	public void SetPushToken(string pushToken, OnCompletedAction? onCompleted);
+	#if ANDROID || !IOS
+	public void SetPushToken(string pushToken, OnCompletedAction onCompleted);
 	#elif IOS
-	public void SetPushToken(NSData pushToken, OnCompletedAction? onCompleted);
-	#else
-	public void SetPushToken(string pushToken, OnCompletedAction? onCompleted);
+	public void SetPushToken(NSData pushToken, OnCompletedAction onCompleted);
 	#endif
 
-	public void ClearPushToken(OnCompletedAction? onCompleted);
+	public void ClearPushToken(OnCompletedAction onCompleted);
 
 	public string? GetPushToken();
 

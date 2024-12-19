@@ -19,12 +19,12 @@ public class DotnetEmarsysPush: NSObject {
     }
     
     @objc
-    public static func setPushToken(_ pushToken: Data, _ completionBlock: CompletionBlock?) {
+    public static func setPushToken(_ pushToken: Data, _ completionBlock: @escaping CompletionBlock) {
         Emarsys.push.setPushToken(pushToken: pushToken, completionBlock: completionBlock)
     }
     
     @objc
-    public static func clearPushToken(_ completionBlock: CompletionBlock?) {
+    public static func clearPushToken(_ completionBlock: @escaping CompletionBlock) {
         Emarsys.push.clearPushToken(completionBlock: completionBlock)
     }
     

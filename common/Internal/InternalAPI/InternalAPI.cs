@@ -5,6 +5,8 @@ using Android.App;
 using Android.Content;
 #elif IOS
 using Foundation;
+#else
+using EMSConfig = string;
 #endif
 
 public class InternalAPI(IPlatformAPI platform)
@@ -12,18 +14,14 @@ public class InternalAPI(IPlatformAPI platform)
 
 	private readonly IPlatformAPI _platform = platform;
 
-	#if ANDROID || IOS
 	public void Setup(EMSConfig config)
-	#else
-	public void Setup(string config)
-	#endif
 	{
 		_platform.Setup(config);
 	}
 
 	public Task<ErrorType?> SetContact(int contactFieldId, string contactFieldValue)
 	{
-		return Utils.Task((onCompleted) =>
+		return InternalUtils.Task((onCompleted) =>
 		{
 			_platform.SetContact(contactFieldId, contactFieldValue, onCompleted);
 		});
@@ -31,7 +29,7 @@ public class InternalAPI(IPlatformAPI platform)
 
 	public Task<ErrorType?> ClearContact()
 	{
-		return Utils.Task((onCompleted) =>
+		return InternalUtils.Task((onCompleted) =>
 		{
 			_platform.ClearContact(onCompleted);
 		});
@@ -39,7 +37,7 @@ public class InternalAPI(IPlatformAPI platform)
 
 	public Task<ErrorType?> TrackCustomEvent(string eventName, Dictionary<string, string>? eventAttributes)
 	{
-		return Utils.Task((onCompleted) =>
+		return InternalUtils.Task((onCompleted) =>
 		{
 			_platform.TrackCustomEvent(eventName, eventAttributes, onCompleted);
 		});
@@ -48,7 +46,7 @@ public class InternalAPI(IPlatformAPI platform)
 	#if ANDROID
 	public Task<ErrorType?> TrackDeepLink(Activity activity, Intent intent)
 	{
-		return Utils.Task((onCompleted) =>
+		return InternalUtils.Task((onCompleted) =>
 		{
 			_platform.TrackDeepLink(activity, intent, onCompleted);
 		});

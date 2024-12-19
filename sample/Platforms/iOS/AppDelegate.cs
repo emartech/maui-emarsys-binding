@@ -16,7 +16,7 @@ public class AppDelegate : MauiUIApplicationDelegate
 		Emarsys.Setup(config);
 		Emarsys.Push.SetDelegate();
 
-		Action<NSString, NSDictionary<NSString, NSObject>> eventHandler = (eventName, payload) =>
+		Action<NSString, NSDictionary<NSString, NSObject>?> eventHandler = (eventName, payload) =>
 		{
 			string payloadString = payload?.Description ?? "No payload";
 			Utils.DisplayAlert("Handle event", $"Event: {eventName}\nPayload: {payloadString}");
