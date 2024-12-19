@@ -30,6 +30,11 @@
                 SemanticProperties.Hint="Change Application Code"
                 Clicked="OnChangeApplicationCodeClicked"
                 HorizontalOptions="Fill" />
+            <Button
+                Text="Change Merchant Id"
+                SemanticProperties.Hint="Change Merchant Id"
+                Clicked="OnChangeMerchantIdClicked"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 

@@ -16,4 +16,8 @@ public class DotnetEmarsysConfig {
         Emarsys.getConfig().changeApplicationCode(applicationCode, completionListener::onCompleted);
     }
 
+    public static void changeMerchantId(String merchantId, @NonNull CompletionListener completionListener) {
+        Emarsys.getConfig().changeMerchantId(merchantId);
+        completionListener.onCompleted(null);
+    }
 }

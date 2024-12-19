@@ -55,6 +55,11 @@ namespace EmarsysiOS
 		[Static]
 		[Export ("changeApplicationCode::")]
 		void ChangeApplicationCode ([NullAllowed] string applicationCode, Action<NSError> completionBlock);
+
+		// +(void)changeMerchantId:(NSString * _Nullable)merchantId :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		[Static]
+		[Export ("changeMerchantId::")]
+		void ChangeMerchantId ([NullAllowed] string merchantId, Action<NSError> completionBlock);
 	}
 
 	// @interface DotnetEmarsysInApp : NSObject

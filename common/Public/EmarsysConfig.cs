@@ -27,4 +27,8 @@ public class EmarsysConfig
 		return _internal.ChangeApplicationCode(applicationCode);
 	}
 
+	public Task<ErrorType?> ChangeMerchantId(string? merchantId)
+	{
+		return _internal.ChangeMerchantId(merchantId);
+	}
 }
