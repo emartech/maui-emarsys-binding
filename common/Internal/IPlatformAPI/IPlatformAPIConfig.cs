@@ -16,4 +16,6 @@ public interface IPlatformAPIConfig
 	public bool Build(string? applicationCode, string? merchantId, bool enableConsoleLogging);
 	#endif
 
+	public void ChangeApplicationCode(string? applicationCode, OnCompletedAction onCompleted);
+
 }

@@ -22,4 +22,9 @@ public class EmarsysConfig
 	}
 	#endif
 
+	public Task<ErrorType?> ChangeApplicationCode(string? applicationCode)
+	{
+		return _internal.ChangeApplicationCode(applicationCode);
+	}
+
 }

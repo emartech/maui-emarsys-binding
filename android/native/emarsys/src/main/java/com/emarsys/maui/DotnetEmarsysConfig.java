@@ -12,4 +12,8 @@ public class DotnetEmarsysConfig {
         return new EMSConfig(application, applicationCode, merchantId, sharedPackageNames, sharedSecret, enableConsoleLogging);
     }
 
+    public static void changeApplicationCode(String applicationCode, @NonNull CompletionListener completionListener) {
+        Emarsys.getConfig().changeApplicationCode(applicationCode, completionListener::onCompleted);
+    }
+
 }

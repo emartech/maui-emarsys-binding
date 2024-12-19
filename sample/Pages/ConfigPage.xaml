@@ -24,6 +24,12 @@
                 HorizontalOptions="Fill" />
 
             <BoxView HeightRequest="1" Color="Grey"/>
+
+            <Button
+                Text="Change Application Code"
+                SemanticProperties.Hint="Change Application Code"
+                Clicked="OnChangeApplicationCodeClicked"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 

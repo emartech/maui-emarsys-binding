@@ -27,4 +27,12 @@ public class InternalAPIConfig(IPlatformAPIConfig platform)
 	}
 	#endif
 
+	public Task<ErrorType?> ChangeApplicationCode(string? applicationCode)
+	{
+		return InternalUtils.Task((onCompleted) =>
+		{
+			_platform.ChangeApplicationCode(applicationCode, onCompleted);
+		});
+	}
+
 }

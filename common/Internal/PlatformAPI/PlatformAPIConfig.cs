@@ -20,4 +20,9 @@ public class PlatformAPIConfig: IPlatformAPIConfig
 	}
 	#endif
 
+	public void ChangeApplicationCode(string? applicationCode, OnCompletedAction onCompleted)
+	{
+		DotnetEmarsysConfig.ChangeApplicationCode(applicationCode, PlatformUtils.CompletionListener(onCompleted));
+	}
+
 }
