@@ -62,6 +62,83 @@ namespace EmarsysiOS
 		void ChangeMerchantId ([NullAllowed] string merchantId, Action<NSError> completionBlock);
 	}
 
+	// @interface EMSGeofence : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface EMSGeofence
+	{
+		[Export ("id")]
+		string Id { get; }
+
+		[Export ("lat")]
+		double Lat { get; }
+
+		[Export ("lon")]
+		double Lon { get; }
+
+		[Export ("r")]
+		int Radius { get; }
+
+		[Export ("waitInterval")]
+		double WaitInterval { get; }
+
+		[Export ("triggers")]
+		EMSGeofenceTrigger[] Triggers { get; }
+	}
+
+	// @interface EMSGeofenceTrigger : NSObject
+	[BaseType (typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface EMSGeofenceTrigger
+	{
+		[Export ("id")]
+		string Id { get; }
+
+		[Export ("type")]
+		string Type { get; }
+
+		[Export ("loiteringDelay")]
+		int LoiteringDelay { get; }
+
+		[Export ("action")]
+		NSDictionary<NSString, NSObject> Action { get; }
+	}
+
+	// @interface DotnetEmarsysGeofence : NSObject
+	[BaseType (typeof(NSObject))]
+	interface DotnetEmarsysGeofence
+	{
+		// +(void)setInitialEnterTriggerEnabled:(BOOL)initialEnterTriggerEnabled;
+		[Static]
+		[Export ("setInitialEnterTriggerEnabled:")]
+		void SetInitialEnterTriggerEnabled (bool initialEnterTriggerEnabled);
+
+		// +(void)enable:(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		[Static]
+		[Export ("enable:")]
+		void Enable (Action<NSError> completionBlock);
+
+		// +(void)disable;
+		[Static]
+		[Export ("disable")]
+		void Disable ();
+
+		// +(BOOL)isEnabled __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("isEnabled")]
+		bool IsEnabled { get; }
+
+		// +(void)setEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		[Static]
+		[Export ("setEventHandler:")]
+		void SetEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
+
+		// +(NSArray<EMSGeofence *> * _Nonnull)registeredGeofences __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("registeredGeofences")]
+		EMSGeofence[] RegisteredGeofences { get; }
+	}
+
 	// @interface DotnetEmarsysInApp : NSObject
 	[BaseType (typeof(NSObject))]
 	interface DotnetEmarsysInApp
