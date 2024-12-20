@@ -50,6 +50,11 @@ namespace EmarsysiOS
 		[Static]
 		[Export ("build::::")]
 		EMSConfig Build ([NullAllowed] string applicationCode, [NullAllowed] string merchantId, [NullAllowed] string sharedKeychainAccessGroup, bool enableConsoleLogging);
+
+		// +(void)changeApplicationCode:(NSString * _Nullable)applicationCode :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		[Static]
+		[Export ("changeApplicationCode::")]
+		void ChangeApplicationCode ([NullAllowed] string applicationCode, Action<NSError> completionBlock);
 	}
 
 	// @interface DotnetEmarsysInApp : NSObject

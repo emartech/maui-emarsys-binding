@@ -24,4 +24,28 @@ public class TestConfig
 		Assert.True(result);
 	}
 
+	[Fact]
+	public async Task ChangeApplicationCode_ShouldWork()
+	{
+		_platformMock.Setup(mock => mock.ChangeApplicationCode(It.IsAny<string>(), It.IsAny<Action<string?>>()))
+			.Callback((string _, Action<string?> onCompleted) => onCompleted(null));
+
+		string? result = await _internal.ChangeApplicationCode("test");
+
+		_platformMock.Verify(mock => mock.ChangeApplicationCode("test", It.IsAny<Action<string?>>()));
+		Assert.Null(result);
+	}
+
+	[Fact]
+	public async Task ChangeApplicationCode_ShouldWorkWithError()
+	{
+		_platformMock.Setup(mock => mock.ChangeApplicationCode(It.IsAny<string>(), It.IsAny<Action<string?>>()))
+			.Callback((string _, Action<string?> onCompleted) => onCompleted("error"));
+
+		string? result = await _internal.ChangeApplicationCode("test");
+
+		_platformMock.Verify(mock => mock.ChangeApplicationCode("test", It.IsAny<Action<string?>>()));
+		Assert.Equal("error", result);
+	}
+
 }

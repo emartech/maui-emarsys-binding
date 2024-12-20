@@ -42,4 +42,11 @@ public partial class ConfigPage : ContentPage
 		Utils.LogResult("TrackCustomEvent", error);
 	}
 
+	private async void OnChangeApplicationCodeClicked(object sender, EventArgs e)
+	{
+		string applicationCode = "EMS12-04EC1";
+		var error = await Emarsys.Config.ChangeApplicationCode(applicationCode);
+		Utils.LogResult("ChangeApplicationCode", error);
+	}
+
 }

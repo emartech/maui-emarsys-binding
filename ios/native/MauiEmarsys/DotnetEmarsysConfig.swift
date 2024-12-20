@@ -28,4 +28,9 @@ public class DotnetEmarsysConfig: NSObject {
         return config
     }
     
+    @objc
+    public static func changeApplicationCode(_ applicationCode: String?, _ completionBlock: @escaping CompletionBlock) {
+        Emarsys.config.changeApplicationCode(applicationCode: applicationCode, completionBlock: completionBlock)
+    }
+    
 }
