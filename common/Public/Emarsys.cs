@@ -11,6 +11,7 @@ public class Emarsys
 {
 
 	private static InternalAPI _internal = new InternalAPI(new PlatformAPI());
+	private static string packageVersion = "0.0.1";
 
 	public static void Setup(EMSConfig config)
 	{
@@ -18,7 +19,8 @@ public class Emarsys
 		
 		TrackCustomEvent("wrapper:init", new Dictionary<string, string>
 		{
-			{ "type", "maui" }
+			{ "type", "maui" },
+			{ "version", packageVersion }
 		});
 	}
 
