@@ -28,4 +28,7 @@ public class DotnetEmarsysPush {
         return EmarsysFirebaseMessagingServiceUtils.handleMessage(context, message);
     }
 
+    public static void setSilentMessageEventHandler(@NonNull EventHandler eventHandler) {
+        Emarsys.getPush().setSilentMessageEventHandler(eventHandler::handleEvent);
+    }
 }

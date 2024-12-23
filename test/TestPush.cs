@@ -122,4 +122,13 @@ public class TestPush
 		_platformMock.Verify(mock => mock.TimeWillExpire());
 	}
 
+	[Fact]
+	public void SetSilentMessageEventHandler_ShouldWork()
+	{
+		_platformMock.Setup(mock => mock.SetSilentMessageEventHandler(It.IsAny<Action<string>>()));
+
+		_internal.SetSilentMessageEventHandler(Utils.EventHandler());
+
+		_platformMock.Verify(mock => mock.SetSilentMessageEventHandler(It.IsAny<Action<string>>()));
+	}
 }

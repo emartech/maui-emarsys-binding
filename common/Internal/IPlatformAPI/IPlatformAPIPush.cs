@@ -45,4 +45,5 @@ public interface IPlatformAPIPush
 	public void TimeWillExpire();
 	#endif
 
+	public void SetSilentMessageEventHandler(EventHandlerAction eventHandler);
 }

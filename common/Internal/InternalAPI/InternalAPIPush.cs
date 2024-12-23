@@ -86,4 +86,8 @@ public class InternalAPIPush(IPlatformAPIPush platform)
 	}
 	#endif
 
+	public void SetSilentMessageEventHandler(EventHandlerAction eventHandler)
+	{
+		_platform.SetSilentMessageEventHandler(eventHandler);
+	}
 }

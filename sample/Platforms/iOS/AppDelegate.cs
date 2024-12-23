@@ -22,6 +22,7 @@ public class AppDelegate : MauiUIApplicationDelegate
 			Utils.DisplayAlert("Handle event", $"Event: {eventName}\nPayload: {payloadString}");
 		};
 		Emarsys.Push.SetEventHandler(eventHandler);
+		Emarsys.Push.SetSilentMessageEventHandler(eventHandler);
 		Emarsys.InApp.SetEventHandler(eventHandler);
 		Emarsys.InApp.SetOnEventActionEventHandler(eventHandler);
 

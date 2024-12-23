@@ -155,5 +155,10 @@ namespace EmarsysiOS
 		[Static]
 		[Export ("timeWillExpire")]
 		void TimeWillExpire ();
+
+		// +(void)setSilentMessageEventHandler:(void (^ _Nonnull)(NSString * _Nonnull, NSDictionary<NSString *,id> * _Nullable))eventHandler;
+		[Static]
+		[Export ("setSilentMessageEventHandler:")]
+		void SetSilentMessageEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
 	}
 }
