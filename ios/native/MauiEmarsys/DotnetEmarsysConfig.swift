@@ -35,7 +35,6 @@ public class DotnetEmarsysConfig: NSObject {
     
     @objc
     public static func changeMerchantId(_ merchantId: String?, _ completionBlock: @escaping CompletionBlock) {
-        Emarsys.config.changeMerchantId(merchantId: merchantId)
-        completionBlock(nil)
+        Emarsys.config.changeMerchantId(merchantId: merchantId, completionBlock: completionBlock)
     }
 }
