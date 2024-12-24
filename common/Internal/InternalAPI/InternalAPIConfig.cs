@@ -35,4 +35,11 @@ public class InternalAPIConfig(IPlatformAPIConfig platform)
 		});
 	}
 
+	public Task<ErrorType?> ChangeMerchantId(string? merchantId)
+	{
+		return InternalUtils.Task((onCompleted) =>
+		{
+			_platform.ChangeMerchantId(merchantId, onCompleted);
+		});
+	}
 }

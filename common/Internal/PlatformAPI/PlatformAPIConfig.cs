@@ -25,4 +25,8 @@ public class PlatformAPIConfig: IPlatformAPIConfig
 		DotnetEmarsysConfig.ChangeApplicationCode(applicationCode, PlatformUtils.CompletionListener(onCompleted));
 	}
 
+	public void ChangeMerchantId(string? merchantId, OnCompletedAction onCompleted)
+	{
+		DotnetEmarsysConfig.ChangeMerchantId(merchantId, PlatformUtils.CompletionListener(onCompleted));
+	}
 }

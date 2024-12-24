@@ -49,4 +49,10 @@ public partial class ConfigPage : ContentPage
 		Utils.LogResult("ChangeApplicationCode", error);
 	}
 
+	private async void OnChangeMerchantIdClicked(object sender, EventArgs e)
+	{
+		string merchantId = "102F6519FC312033";
+		var error = await Emarsys.Config.ChangeMerchantId(merchantId);
+		Utils.LogResult("ChangeMerchantId", error);
+	}
 }
