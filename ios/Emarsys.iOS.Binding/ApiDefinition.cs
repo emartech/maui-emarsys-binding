@@ -225,6 +225,11 @@ namespace EmarsysiOS
 	[BaseType (typeof(NSObject))]
 	interface DotnetEmarsysInbox
 	{
+		// +(void)fetchMessages:(void (^ _Nonnull)(NSDictionary<NSString *,id> * _Nonnull))resultCallback;
+		[Static]
+		[Export ("fetchMessages:")]
+		void FetchMessages (Action<NSDictionary<NSString, NSObject>> resultCallback);
+
 		// +(void)addTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonnull)messageId :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
 		[Static]
 		[Export ("addTag:messageId::")]

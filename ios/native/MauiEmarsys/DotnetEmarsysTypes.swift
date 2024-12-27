@@ -6,3 +6,4 @@ import Foundation
 
 public typealias CompletionBlock = (Error?) -> Void
 public typealias EventHandler = (String, [String: Any]?) -> Void
+public typealias ResultCallback = ([String: Any]) -> Void

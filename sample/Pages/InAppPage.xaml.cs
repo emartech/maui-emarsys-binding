@@ -54,6 +54,12 @@ public partial class InAppPage : ContentPage
 		inlineInAppView.LoadInApp("view-id");
 	}
 
+	private async void OnFetchInboxMessagesClicked(object sender, EventArgs e)
+	{
+		var messages = await Emarsys.Inbox.FetchMessages();
+		Utils.LogResult("FetchMessages", null, $"{messages}");
+	}
+
 	private async void OnAddTagClicked(object sender, EventArgs e)
 	{
 		var tag = "seen";

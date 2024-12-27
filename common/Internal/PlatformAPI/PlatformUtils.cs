@@ -21,6 +21,10 @@ class PlatformUtils
 	{
 		return action;
 	}
+	public static OnResultCallbackAction ResultCallback(OnResultCallbackAction action)
+	{
+		return action;
+	}
 	#endif
 
 	#if ANDROID

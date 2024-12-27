@@ -5,6 +5,14 @@ public class InternalAPIInbox(IPlatformAPIInbox platform)
 
 	private readonly IPlatformAPIInbox _platform = platform;
 
+	public Task<CallbackType?> FetchMessages()
+	{
+		return InternalUtils.TaskFromCallback((callback) =>
+		{
+			_platform.FetchMessages(callback);
+		});
+	}
+
 	public Task<ErrorType?> AddTag(string tag, string messageId)
 	{
 		return InternalUtils.Task((onCompleted) =>

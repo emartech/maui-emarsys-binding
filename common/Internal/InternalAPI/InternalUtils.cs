@@ -13,4 +13,15 @@ class InternalUtils
 		return cs.Task;
 	}
 
+	public static Task<CallbackType?> TaskFromCallback(Action<Action<CallbackType?>> callback)
+	{
+		var taskCompletionSource = new TaskCompletionSource<CallbackType?>();
+		
+		callback(result =>
+		{
+			taskCompletionSource.SetResult(result);
+		});
+		return taskCompletionSource.Task;
+	}
+
 }
