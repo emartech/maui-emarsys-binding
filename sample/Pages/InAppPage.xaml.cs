@@ -54,4 +54,19 @@ public partial class InAppPage : ContentPage
 		inlineInAppView.LoadInApp("view-id");
 	}
 
+	private async void OnAddTagClicked(object sender, EventArgs e)
+	{
+		var tag = "seen";
+		var messageId = "123456";
+		var error = await Emarsys.Inbox.AddTag(tag, messageId);
+		Utils.LogResult("AddTag", error);
+	}
+
+	private async void OnRemoveTagClicked(object sender, EventArgs e)
+	{
+		var tag = "seen";
+		var messageId = "123456";
+		var error = await Emarsys.Inbox.RemoveTag(tag, messageId);
+		Utils.LogResult("RemoveTag");
+	}
 }

@@ -34,6 +34,18 @@
                 HeightRequest="0" />
 
             <BoxView HeightRequest="1" Color="Grey"/>
+
+            <Button
+                Text="Add Tag"
+                SemanticProperties.Hint="Add Tag"
+                Clicked="OnAddTagClicked"
+                HorizontalOptions="Fill" />
+
+            <Button
+                Text="Remove Tag"
+                SemanticProperties.Hint="Remove Tag"
+                Clicked="OnRemoveTagClicked"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 
