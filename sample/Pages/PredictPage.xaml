@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Sample.PredictPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Button
+                Text="Track Cart"
+                SemanticProperties.Hint="Track Cart"
+                Clicked="OnTrackCartClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Track Purchase"
+                SemanticProperties.Hint="Track Purchase"
+                Clicked="OnTrackPurchaseClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Track Item View"
+                SemanticProperties.Hint="Track Item View"
+                Clicked="OnTrackItemViewClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Track Category View"
+                SemanticProperties.Hint="Track Category View"
+                Clicked="OnTrackCategoryViewClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Track Search Term"
+                SemanticProperties.Hint="Track Search Term"
+                Clicked="OnTrackSearchTermClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Track Tag"
+                SemanticProperties.Hint="Track Tag"
+                Clicked="OnTrackTagClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Recommend Products"
+                SemanticProperties.Hint="Recommend Products"
+                Clicked="OnRecommendProductsClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Track Recommendation Click"
+                SemanticProperties.Hint="Track Recommendation Click"
+                Clicked="OnTrackRecommendationClickClicked"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -35,7 +35,7 @@ public class DotnetEmarsysPush: NSObject {
     }
     
     @objc
-    public static func handleMessage(_ userInfo: [AnyHashable : Any]) {
+    public static func handleMessage(_ userInfo: [AnyHashable: Any]) {
         Emarsys.push.handleMessage(userInfo: userInfo)
     }
     

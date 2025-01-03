@@ -23,7 +23,7 @@
         <ShellContent
             Title="Predict"
             Icon="tag.png"
-            ContentTemplate="{DataTemplate local:ConfigPage}" />
+            ContentTemplate="{DataTemplate local:PredictPage}" />
     </TabBar>
 
 </Shell>

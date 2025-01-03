@@ -10,7 +10,7 @@ using PlatformView = UIKit.UIView;
 using InlineInAppEventHandlerAction = System.Action<Foundation.NSString, Foundation.NSDictionary<Foundation.NSString, Foundation.NSObject>?>;
 #endif
 
-public class PlatformAPIInApp: IPlatformAPIInApp
+public class PlatformAPIInApp : IPlatformAPIInApp
 {
 
 	public void SetEventHandler(EventHandlerAction eventHandler)
