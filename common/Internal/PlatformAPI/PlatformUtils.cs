@@ -4,8 +4,10 @@
 using Java.Lang;
 using Android.Content;
 using Org.Json;
+using OnResultCallbackAction = System.Action<EmarsysAndroid.EMSMessage?, Java.Lang.Throwable?>;
 #elif IOS
 using Foundation;
+using OnResultCallbackAction = System.Action<Foundation.NSArray, Foundation.NSError?>;
 #endif
 
 class PlatformUtils
@@ -15,6 +17,10 @@ class PlatformUtils
 	public static CompletionListener CompletionListener(OnCompletedAction action)
 	{
 		return new CompletionListener(action);
+	}
+	public static ResultCallback ResultCallback(OnResultCallbackAction action)
+	{
+		return new ResultCallback(action);
 	}
 	#elif IOS
 	public static OnCompletedAction CompletionListener(OnCompletedAction action)
@@ -67,6 +73,21 @@ class CompletionListener(OnCompletedAction action) : Object, ICompletionListener
 	public void OnCompleted(Throwable? errorCause)
 	{
 		_action.Invoke(errorCause);
+	}
+}
+
+public class ResultCallback : Object, IResultCallback
+{
+	private readonly OnResultCallbackAction _action;
+
+	public ResultCallback(OnResultCallbackAction action)
+	{
+		_action = action;
+	}
+
+	public void OnResult(EMSMessage messages, Throwable error)
+	{
+		_action.Invoke(messages, error);
 	}
 }
 

@@ -11,15 +11,14 @@ public class DotnetEmarsysInbox: NSObject {
     @objc
     public static func fetchMessages(_ resultCallback: @escaping ResultCallback) {
         Emarsys.messageInbox.fetchMessages(resultBlock: { result, error in
-            if let res = result {
-                let messages: [EMSMessage] = res.messages
-                if let messageDicts = mapInbox(messages) {
-                    resultCallback(["success": messageDicts])
+            if error != nil {
+                resultCallback(nil, error)
+            } else {
+                if let messages = result?.messages {
+                    resultCallback(mapInbox(messages), nil)
                 } else {
-                    resultCallback(["success": []])
+                    resultCallback([], nil)
                 }
-            } else if let e = error {
-                resultCallback(["error": e])
             }
         })
     }
@@ -80,6 +79,5 @@ public class DotnetEmarsysInbox: NSObject {
             actionDict["url"] = appAction.url.absoluteString
         }
         return actionDict
-        
     }
 }

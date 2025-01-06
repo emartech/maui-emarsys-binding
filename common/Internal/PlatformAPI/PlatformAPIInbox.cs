@@ -1,5 +1,12 @@
 namespace EmarsysBinding.Internal;
 
+#if ANDROID
+using OnResultCallbackAction = System.Action<EmarsysAndroid.EMSMessage?, Java.Lang.Throwable?>;
+#elif IOS
+using OnResultCallbackAction = System.Action<Foundation.NSArray, Foundation.NSError?>;
+
+#endif
+
 public class PlatformAPIInbox: IPlatformAPIInbox
 {
 
@@ -17,4 +24,6 @@ public class PlatformAPIInbox: IPlatformAPIInbox
 	{
 		DotnetEmarsysInbox.RemoveTag(tag, messageId, PlatformUtils.CompletionListener(onCompleted));
 	}
+
+
 }

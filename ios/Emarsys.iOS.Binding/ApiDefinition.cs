@@ -2,6 +2,7 @@ using System;
 using Foundation;
 using UIKit;
 using UserNotifications;
+using ObjCRuntime;
 
 namespace EmarsysiOS
 {
@@ -10,6 +11,132 @@ namespace EmarsysiOS
 	interface EMSConfig
 	{
 	}
+
+	// // @interface EMSMessage : NSObject
+	// [BaseType (typeof(NSObject))]
+	// [DisableDefaultCtor]
+	// interface EMSMessage : INativeObject
+	// {
+	// 	[Export ("id")]
+	// 	string Id { get; }
+
+	// 	[Export ("campaignId")]
+	// 	string CampaignId { get; }
+
+	// 	[Export ("collapseId")]
+	// 	string CollapseId { get; }
+
+	// 	[Export ("title")]
+	// 	string Title { get; }
+
+	// 	[Export ("body")]
+	// 	string Body { get; }
+
+	// 	[Export ("imageUrl")]
+	// 	string ImageUrl { get; }
+
+	// 	[Export ("receivedAt")]
+	// 	int ReceivedAt { get; }
+
+	// 	[Export ("updatedAt")]
+	// 	int UpdatedAt { get; }
+
+	// 	[Export ("expiresAt")]
+	// 	int ExpiresAt { get; }
+
+	// 	[Export ("tags")]
+	// 	string[] Tags { get; }
+
+	// 	[Export ("properties")]
+	// 	NSDictionary<NSString, NSString> Properties { get; }
+
+	// 	[Export ("actions")]
+	// 	EMSActionModelProtocol[] Actions { get; }
+	// }
+
+	// [BaseType(typeof(NSObject))]
+	// [Protocol]
+	// [DisableDefaultCtor]
+	// interface EMSActionModelProtocol
+	// {
+	// 		[Abstract]
+	// 		[Export("id")]
+	// 		string Id { get; }
+
+	// 		[Abstract]
+	// 		[Export("title")]
+	// 		string Title { get; }
+
+	// 		[Abstract]
+	// 		[Export("type")]
+	// 		string Type { get; }
+	// }
+
+	// [BaseType(typeof(NSObject))]
+	// [DisableDefaultCtor]
+	// interface EMSAppEventActionModel : EMSActionModelProtocol
+	// {
+	// 		[Export("id")]
+	// 		new string Id { get; }
+
+	// 		[Export("title")]
+	// 		new string Title { get; }
+
+	// 		[Export("type")]
+	// 		new string Type { get; }
+
+	// 		[Export("name")]
+	// 		string Name { get; }
+
+	// 		[NullAllowed, Export("payload", ArgumentSemantic.Copy)]
+	// 		NSDictionary<NSString, NSObject> Payload { get; }
+
+	// 		[Export("init:::::")]
+	// 		IntPtr Constructor(string id, string title, string type, string name, [NullAllowed] NSDictionary<NSString, NSObject> payload);
+	// }
+
+	// [BaseType(typeof(NSObject))]
+	// [DisableDefaultCtor]
+	// interface EMSCustomEventActionModel : EMSActionModelProtocol
+	// {
+	// 		[Export("id")]
+	// 		new string Id { get; }
+
+	// 		[Export("title")]
+	// 		new string Title { get; }
+
+	// 		[Export("type")]
+	// 		new string Type { get; }
+
+	// 		[Export("name")]
+	// 		string Name { get; }
+
+	// 		[NullAllowed, Export("payload", ArgumentSemantic.Copy)]
+	// 		NSDictionary<NSString, NSObject> Payload { get; }
+
+	// 		[Export("initWithId:title:type:name:payload:")]
+	// 		IntPtr Constructor(string id, string title, string type, string name, [NullAllowed] NSDictionary<NSString, NSObject> payload);
+	// }
+
+	// [BaseType(typeof(NSObject))]
+	// [DisableDefaultCtor]
+	// interface EMSOpenExternalUrlActionModel : EMSActionModelProtocol
+	// {
+	// 		[Export("id")]
+	// 		new string Id { get; }
+
+	// 		[Export("title")]
+	// 		new string Title { get; }
+
+	// 		[Export("type")]
+	// 		new string Type { get; }
+
+	// 		[Export("url", ArgumentSemantic.Strong)]
+	// 		NSUrl Url { get; }
+
+	// 		[Export("initWithId:title:type:name:payload:")]
+	// 		IntPtr Constructor(string id, string title, string type, string name, [NullAllowed] NSDictionary<NSString, NSObject> payload);
+	// }
 
 	// @interface DotnetEmarsys : NSObject
 	[BaseType (typeof(NSObject))]
@@ -225,10 +352,10 @@ namespace EmarsysiOS
 	[BaseType (typeof(NSObject))]
 	interface DotnetEmarsysInbox
 	{
-		// +(void)fetchMessages:(void (^ _Nonnull)(NSDictionary<NSString *,id> * _Nonnull))resultCallback;
+		// +(void)fetchMessages:(void (^ _Nonnull)(NSArray<NSDictionary<NSString *,id> *> * _Nullable, NSError * _Nullable))resultCallback;
 		[Static]
 		[Export ("fetchMessages:")]
-		void FetchMessages (Action<NSDictionary<NSString, NSObject>> resultCallback);
+		void FetchMessages (Action<NSArray<NSDictionary<NSString, NSObject>>, NSError> resultCallback);
 
 		// +(void)addTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonnull)messageId :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
 		[Static]

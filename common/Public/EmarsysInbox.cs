@@ -1,11 +1,17 @@
 ﻿namespace EmarsysBinding;
 
+#if ANDROID
+using OnResultCallbackAction = System.Action<EmarsysAndroid.EMSMessage?, Java.Lang.Throwable?>;
+#elif IOS
+using OnResultCallbackAction = System.Action<Foundation.NSArray, Foundation.NSError?>;
+#endif
+
 public class EmarsysInbox
 {
 
 	private static InternalAPIInbox _internal = new InternalAPIInbox(new PlatformAPIInbox());
 
-	public Task<CallbackType?> FetchMessages()
+	public Task<List<Message>?> FetchMessages()
 	{
 		return _internal.FetchMessages();
 	}

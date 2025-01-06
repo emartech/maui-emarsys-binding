@@ -13,6 +13,30 @@ public class TestInbox
 	}
 
 	[Fact]
+	public async Task FetchMessages_ShouldWork()
+	{
+		_platformMock.Setup(mock => mock.FetchMessages(It.IsAny<Action<string?>>()))
+			.Callback((Action<string?> resultCallback) => resultCallback(null));
+
+		string? result = await _internal.FetchMessages();
+
+		_platformMock.Verify(mock => mock.FetchMessages(It.IsAny<Action<string?>>()));
+		Assert.Null(result);
+	}
+
+	[Fact]
+	public async Task FetchMessages_ShouldWorkWithError()
+	{
+		_platformMock.Setup(mock => mock.FetchMessages(It.IsAny<Action<string?>>()))
+			.Callback((Action<string?> resultCallback) => resultCallback("error"));
+
+		string? result = await _internal.FetchMessages();
+
+		_platformMock.Verify(mock => mock.FetchMessages(It.IsAny<Action<string?>>()));
+		Assert.Equal("error", result);
+	}
+
+	[Fact]
 	public async Task AddTag_ShouldWork()
 	{
 		_platformMock.Setup(mock => mock.AddTag(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<Action<string?>>()))
