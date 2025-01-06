@@ -34,6 +34,7 @@ public class MainApplication : MauiApplication
         Emarsys.Push.SetSilentMessageEventHandler(eventHandler);
         Emarsys.InApp.SetEventHandler(eventHandler);
         Emarsys.InApp.SetOnEventActionEventHandler(eventHandler);
+        Emarsys.Geofence.SetEventHandler(eventHandler);
 
         if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
         {

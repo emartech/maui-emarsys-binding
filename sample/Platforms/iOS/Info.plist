@@ -28,5 +28,11 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Emarsys Geofence</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Emarsys Geofence</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Emarsys Geofence</string>
 </dict>
 </plist>

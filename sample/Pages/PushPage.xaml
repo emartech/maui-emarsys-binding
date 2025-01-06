@@ -22,6 +22,39 @@
                 SemanticProperties.Hint="Get Push Token"
                 Clicked="OnGetPushTokenClicked"
                 HorizontalOptions="Fill" />
+
+            <BoxView HeightRequest="1" Color="Grey"/>
+
+            <Button
+                Text="Request Location Permission"
+                SemanticProperties.Hint="Request Location Permission"
+                Clicked="OnRequestLocationPermissionClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Geofence Set InitialEnterTriggerEnabled"
+                SemanticProperties.Hint="Geofence Set InitialEnterTriggerEnabled"
+                Clicked="OnGeofenceSetInitialEnterTriggerEnabledClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Geofence Enable"
+                SemanticProperties.Hint="Geofence Enable"
+                Clicked="OnGeofenceEnableClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Geofence Disable"
+                SemanticProperties.Hint="Geofence Disable"
+                Clicked="OnGeofenceDisableClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Geofence Get IsEnabled"
+                SemanticProperties.Hint="Geofence Get IsEnabled"
+                Clicked="OnGeofenceGetIsEnabledClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Geofence Get Registered Geofences"
+                SemanticProperties.Hint="Geofence Get Registered Geofences"
+                Clicked="OnGeofenceGetRegisteredGeofencesClicked"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 

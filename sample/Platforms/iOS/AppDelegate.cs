@@ -25,6 +25,7 @@ public class AppDelegate : MauiUIApplicationDelegate
 		Emarsys.Push.SetSilentMessageEventHandler(eventHandler);
 		Emarsys.InApp.SetEventHandler(eventHandler);
 		Emarsys.InApp.SetOnEventActionEventHandler(eventHandler);
+		Emarsys.Geofence.SetEventHandler(eventHandler);
 
 		UNUserNotificationCenter.Current.GetNotificationSettings((settings) =>
 		{
