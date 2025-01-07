@@ -5,7 +5,7 @@ using Foundation;
 class MessageMapper
 {
   public static List<Message> MapInbox(NSArray input) {
-    var inputList = ConvertNSArrayToList<Dictionary<string, object>>(input);
+    var inputList = Helper.ConvertNSArrayToList<Dictionary<string, object>>(input);
 
     return inputList
       .Where(element => element is Dictionary<string, object> messageMap && messageMap.Count > 0)
@@ -22,13 +22,28 @@ class MessageMapper
           receivedAt: Convert.ToInt32(messageMap["receivedAt"]),
           updatedAt: messageMap.ContainsKey("updatedAt") ? (int?)Convert.ToInt32(messageMap["updatedAt"]) : null,
           expiresAt: messageMap.ContainsKey("expiresAt") ? (int?)Convert.ToInt32(messageMap["expiresAt"]) : null,
-          properties: ConvertToStringDictionary(
-            messageMap.ContainsKey("properties")
-                ? messageMap["properties"]
-                : null),
-          tags: messageMap.ContainsKey("tags")
-              ? new List<string>() // TODO: MAP TAGS
-              : new List<string>(),
+          properties: messageMap.ContainsKey("properties") && messageMap["properties"] is Dictionary<NSObject, NSObject> nsObjectDictionary
+            ? Helper.ConvertToStringDictionary(nsObjectDictionary)
+            : null,
+          tags: messageMap.ContainsKey("tags") && messageMap["tags"] is IEnumerable<object> rawTags
+            ? rawTags.Select(item =>
+              {
+                if (item is NSString nsString)
+                {
+                  return nsString.ToString();
+                }
+                else if (item is string realString)
+                {
+                  return realString;
+                }
+                else
+                {
+                  return item?.ToString();
+                }
+              })
+              .Where(s => !string.IsNullOrEmpty(s))
+              .ToList()
+            : new List<string>(),
           actions: messageMap.ContainsKey("actions") 
             ? new List<ActionModel>() // TODO: MAP ACTIONS
             : new List<ActionModel>()
@@ -89,61 +104,5 @@ class MessageMapper
 			default:
 				return null;
 		}
-	}
-
-  private static Dictionary<string, string>? ConvertToStringDictionary(object maybeDict)
-  {
-    if (maybeDict is Dictionary<string, object> dict)
-    {
-      var result = new Dictionary<string, string>();
-      foreach (var kvp in dict)
-      {
-        if (kvp.Value is string sVal)
-        {
-          result[kvp.Key] = sVal;
-        }
-      }
-      return result;
-    }
-    return null;
-  }
-
-  private static List<T> ConvertNSArrayToList<T>(NSArray nsArray)
-	{
-		var list = new List<T>();
-
-		for (nuint i = 0; i < nsArray.Count; i++)
-		{
-			var item = nsArray.GetItem<NSObject>(i);
-
-			if (typeof(T) == typeof(Dictionary<string, object>))
-			{
-				if (item is NSDictionary nsDict)
-				{
-					var dict = nsDict.ToDictionary();
-					list.Add((T)(object)dict);
-				}
-			}
-			else if (typeof(T) == typeof(string))
-			{
-				if (item is NSString nsString)
-				{
-					list.Add((T)(object)nsString.ToString());
-				}
-			}
-			else if (typeof(T) == typeof(int))
-			{
-				if (item is NSNumber nsNumber)
-				{
-					list.Add((T)(object)nsNumber.Int32Value);
-				}
-			}
-			else
-			{
-				list.Add((T)(object)item);
-			}
-		}
-
-		return list;
 	}
 }
