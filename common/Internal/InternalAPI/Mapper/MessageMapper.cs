@@ -1,6 +1,7 @@
 namespace EmarsysBinding.Internal;
 
 using Foundation;
+using EmarsysBinding.Model;
 
 class MessageMapper
 {
@@ -23,7 +24,7 @@ class MessageMapper
           updatedAt: messageMap.ContainsKey("updatedAt") ? (int?)Convert.ToInt32(messageMap["updatedAt"]) : null,
           expiresAt: messageMap.ContainsKey("expiresAt") ? (int?)Convert.ToInt32(messageMap["expiresAt"]) : null,
           properties: messageMap.ContainsKey("properties") && messageMap["properties"] is Dictionary<NSObject, NSObject> nsObjectDictionary
-            ? Helper.ConvertToStringDictionary(nsObjectDictionary)
+            ? Helper.ConvertToStringDictionary(nsObjectDictionary) // TODO: convert to Dictionary<object, object>
             : null,
           tags: messageMap.ContainsKey("tags") && messageMap["tags"] is IEnumerable<object> rawTags
             ? rawTags.Select(item =>
@@ -44,8 +45,8 @@ class MessageMapper
               .Where(s => !string.IsNullOrEmpty(s))
               .ToList()
             : new List<string>(),
-          actions: messageMap.ContainsKey("actions") 
-            ? new List<ActionModel>() // TODO: MAP ACTIONS
+          actions: messageMap.ContainsKey("actions") && messageMap["actions"] is List<object> actionList
+            ? MapActions(actionList)
             : new List<ActionModel>()
         );
       })
@@ -60,14 +61,33 @@ class MessageMapper
 		}
 
 		return actionList
-			.Select(action => ActionFromMap((Dictionary<string, object>)action))
+			.Select(action => {
+        return ActionFromMap(Helper.ConvertNSDictionaryToDictionary(action as NSDictionary)); // TODO: convert to Dictionary<object, object>
+      })
 			.Where(action => action != null)
 			.ToList();
 	}
 
 	private static ActionModel? ActionFromMap(Dictionary<string, object> actionMap)
 	{
-		var type = (string)actionMap["type"];
+    if (actionMap == null)
+    {
+      Console.WriteLine("Action map is null.");
+      return null;
+    }
+
+    if (!actionMap.ContainsKey("type") || actionMap["type"] == null)
+    {
+      Console.WriteLine("Action map does not contain a valid 'type'.");
+      return null;
+    }
+
+    var type = actionMap["type"] as string;
+    if (type == null)
+    {
+      Console.WriteLine("'type' is not a valid string.");
+      return null;
+    }
 
 		switch (type)
 		{
@@ -77,9 +97,9 @@ class MessageMapper
 					title: (string)actionMap["title"],
 					type: (string)actionMap["type"],
 					name: (string)actionMap["name"],
-					payload: actionMap.ContainsKey("payload") 
-						? actionMap["payload"] as Dictionary<string, object> 
-						: new Dictionary<string, object>()
+          payload: actionMap.ContainsKey("payload") && actionMap["payload"] is Dictionary<NSObject, NSObject> appEventNSObjectDictionary
+            ? Helper.ConvertToStringDictionary(appEventNSObjectDictionary)
+            : null
 				);
 
 			case "MECustomEvent":
@@ -88,9 +108,9 @@ class MessageMapper
 					title: (string)actionMap["title"],
 					type: (string)actionMap["type"],
 					name: (string)actionMap["name"],
-					payload: actionMap.ContainsKey("payload") 
-						? actionMap["payload"] as Dictionary<string, object> 
-						: new Dictionary<string, object>()
+          payload: actionMap.ContainsKey("payload") && actionMap["payload"] is Dictionary<NSObject, NSObject> customEventNSObjectDictionary
+            ? Helper.ConvertToStringDictionary(customEventNSObjectDictionary)
+            : null
 				);
 
 			case "OpenExternalUrl":

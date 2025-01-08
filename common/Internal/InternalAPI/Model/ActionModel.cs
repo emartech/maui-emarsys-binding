@@ -1,4 +1,4 @@
-namespace EmarsysBinding.Internal;
+namespace EmarsysBinding.Model;
 
 using System;
 using System.Collections.Generic;
@@ -20,14 +20,14 @@ public class ActionModel
 public class AppEventActionModel : ActionModel
 {
 	public string Name { get; set; }
-	public Dictionary<string, object>? Payload { get; set; }
+	public Dictionary<string, string>? Payload { get; set; }
 
 	public AppEventActionModel(
 		string id,
 		string title,
 		string type,
 		string name,
-			Dictionary<string, object>? payload = null
+			Dictionary<string, string>? payload = null
 	) : base(id, title, type)
 	{
 		Name = name;
@@ -38,14 +38,14 @@ public class AppEventActionModel : ActionModel
 public class CustomEventActionModel : ActionModel
 {
 	public string Name { get; set; }
-	public Dictionary<string, object>? Payload { get; set; }
+	public Dictionary<string, string>? Payload { get; set; }
 
 	public CustomEventActionModel(
 		string id,
 		string title,
 		string type,
 		string name,
-		Dictionary<string, object>? payload = null
+		Dictionary<string, string>? payload = null
 	) : base(id, title, type)
 	{
 		Name = name;

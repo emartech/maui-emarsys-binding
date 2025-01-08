@@ -5,6 +5,7 @@ using OnResultCallbackAction = System.Action<EmarsysAndroid.EMSMessage?, Java.La
 #elif IOS
 using OnResultCallbackAction = System.Action<Foundation.NSArray, Foundation.NSError?>;
 #endif
+using EmarsysBinding.Model;
 
 public class EmarsysInbox
 {

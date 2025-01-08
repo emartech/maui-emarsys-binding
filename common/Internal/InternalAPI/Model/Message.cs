@@ -1,4 +1,4 @@
-namespace EmarsysBinding.Internal;
+namespace EmarsysBinding.Model;
 
 using System;
 using System.Collections.Generic;
