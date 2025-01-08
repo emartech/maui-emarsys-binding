@@ -57,16 +57,15 @@ public partial class InAppPage : ContentPage
 
 	private async void OnFetchInboxMessagesClicked(object sender, EventArgs e)
 	{
-		try
-    {
-			var messages = await Emarsys.Inbox.FetchMessages();
-			LogInboxMessages(messages);
-    }
-    catch (Exception ex)
-    {
-			Utils.LogResult("FetchMessages Error", null, ex.Message);
-			Console.WriteLine(ex.StackTrace);
-    }
+		var results = await Emarsys.Inbox.FetchMessages();
+		if (results.Error != null)
+		{
+			Utils.LogResult("FetchMessages", results.Error);
+		}
+		else
+		{
+			LogInboxMessages(results.Messages);
+		}
 	}
 
 	private async void OnAddTagClicked(object sender, EventArgs e)

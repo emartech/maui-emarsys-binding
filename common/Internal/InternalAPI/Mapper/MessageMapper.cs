@@ -53,7 +53,7 @@ class MessageMapper
       .ToList();
 	}
 
-	private static List<ActionModel> MapActions(List<object>? actionList)
+	private static List<ActionModel>? MapActions(List<object>? actionList)
 	{
 		if (actionList == null)
 		{

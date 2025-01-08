@@ -1,9 +1,8 @@
 ﻿namespace EmarsysBinding.Internal;
 
 #if ANDROID
-using OnResultCallbackAction = System.Action<EmarsysAndroid.EMSMessage?, Java.Lang.Throwable?>;
+
 #elif IOS
-using OnResultCallbackAction = System.Action<Foundation.NSArray, Foundation.NSError?>;
 using Foundation;
 #endif
 using EmarsysBinding.Model;
@@ -13,22 +12,17 @@ public class InternalAPIInbox(IPlatformAPIInbox platform)
 
 	private readonly IPlatformAPIInbox _platform = platform;
 
-	public Task<List<Message>?> FetchMessages()
+	public Task<(List<Message>? Messages, ErrorType? Error)> FetchMessages()
 	{
-		var tcs = new TaskCompletionSource<List<Message>?>();
+		var tcs = new TaskCompletionSource<(List<Message>?, ErrorType?)>();
 
 		_platform.FetchMessages((messages, error) =>
 		{
-			if (error != null)
-			{
-				Console.WriteLine($"Error fetching messages: {error}");
-				tcs.SetResult(null);
-				// tcs.SetException(new Exception($"Error fetching messages: {error}"));
-			}
-			else
-			{
-				tcs.SetResult(MessageMapper.MapInbox(messages));
-			}
+			#if ANDROID
+			tcs.SetResult((messages, error));
+			#elif IOS
+			tcs.SetResult((MessageMapper.MapInbox(messages), error));
+			#endif
 		});
 
 		return tcs.Task;

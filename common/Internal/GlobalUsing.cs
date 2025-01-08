@@ -12,5 +12,4 @@ global using ErrorType = Foundation.NSError;
 global using OnCompletedAction = System.Action<string>;
 global using EventHandlerAction = System.Action<string>;
 global using ErrorType = string;
-global using OnResultCallbackAction = System.Action<string>;
 #endif
