@@ -1,10 +1,5 @@
 ﻿namespace EmarsysBinding.Internal;
 
-#if ANDROID
-
-#elif IOS
-using Foundation;
-#endif
 using EmarsysBinding.Model;
 
 public class InternalAPIInbox(IPlatformAPIInbox platform)
@@ -12,20 +7,14 @@ public class InternalAPIInbox(IPlatformAPIInbox platform)
 
 	private readonly IPlatformAPIInbox _platform = platform;
 
-	public Task<(List<Message>? Messages, ErrorType? Error)> FetchMessages()
+	public Task<(List<EMSMessage>? Messages, ErrorType? Error)> FetchMessages()
 	{
-		var tcs = new TaskCompletionSource<(List<Message>?, ErrorType?)>();
-
+		var cs = new TaskCompletionSource<(List<EMSMessage>?, ErrorType?)>();
 		_platform.FetchMessages((messages, error) =>
 		{
-			#if ANDROID
-			tcs.SetResult((messages, error));
-			#elif IOS
-			tcs.SetResult((MessageMapper.MapInbox(messages), error));
-			#endif
+			cs.SetResult((messages, error));
 		});
-
-		return tcs.Task;
+		return cs.Task;
 	}
 
 	public Task<ErrorType?> AddTag(string tag, string messageId)
@@ -43,4 +32,5 @@ public class InternalAPIInbox(IPlatformAPIInbox platform)
 			_platform.RemoveTag(tag, messageId, onCompleted);
 		});
 	}
+
 }

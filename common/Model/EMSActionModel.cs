@@ -1,15 +1,12 @@
 namespace EmarsysBinding.Model;
 
-using System;
-using System.Collections.Generic;
-
-public class ActionModel
+public class EMSActionModel
 {
 	public string Id { get; set; }
 	public string Title { get; set; }
 	public string Type { get; set; }
 
-	public ActionModel(string id, string title, string type)
+	public EMSActionModel(string id, string title, string type)
 	{
 		Id = id;
 		Title = title;
@@ -17,17 +14,17 @@ public class ActionModel
 	}
 }
 
-public class AppEventActionModel : ActionModel
+public class EMSAppEventActionModel : EMSActionModel
 {
 	public string Name { get; set; }
-	public Dictionary<string, string>? Payload { get; set; }
+	public Dictionary<string, object>? Payload { get; set; }
 
-	public AppEventActionModel(
+	public EMSAppEventActionModel(
 		string id,
 		string title,
 		string type,
 		string name,
-			Dictionary<string, string>? payload = null
+			Dictionary<string, object>? payload = null
 	) : base(id, title, type)
 	{
 		Name = name;
@@ -35,17 +32,17 @@ public class AppEventActionModel : ActionModel
 	}
 }
 
-public class CustomEventActionModel : ActionModel
+public class EMSCustomEventActionModel : EMSActionModel
 {
 	public string Name { get; set; }
-	public Dictionary<string, string>? Payload { get; set; }
+	public Dictionary<string, object>? Payload { get; set; }
 
-	public CustomEventActionModel(
+	public EMSCustomEventActionModel(
 		string id,
 		string title,
 		string type,
 		string name,
-		Dictionary<string, string>? payload = null
+		Dictionary<string, object>? payload = null
 	) : base(id, title, type)
 	{
 		Name = name;
@@ -53,11 +50,11 @@ public class CustomEventActionModel : ActionModel
 	}
 }
 
-public class OpenExternalUrlActionModel : ActionModel
+public class EMSOpenExternalUrlActionModel : EMSActionModel
 {
 	public string Url { get; set; }
 
-	public OpenExternalUrlActionModel(
+	public EMSOpenExternalUrlActionModel(
 		string id,
 		string title,
 		string type,

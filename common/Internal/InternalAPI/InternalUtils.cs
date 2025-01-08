@@ -1,6 +1,4 @@
-﻿namespace EmarsysBinding.Internal;
-
-using Foundation;
+namespace EmarsysBinding.Internal;
 
 class InternalUtils
 {
@@ -14,4 +12,5 @@ class InternalUtils
 		});
 		return cs.Task;
 	}
+
 }

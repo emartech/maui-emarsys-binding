@@ -9,13 +9,14 @@ import EmarsysSDK
 public class DotnetEmarsysInbox: NSObject {
     
     @objc
-    public static func fetchMessages(_ resultCallback: @escaping ResultCallback) {
+    public static func fetchMessages(_ resultCallback: @escaping ([[String: Any]]?, Error?) -> Void) {
         Emarsys.messageInbox.fetchMessages(resultBlock: { result, error in
             if error != nil {
                 resultCallback(nil, error)
             } else {
                 if let messages = result?.messages {
-                    resultCallback(mapInbox(messages), nil)
+                    let mappedMessages = mapMessages(messages)
+                    resultCallback(mappedMessages, nil)
                 } else {
                     resultCallback([], nil)
                 }
@@ -33,8 +34,8 @@ public class DotnetEmarsysInbox: NSObject {
         Emarsys.messageInbox.removeTag(tag: tag, messageId: messageId, completionBlock: completionBlock)
     }
     
-    static func mapInbox(_ input: [EMSMessage]) -> [[String : Any]]? {
-        let messageDicts: [[String: Any]]? = input.map { message in
+    static func mapMessages(_ messages: [EMSMessage]) -> [[String: Any]] {
+        let messageDicts: [[String: Any]] = messages.map { message in
             var messageDict = [String: Any]()
             messageDict["id"] = message.id
             messageDict["campaignId"] = message.campaignId
@@ -48,36 +49,37 @@ public class DotnetEmarsysInbox: NSObject {
             messageDict["tags"] = message.tags
             messageDict["properties"] = message.properties
             if let actions = message.actions {
-                let actionDicts: [[String: Any]]? = actions.map { action in
-                    return dictFromAction(action: action)
-                }
-                messageDict["actions"] = actionDicts
+                messageDict["actions"] = mapActions(actions)
             }
             return messageDict
         }
         return messageDicts
     }
     
-    static func dictFromAction(action: EMSActionModelProtocol) -> [String: Any] {
-        var actionDict = [String: Any]()
-        if let appAction = action as? EMSAppEventActionModel {
-            actionDict["id"] = appAction.id
-            actionDict["title"] = appAction.title
-            actionDict["type"] = appAction.type
-            actionDict["name"] = appAction.name
-            actionDict["payload"] = appAction.payload
-        } else if let appAction = action as? EMSCustomEventActionModel {
-            actionDict["id"] = appAction.id
-            actionDict["title"] = appAction.title
-            actionDict["type"] = appAction.type
-            actionDict["name"] = appAction.name
-            actionDict["payload"] = appAction.payload
-        } else if let appAction = action as? EMSOpenExternalUrlActionModel {
-            actionDict["id"] = appAction.id
-            actionDict["title"] = appAction.title
-            actionDict["type"] = appAction.type
-            actionDict["url"] = appAction.url.absoluteString
+    static func mapActions(_ actions: [EMSActionModelProtocol]) -> [[String: Any]] {
+        let actionDicts: [[String: Any]] = actions.map { action in
+            var actionDict = [String: Any]()
+            if let appEvent = action as? EMSAppEventActionModel {
+                actionDict["id"] = appEvent.id
+                actionDict["title"] = appEvent.title
+                actionDict["type"] = appEvent.type
+                actionDict["name"] = appEvent.name
+                actionDict["payload"] = appEvent.payload
+            } else if let customEvent = action as? EMSCustomEventActionModel {
+                actionDict["id"] = customEvent.id
+                actionDict["title"] = customEvent.title
+                actionDict["type"] = customEvent.type
+                actionDict["name"] = customEvent.name
+                actionDict["payload"] = customEvent.payload
+            } else if let externalUrl = action as? EMSOpenExternalUrlActionModel {
+                actionDict["id"] = externalUrl.id
+                actionDict["title"] = externalUrl.title
+                actionDict["type"] = externalUrl.type
+                actionDict["url"] = externalUrl.url.absoluteString
+            }
+            return actionDict
         }
-        return actionDict
+        return actionDicts
     }
+    
 }

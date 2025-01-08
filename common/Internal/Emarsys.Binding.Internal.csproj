@@ -96,7 +96,19 @@
     <AndroidLibrary Include="$(DependenciesPath)\webkit-1.11.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary> -->
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\Model\*.*" />
+  </ItemGroup>
+
   <ItemGroup Condition="$(TargetFramework) == 'net8.0'">
-    <Compile Remove="PlatformAPI\*.*" />
+    <Compile Remove="PlatformAPI\**\*.*" />
+    <Compile Remove="**\Android.cs" />
+    <Compile Remove="**\iOS.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('android'))">
+    <Compile Remove="**\iOS.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('ios'))">
+    <Compile Remove="**\Android.cs" />
   </ItemGroup>
 </Project>

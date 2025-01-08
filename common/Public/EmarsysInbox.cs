@@ -7,7 +7,7 @@ public class EmarsysInbox
 
 	private static InternalAPIInbox _internal = new InternalAPIInbox(new PlatformAPIInbox());
 
-	public Task<(List<Message>? Messages, ErrorType? Error)> FetchMessages()
+	public Task<(List<EMSMessage>? Messages, ErrorType? Error)> FetchMessages()
 	{
 		return _internal.FetchMessages();
 	}
@@ -21,4 +21,5 @@ public class EmarsysInbox
 	{
 		return _internal.RemoveTag(tag, messageId);
 	}
+
 }

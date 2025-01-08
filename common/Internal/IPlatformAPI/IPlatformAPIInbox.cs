@@ -1,14 +1,14 @@
 namespace EmarsysBinding.Internal;
 
-#if ANDROID
-using OnResultCallbackAction = System.Action<Message?, Java.Lang.Throwable?>;
-#elif IOS
-using OnResultCallbackAction = System.Action<Foundation.NSArray, Foundation.NSError?>;
-#endif
+using EmarsysBinding.Model;
 
 public interface IPlatformAPIInbox
 {
-	public void FetchMessages(OnResultCallbackAction resultCallback);
+
+	public void FetchMessages(Action<List<EMSMessage>?, ErrorType?> onCompleted);
+
 	public void AddTag(string tag, string messageId, OnCompletedAction onCompleted);
+
 	public void RemoveTag(string tag, string messageId, OnCompletedAction onCompleted);
+
 }

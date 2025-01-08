@@ -62,4 +62,5 @@ public class Emarsys
 	public static EmarsysGeofence Geofence = new EmarsysGeofence();
 
 	public static EmarsysPredict Predict = new EmarsysPredict();
+
 }

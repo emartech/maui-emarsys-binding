@@ -1,5 +1,7 @@
 ﻿namespace Test;
 
+using EmarsysBinding.Model;
+
 public class TestInbox
 {
 
@@ -15,25 +17,34 @@ public class TestInbox
 	[Fact]
 	public async Task FetchMessages_ShouldWork()
 	{
-		_platformMock.Setup(mock => mock.FetchMessages(It.IsAny<Action<string?>>()))
-			.Callback((Action<string?> resultCallback) => resultCallback(null));
+		List<EMSMessage> resultMessages = new List<EMSMessage> { new EMSMessage(
+			id: "testId",
+			campaignId: "testCampaignId",
+			title: "testTitle",
+			body: "testBody",
+			receivedAt: 123
+		) };
+		_platformMock.Setup(mock => mock.FetchMessages(It.IsAny<Action<List<EMSMessage>?, string?>>()))
+			.Callback((Action<List<EMSMessage>?, string?> resultCallback) => resultCallback(resultMessages, null));
 
-		string? result = await _internal.FetchMessages();
+		var result = await _internal.FetchMessages();
 
-		_platformMock.Verify(mock => mock.FetchMessages(It.IsAny<Action<string?>>()));
-		Assert.Null(result);
+		_platformMock.Verify(mock => mock.FetchMessages(It.IsAny<Action<List<EMSMessage>?, string?>>()));
+		Assert.Equal(resultMessages, result.Messages);
+		Assert.Null(result.Error);
 	}
 
 	[Fact]
 	public async Task FetchMessages_ShouldWorkWithError()
 	{
-		_platformMock.Setup(mock => mock.FetchMessages(It.IsAny<Action<string?>>()))
-			.Callback((Action<string?> resultCallback) => resultCallback("error"));
+		_platformMock.Setup(mock => mock.FetchMessages(It.IsAny<Action<List<EMSMessage>?, string?>>()))
+			.Callback((Action<List<EMSMessage>?, string?> resultCallback) => resultCallback(null, "error"));
 
-		string? result = await _internal.FetchMessages();
+		var result = await _internal.FetchMessages();
 
-		_platformMock.Verify(mock => mock.FetchMessages(It.IsAny<Action<string?>>()));
-		Assert.Equal("error", result);
+		_platformMock.Verify(mock => mock.FetchMessages(It.IsAny<Action<List<EMSMessage>?, string?>>()));
+		Assert.Null(result.Messages);
+		Assert.Equal("error", result.Error);
 	}
 
 	[Fact]
@@ -83,4 +94,5 @@ public class TestInbox
 		_platformMock.Verify(mock => mock.RemoveTag("test", "test", It.IsAny<Action<string?>>()));
 		Assert.Equal("error", result);
 	}
+
 }
