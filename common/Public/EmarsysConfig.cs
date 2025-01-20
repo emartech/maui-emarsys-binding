@@ -31,4 +31,35 @@ public class EmarsysConfig
 	{
 		return _internal.ChangeMerchantId(merchantId);
 	}
+
+	public string? GetApplicationCode()
+	{
+		return _internal.GetApplicationCode();
+	}
+
+	public string? GetMerchantId()
+	{
+		return _internal.GetMerchantId();
+	}
+
+	public string GetClientId()
+	{
+		return _internal.GetClientId();
+	}
+
+	public string GetLanguageCode()
+	{
+		return _internal.GetLanguageCode();
+	}
+
+	public string GetSdkVersion()
+	{
+		return _internal.GetSdkVersion();
+	}
+
+	public int? GetContactFieldId()
+	{
+		return _internal.GetContactFieldId();
+	}
+
 }

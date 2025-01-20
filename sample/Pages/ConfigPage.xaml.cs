@@ -55,4 +55,41 @@ public partial class ConfigPage : ContentPage
 		var error = await Emarsys.Config.ChangeMerchantId(merchantId);
 		Utils.LogResult("ChangeMerchantId", error);
 	}
+
+	private void OnGetApplicationCodeClicked(object sender, EventArgs e)
+	{
+		var applicationCode = Emarsys.Config.GetApplicationCode();
+		Utils.LogResult("GetApplicationCode", null, applicationCode);
+	}
+
+	private void OnGetMerchantIdClicked(object sender, EventArgs e)
+	{
+		var merchantId = Emarsys.Config.GetMerchantId();
+		Utils.LogResult("GetMerchantId", null, merchantId);
+	}
+
+	private void OnGetClientIdClicked(object sender, EventArgs e)
+	{
+		var clientId = Emarsys.Config.GetClientId();
+		Utils.LogResult("GetClientId", null, clientId);
+	}
+
+	private void OnGetLanguageCodeClicked(object sender, EventArgs e)
+	{
+		var languageCode = Emarsys.Config.GetLanguageCode();
+		Utils.LogResult("GetLanguageCode", null, languageCode);
+	}
+
+	private void OnGetSdkVersionClicked(object sender, EventArgs e)
+	{
+		var sdkVersion = Emarsys.Config.GetSdkVersion();
+		Utils.LogResult("GetSdkVersion", null, sdkVersion);
+	}
+
+	private void OnGetContactFieldIdClicked(object sender, EventArgs e)
+	{
+		var contactFieldId = Emarsys.Config.GetContactFieldId();
+		Utils.LogResult("GetContactFieldId", null, $"{contactFieldId}");
+	}
+
 }

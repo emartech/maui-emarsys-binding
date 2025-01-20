@@ -60,6 +60,36 @@ namespace EmarsysiOS
 		[Static]
 		[Export ("changeMerchantId::")]
 		void ChangeMerchantId ([NullAllowed] string merchantId, Action<NSError> completionBlock);
+
+		// +(NSString * _Nullable)getApplicationCode __attribute__((warn_unused_result("")));
+		[Static]
+		[NullAllowed, Export ("getApplicationCode")]
+		string ApplicationCode { get; }
+
+		// +(NSString * _Nullable)getMerchantId __attribute__((warn_unused_result("")));
+		[Static]
+		[NullAllowed, Export ("getMerchantId")]
+		string MerchantId { get; }
+
+		// +(NSString * _Nonnull)getClientId __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("getClientId")]
+		string ClientId { get; }
+
+		// +(NSString * _Nonnull)getLanguageCode __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("getLanguageCode")]
+		string LanguageCode { get; }
+
+		// +(NSString * _Nonnull)getSdkVersion __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("getSdkVersion")]
+		string SdkVersion { get; }
+
+		// +(NSNumber * _Nullable)getContactFieldId __attribute__((warn_unused_result("")));
+		[Static]
+		[NullAllowed, Export ("getContactFieldId")]
+		NSNumber ContactFieldId { get; }
 	}
 
 	// @interface EMSGeofence : NSObject

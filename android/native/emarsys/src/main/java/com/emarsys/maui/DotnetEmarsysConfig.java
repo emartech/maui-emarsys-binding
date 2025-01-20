@@ -20,4 +20,29 @@ public class DotnetEmarsysConfig {
         Emarsys.getConfig().changeMerchantId(merchantId);
         completionListener.onCompleted(null);
     }
+
+    public static String getApplicationCode() {
+        return Emarsys.getConfig().getApplicationCode();
+    }
+
+    public static String getMerchantId() {
+        return Emarsys.getConfig().getMerchantId();
+    }
+
+    public static @NonNull String getClientId() {
+        return Emarsys.getConfig().getHardwareId();
+    }
+
+    public static @NonNull String getLanguageCode() {
+        return Emarsys.getConfig().getLanguageCode();
+    }
+
+    public static @NonNull String getSdkVersion() {
+        return Emarsys.getConfig().getSdkVersion();
+    }
+
+    public static Integer getContactFieldId() {
+        return Emarsys.getConfig().getContactFieldId();
+    }
+
 }

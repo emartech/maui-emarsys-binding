@@ -37,4 +37,35 @@ public class DotnetEmarsysConfig: NSObject {
     public static func changeMerchantId(_ merchantId: String?, _ completionBlock: @escaping CompletionBlock) {
         Emarsys.config.changeMerchantId(merchantId: merchantId, completionBlock: completionBlock)
     }
+    
+    @objc
+    public static func getApplicationCode() -> String? {
+        return Emarsys.config.applicationCode()
+    }
+    
+    @objc
+    public static func getMerchantId() -> String? {
+        return Emarsys.config.merchantId()
+    }
+    
+    @objc
+    public static func getClientId() -> String {
+        return Emarsys.config.hardwareId()
+    }
+    
+    @objc
+    public static func getLanguageCode() -> String {
+        return Emarsys.config.languageCode()
+    }
+    
+    @objc
+    public static func getSdkVersion() -> String {
+        return Emarsys.config.sdkVersion()
+    }
+    
+    @objc
+    public static func getContactFieldId() -> NSNumber? {
+        return Emarsys.config.contactFieldId()
+    }
+    
 }
