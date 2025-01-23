@@ -31,7 +31,11 @@ public class DotnetEmarsysGeofence {
 
     public static @NonNull List<EMSGeofence> getRegisteredGeofences() {
         List<Geofence> geofences = Emarsys.getGeofence().getRegisteredGeofences();
-        List<EMSGeofence> result = new ArrayList<>();
+        return mapGeofences(geofences);
+    }
+
+    static @NonNull List<EMSGeofence> mapGeofences(@NonNull List<Geofence> geofences) {
+        List<EMSGeofence> _geofences = new ArrayList<>();
         for (int i = 0; i < geofences.size(); i++) {
             Geofence g = geofences.get(i);
             List<EMSGeofenceTrigger> triggers = new ArrayList<>();
@@ -39,9 +43,9 @@ public class DotnetEmarsysGeofence {
                 Trigger t = g.getTriggers().get(j);
                 triggers.add(new EMSGeofenceTrigger(t.getId(), t.getType().toString(), t.getLoiteringDelay(), t.getAction()));
             }
-            result.add(new EMSGeofence(g.getId(), g.getLat(), g.getLon(), g.getRadius(), g.getWaitInterval(), triggers));
+            _geofences.add(new EMSGeofence(g.getId(), g.getLat(), g.getLon(), g.getRadius(), g.getWaitInterval(), triggers));
         }
-        return result;
+        return _geofences;
     }
 
 }

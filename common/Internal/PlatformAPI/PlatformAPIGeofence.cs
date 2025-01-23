@@ -1,6 +1,6 @@
 namespace EmarsysBinding.Internal;
 
-public class PlatformAPIGeofence: IPlatformAPIGeofence
+public class PlatformAPIGeofence : IPlatformAPIGeofence
 {
 
 	public void SetInitialEnterTriggerEnabled(bool initialEnterTriggerEnabled)

@@ -51,8 +51,9 @@ public partial class ConfigPage : ContentPage
 
 	private async void OnChangeMerchantIdClicked(object sender, EventArgs e)
 	{
-		string merchantId = "102F6519FC312033";
+		string merchantId = "1DF86BF95CBE8F19";
 		var error = await Emarsys.Config.ChangeMerchantId(merchantId);
 		Utils.LogResult("ChangeMerchantId", error);
 	}
+
 }

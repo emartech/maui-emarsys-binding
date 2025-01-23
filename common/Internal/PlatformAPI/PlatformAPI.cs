@@ -7,7 +7,7 @@ using Android.Content;
 using Foundation;
 #endif
 
-public class PlatformAPI: IPlatformAPI
+public class PlatformAPI : IPlatformAPI
 {
 
 	public void Setup(EMSConfig config)

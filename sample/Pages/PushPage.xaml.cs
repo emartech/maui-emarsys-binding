@@ -68,9 +68,11 @@ public partial class PushPage : ContentPage
 	{
 		var registeredGeofences = Emarsys.Geofence.GetRegisteredGeofences();
 		Utils.LogResult("GetRegisteredGeofences", null, $"{registeredGeofences.Count}");
-		foreach (var g in registeredGeofences) {
+		foreach (var g in registeredGeofences)
+		{
 			Console.WriteLine($"{g.Id}, {g.Lat}, {g.Lon}, {g.Radius}, {g.WaitInterval}");
-			foreach (var t in g.Triggers) {
+			foreach (var t in g.Triggers)
+			{
 				Console.WriteLine($"  {t.Id}, {t.Type}, {t.LoiteringDelay}, {t.Action}");
 			}
 		}
