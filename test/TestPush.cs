@@ -131,4 +131,5 @@ public class TestPush
 
 		_platformMock.Verify(mock => mock.SetSilentMessageEventHandler(It.IsAny<Action<string>>()));
 	}
+
 }

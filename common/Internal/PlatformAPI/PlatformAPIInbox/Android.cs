@@ -3,7 +3,7 @@ namespace EmarsysBinding.Internal;
 using Java.Lang;
 using EmarsysBinding.Model;
 
-public partial class PlatformAPIInbox: IPlatformAPIInbox
+public partial class PlatformAPIInbox
 {
 
 	public void FetchMessages(Action<List<EMSMessage>?, ErrorType?> onCompleted)

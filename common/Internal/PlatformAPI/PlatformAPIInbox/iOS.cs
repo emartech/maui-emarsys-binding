@@ -2,7 +2,7 @@ namespace EmarsysBinding.Internal;
 
 using EmarsysBinding.Model;
 
-public partial class PlatformAPIInbox: IPlatformAPIInbox
+public partial class PlatformAPIInbox
 {
 
 	public void FetchMessages(Action<List<EMSMessage>?, ErrorType?> onCompleted)

@@ -1,13 +1,6 @@
 namespace EmarsysBinding.Internal;
 
-#if ANDROID
-using Android.App;
-using Android.Content;
-#elif IOS
-using Foundation;
-#endif
-
-public class PlatformAPI : IPlatformAPI
+public partial class PlatformAPI : IPlatformAPI
 {
 
 	public void Setup(EMSConfig config)
@@ -29,17 +22,5 @@ public class PlatformAPI : IPlatformAPI
 	{
 		DotnetEmarsys.TrackCustomEvent(eventName, PlatformUtils.ToNativeDictionary(eventAttributes), PlatformUtils.CompletionListener(onCompleted));
 	}
-
-	#if ANDROID
-	public void TrackDeepLink(Activity activity, Intent intent, OnCompletedAction onCompleted)
-	{
-		DotnetEmarsys.TrackDeepLink(activity, intent, PlatformUtils.CompletionListener(onCompleted));
-	}
-	#elif IOS
-	public bool TrackDeepLink(NSUserActivity userActivity, Action<NSString>? sourceHandler)
-	{
-		return DotnetEmarsys.TrackDeepLink(userActivity, sourceHandler);
-	}
-	#endif
 
 }

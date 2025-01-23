@@ -41,74 +41,23 @@
 
     <AndroidLibrary Include="$(DependenciesPath)\espresso-idling-resource-3.6.1.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
     <AndroidLibrary Include="$(DependenciesPath)\play-services-location-21.3.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-
-    <!-- <AndroidLibrary Include="$(DependenciesPath)\activity-1.9.1.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\annotation-experimental-1.4.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\annotation-jvm-1.8.2.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\annotations-23.0.0.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\appcompat-1.7.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\appcompat-resources-1.7.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\collection-1.1.0.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\concurrent-futures-1.1.0.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\core-1.13.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\core-common-2.2.0.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\core-ktx-1.13.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\core-runtime-2.2.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\cursoradapter-1.0.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\customview-1.0.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\drawerlayout-1.0.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\emoji2-1.3.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\emoji2-views-helper-1.3.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\error_prone_annotations-2.18.0.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\fragment-1.5.4.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\gson-2.10.1.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\interpolator-1.0.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\jsr305-3.0.2.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\kotlin-stdlib-1.9.25.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\kotlinx-coroutines-android-1.8.1.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\kotlinx-coroutines-core-jvm-1.8.1.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\lifecycle-common-java8-2.8.4.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\lifecycle-common-jvm-2.8.4.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\lifecycle-livedata-2.8.4.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\lifecycle-livedata-core-2.8.4.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\lifecycle-livedata-core-ktx-2.8.4.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\lifecycle-process-2.8.4.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\lifecycle-runtime-desktop-2.8.4.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\lifecycle-viewmodel-2.8.4.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\lifecycle-viewmodel-desktop-2.8.4.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\lifecycle-viewmodel-savedstate-2.8.4.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\listenablefuture-1.0.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\loader-1.0.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\play-services-base-18.5.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\play-services-basement-18.4.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\play-services-tasks-18.2.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\profileinstaller-1.3.1.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\resourceinspection-annotation-1.0.1.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\savedstate-1.2.1.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\security-crypto-1.1.0-alpha06.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\startup-runtime-1.1.1.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\tink-android-1.9.0.jar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\tracing-1.0.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\vectordrawable-1.1.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\vectordrawable-animated-1.1.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\versionedparcelable-1.1.1.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\viewpager-1.0.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary>
-    <AndroidLibrary Include="$(DependenciesPath)\webkit-1.11.0.aar"><Bind>false</Bind><Visible>false</Visible></AndroidLibrary> -->
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\Model\*.*" />
+    <Compile Include="..\Model\**" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework) == 'net8.0'">
-    <Compile Remove="PlatformAPI\**\*.*" />
-    <Compile Remove="**\Android.cs" />
-    <Compile Remove="**\iOS.cs" />
-  </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('android'))">
     <Compile Remove="**\iOS.cs" />
+    <Compile Remove="**\Dotnet.cs" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework.Contains('ios'))">
     <Compile Remove="**\Android.cs" />
+    <Compile Remove="**\Dotnet.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework) == 'net8.0'">
+    <Compile Remove="**\Android.cs" />
+    <Compile Remove="**\iOS.cs" />
+    <Compile Remove="PlatformAPI\**" />
   </ItemGroup>
 </Project>

@@ -65,6 +65,11 @@
                 SemanticProperties.Hint="Get Contact Field Id"
                 Clicked="OnGetContactFieldIdClicked"
                 HorizontalOptions="Fill" />
+            <Button
+                Text="Get Maui Binding Version"
+                SemanticProperties.Hint="Get Maui Binding Version"
+                Clicked="OnGetMauiBindingVersionClicked"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 

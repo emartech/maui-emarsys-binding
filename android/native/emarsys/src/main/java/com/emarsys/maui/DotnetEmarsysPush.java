@@ -31,4 +31,5 @@ public class DotnetEmarsysPush {
     public static void setSilentMessageEventHandler(@NonNull EventHandler eventHandler) {
         Emarsys.getPush().setSilentMessageEventHandler(eventHandler::handleEvent);
     }
+
 }

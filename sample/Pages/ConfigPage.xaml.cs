@@ -92,4 +92,10 @@ public partial class ConfigPage : ContentPage
 		Utils.LogResult("GetContactFieldId", null, $"{contactFieldId}");
 	}
 
+	private void OnGetMauiBindingVersionClicked(object sender, EventArgs e)
+	{
+		var mauiBindingVersion = Emarsys.Config.GetMauiBindingVersion();
+		Utils.LogResult("GetMauiBindingVersion", null, $"{mauiBindingVersion}");
+	}
+
 }

@@ -1,17 +1,9 @@
 ﻿namespace EmarsysBinding;
 
-#if ANDROID
-using Android.App;
-using Android.Content;
-#elif IOS
-using Foundation;
-#endif
-
-public class Emarsys
+public partial class Emarsys
 {
 
 	private static InternalAPI _internal = new InternalAPI(new PlatformAPI());
-	private static string packageVersion = "0.0.1";
 
 	public static void Setup(EMSConfig config)
 	{
@@ -20,7 +12,7 @@ public class Emarsys
 		TrackCustomEvent("wrapper:init", new Dictionary<string, string>
 		{
 			{ "type", "maui" },
-			{ "version", packageVersion }
+			{ "version", Global.packageVersion }
 		});
 	}
 
@@ -38,18 +30,6 @@ public class Emarsys
 	{
 		return _internal.TrackCustomEvent(eventName, eventAttributes);
 	}
-
-	#if ANDROID
-	public static Task<ErrorType?> TrackDeepLink(Activity activity, Intent intent)
-	{
-		return _internal.TrackDeepLink(activity, intent);
-	}
-	#elif IOS
-	public static bool TrackDeepLink(NSUserActivity userActivity, Action<NSString>? sourceHandler = null)
-	{
-		return _internal.TrackDeepLink(userActivity, sourceHandler);
-	}
-	#endif
 
 	public static EmarsysConfig Config = new EmarsysConfig();
 

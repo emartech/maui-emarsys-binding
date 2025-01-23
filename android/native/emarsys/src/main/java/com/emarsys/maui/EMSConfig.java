@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 public class EMSConfig {
+
     private final Application application;
     private final String applicationCode;
     private final String merchantId;
@@ -45,4 +46,5 @@ public class EMSConfig {
     public boolean isEnableConsoleLogging() {
         return enableConsoleLogging;
     }
+
 }

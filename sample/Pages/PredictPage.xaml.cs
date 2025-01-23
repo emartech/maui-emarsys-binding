@@ -1,6 +1,7 @@
 ﻿namespace Sample;
 
 using EmarsysBinding;
+using EmarsysBinding.Model;
 #if ANDROID
 using EmarsysAndroid;
 #elif IOS

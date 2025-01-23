@@ -115,4 +115,5 @@ public class TestInApp
 
 		_platformMock.Verify(mock => mock.SetOnEventActionEventHandler(It.IsAny<Action<string>>()));
 	}
+
 }

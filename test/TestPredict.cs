@@ -1,5 +1,7 @@
 ﻿namespace Test;
 
+using EmarsysBinding.Model;
+
 public class TestPredict
 {
 
@@ -13,23 +15,11 @@ public class TestPredict
 	}
 
 	[Fact]
-	public void BuildCartItem_ShouldWork()
-	{
-		_platformMock.Setup(mock => mock.BuildCartItem(It.IsAny<string>(), It.IsAny<double>(), It.IsAny<double>()))
-			.Returns("test");;
-
-		string result = _internal.BuildCartItem("test", 1.0, 1.0);
-
-		_platformMock.Verify(mock => mock.BuildCartItem("test", 1.0, 1.0));
-		Assert.Equal("test", result);
-	}
-
-	[Fact]
 	public void TrackCart_ShouldWork()
 	{
-		_platformMock.Setup(mock => mock.TrackCart(It.IsAny<IList<string>>()));
+		_platformMock.Setup(mock => mock.TrackCart(It.IsAny<IList<EMSPredictCartItem>>()));
 
-		List<string> items = new List<string> { "test1", "test2" };
+		List<EMSPredictCartItem> items = new List<EMSPredictCartItem> { new EMSPredictCartItem("testId", 1.1, 2.2) };
 		_internal.TrackCart(items);
 
 		_platformMock.Verify(mock => mock.TrackCart(items));
@@ -38,9 +28,9 @@ public class TestPredict
 	[Fact]
 	public void TrackPurchase_ShouldWork()
 	{
-		_platformMock.Setup(mock => mock.TrackPurchase(It.IsAny<string>(), It.IsAny<IList<string>>()));
+		_platformMock.Setup(mock => mock.TrackPurchase(It.IsAny<string>(), It.IsAny<IList<EMSPredictCartItem>>()));
 
-		List<string> items = new List<string> { "test1", "test2" };
+		List<EMSPredictCartItem> items = new List<EMSPredictCartItem> { new EMSPredictCartItem("testId", 1.1, 2.2) };
 		_internal.TrackPurchase("test", items);
 
 		_platformMock.Verify(mock => mock.TrackPurchase("test", items));
@@ -92,43 +82,17 @@ public class TestPredict
 	}
 
 	[Fact]
-	public void BuildLogic_ShouldWork()
-	{
-		_platformMock.Setup(mock => mock.BuildLogic(It.IsAny<string>(), It.IsAny<string?>(), It.IsAny<IList<string>?>(), It.IsAny<IList<string>?>()))
-			.Returns("test");;
-
-		List<string> cartItems = new List<string> { "testCartItems" };
-		List<string> variants = new List<string> { "testVariants" };
-		string result = _internal.BuildLogic("testName", "testQuery", cartItems, variants);
-
-		_platformMock.Verify(mock => mock.BuildLogic("testName", "testQuery", cartItems, variants));
-		Assert.Equal("test", result);
-	}
-
-	[Fact]
-	public void BuildFilter_ShouldWork()
-	{
-		_platformMock.Setup(mock => mock.BuildFilter(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<IList<string>>()))
-			.Returns("test");;
-
-		List<string> expectations = new List<string> { "testExpectation" };
-		string result = _internal.BuildFilter("testType", "testField", "testComparison", expectations);
-
-		_platformMock.Verify(mock => mock.BuildFilter("testType", "testField", "testComparison", expectations));
-		Assert.Equal("test", result);
-	}
-
-	[Fact]
 	public async Task RecommendProducts_ShouldWork()
 	{
 		List<string> resultProducts = new List<string> { "test" };
-		_platformMock.Setup(mock => mock.RecommendProducts(It.IsAny<string>(), It.IsAny<IList<string>?>(), It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<Action<IList<string>?, string?>>()))
-			.Callback((string _, IList<string>? _, int? _, string? _, Action<IList<string>?, string?> onCompleted) => onCompleted(resultProducts, null));
+		_platformMock.Setup(mock => mock.RecommendProducts(It.IsAny<EMSPredictLogic>(), It.IsAny<IList<EMSPredictFilter>?>(), It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<Action<IList<string>?, string?>>()))
+			.Callback((EMSPredictLogic _, IList<EMSPredictFilter>? _, int? _, string? _, Action<IList<string>?, string?> onCompleted) => onCompleted(resultProducts, null));
 		
-		List<string> filters = new List<string> { "testFilter" };
-		var result = await _internal.RecommendProducts("testLogic", filters, 3, "testAZ");
+		EMSPredictLogic logic = EMSPredictLogic.Search();
+		List<EMSPredictFilter> filters = new List<EMSPredictFilter> { EMSPredictFilter.IncludeIsValue("testField", "testValue") };
+		var result = await _internal.RecommendProducts(logic, filters, 3, "testAZ");
 
-		_platformMock.Verify(mock => mock.RecommendProducts("testLogic", filters, 3, "testAZ", It.IsAny<Action<IList<string>?, string?>>()));
+		_platformMock.Verify(mock => mock.RecommendProducts(logic, filters, 3, "testAZ", It.IsAny<Action<IList<string>?, string?>>()));
 		Assert.Equal(resultProducts, result.Products);
 		Assert.Null(result.Error);
 	}
@@ -137,12 +101,13 @@ public class TestPredict
 	public async Task RecommendProducts_ShouldWorkWithNullOptions()
 	{
 		List<string> resultProducts = new List<string> { "test" };
-		_platformMock.Setup(mock => mock.RecommendProducts(It.IsAny<string>(), It.IsAny<IList<string>?>(), It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<Action<IList<string>?, string?>>()))
-			.Callback((string _, IList<string>? _, int? _, string? _, Action<IList<string>?, string?> onCompleted) => onCompleted(resultProducts, null));
+		_platformMock.Setup(mock => mock.RecommendProducts(It.IsAny<EMSPredictLogic>(), It.IsAny<IList<EMSPredictFilter>?>(), It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<Action<IList<string>?, string?>>()))
+			.Callback((EMSPredictLogic _, IList<EMSPredictFilter>? _, int? _, string? _, Action<IList<string>?, string?> onCompleted) => onCompleted(resultProducts, null));
 		
-		var result = await _internal.RecommendProducts("testLogic", null, null, null);
+		EMSPredictLogic logic = EMSPredictLogic.Search();
+		var result = await _internal.RecommendProducts(logic, null, null, null);
 
-		_platformMock.Verify(mock => mock.RecommendProducts("testLogic", null, null, null, It.IsAny<Action<IList<string>?, string?>>()));
+		_platformMock.Verify(mock => mock.RecommendProducts(logic, null, null, null, It.IsAny<Action<IList<string>?, string?>>()));
 		Assert.Equal(resultProducts, result.Products);
 		Assert.Null(result.Error);
 	}
@@ -150,13 +115,14 @@ public class TestPredict
 	[Fact]
 	public async Task RecommendProducts_ShouldWorkWithError()
 	{
-		_platformMock.Setup(mock => mock.RecommendProducts(It.IsAny<string>(), It.IsAny<IList<string>?>(), It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<Action<IList<string>?, string?>>()))
-			.Callback((string _, IList<string>? _, int? _, string? _, Action<IList<string>?, string?> onCompleted) => onCompleted(null, "error"));
+		_platformMock.Setup(mock => mock.RecommendProducts(It.IsAny<EMSPredictLogic>(), It.IsAny<IList<EMSPredictFilter>?>(), It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<Action<IList<string>?, string?>>()))
+			.Callback((EMSPredictLogic _, IList<EMSPredictFilter>? _, int? _, string? _, Action<IList<string>?, string?> onCompleted) => onCompleted(null, "error"));
 		
-		List<string> filters = new List<string> { "testFilter" };
-		var result = await _internal.RecommendProducts("testLogic", filters, 3, "testAZ");
+		EMSPredictLogic logic = EMSPredictLogic.Search();
+		List<EMSPredictFilter> filters = new List<EMSPredictFilter> { EMSPredictFilter.IncludeIsValue("testField", "testValue") };
+		var result = await _internal.RecommendProducts(logic, filters, 3, "testAZ");
 
-		_platformMock.Verify(mock => mock.RecommendProducts("testLogic", filters, 3, "testAZ", It.IsAny<Action<IList<string>?, string?>>()));
+		_platformMock.Verify(mock => mock.RecommendProducts(logic, filters, 3, "testAZ", It.IsAny<Action<IList<string>?, string?>>()));
 		Assert.Null(result.Products);
 		Assert.Equal("error", result.Error);
 	}
