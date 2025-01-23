@@ -35,6 +35,36 @@
                 SemanticProperties.Hint="Change Merchant Id"
                 Clicked="OnChangeMerchantIdClicked"
                 HorizontalOptions="Fill" />
+            <Button
+                Text="Get Application Code"
+                SemanticProperties.Hint="Get Application Code"
+                Clicked="OnGetApplicationCodeClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Get Merchant Id"
+                SemanticProperties.Hint="Get Merchant Id"
+                Clicked="OnGetMerchantIdClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Get Client Id"
+                SemanticProperties.Hint="Get Client Id"
+                Clicked="OnGetClientIdClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Get Language Code"
+                SemanticProperties.Hint="Get Language Code"
+                Clicked="OnGetLanguageCodeClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Get Sdk Version"
+                SemanticProperties.Hint="Get Sdk Version"
+                Clicked="OnGetSdkVersionClicked"
+                HorizontalOptions="Fill" />
+            <Button
+                Text="Get Contact Field Id"
+                SemanticProperties.Hint="Get Contact Field Id"
+                Clicked="OnGetContactFieldIdClicked"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 

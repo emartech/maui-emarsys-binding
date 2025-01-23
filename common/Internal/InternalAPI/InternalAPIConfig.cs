@@ -42,4 +42,35 @@ public class InternalAPIConfig(IPlatformAPIConfig platform)
 			_platform.ChangeMerchantId(merchantId, onCompleted);
 		});
 	}
+
+	public string? GetApplicationCode()
+	{
+		return _platform.GetApplicationCode();
+	}
+
+	public string? GetMerchantId()
+	{
+		return _platform.GetMerchantId();
+	}
+
+	public string GetClientId()
+	{
+		return _platform.GetClientId();
+	}
+
+	public string GetLanguageCode()
+	{
+		return _platform.GetLanguageCode();
+	}
+
+	public string GetSdkVersion()
+	{
+		return _platform.GetSdkVersion();
+	}
+
+	public int? GetContactFieldId()
+	{
+		return _platform.GetContactFieldId();
+	}
+
 }
