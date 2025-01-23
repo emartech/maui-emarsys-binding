@@ -21,7 +21,7 @@ public class InternalAPIConfig(IPlatformAPIConfig platform)
 		return _platform.Build(applicationCode, merchantId, sharedKeychainAccessGroup, enableConsoleLogging);
 	}
 	#else
-	public bool Build(string? applicationCode, string? merchantId, bool enableConsoleLogging)
+	public string Build(string? applicationCode, string? merchantId, bool enableConsoleLogging)
 	{
 		return _platform.Build(applicationCode, merchantId, enableConsoleLogging);
 	}

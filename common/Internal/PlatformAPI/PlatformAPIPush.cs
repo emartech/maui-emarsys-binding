@@ -8,7 +8,7 @@ using Foundation;
 using UserNotifications;
 #endif
 
-public class PlatformAPIPush: IPlatformAPIPush
+public class PlatformAPIPush : IPlatformAPIPush
 {
 
 	#if IOS

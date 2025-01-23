@@ -16,12 +16,12 @@ public class TestConfig
 	public void Build_ShouldWork()
 	{
 		_platformMock.Setup(mock => mock.Build(It.IsAny<string?>(), It.IsAny<string?>(), It.IsAny<bool>()))
-			.Returns(true);
+			.Returns("test");
 
-		bool result = _internal.Build("test-code", "test-id", true);
+		string result = _internal.Build("test-code", "test-id", true);
 
 		_platformMock.Verify(mock => mock.Build("test-code", "test-id", true));
-		Assert.True(result);
+		Assert.Equal("test", result);
 	}
 
 	[Fact]

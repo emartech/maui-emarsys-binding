@@ -5,7 +5,7 @@ using Android.App;
 #elif IOS
 #endif
 
-public class PlatformAPIConfig: IPlatformAPIConfig
+public class PlatformAPIConfig : IPlatformAPIConfig
 {
 
 	#if ANDROID

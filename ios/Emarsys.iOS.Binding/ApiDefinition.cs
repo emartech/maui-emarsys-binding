@@ -7,7 +7,6 @@ namespace EmarsysiOS
 {
 	// @interface EMSConfig : NSObject
 	[BaseType (typeof(NSObject))]
-	[DisableDefaultCtor]
 	interface EMSConfig
 	{
 	}
@@ -94,7 +93,6 @@ namespace EmarsysiOS
 
 	// @interface EMSGeofence : NSObject
 	[BaseType (typeof(NSObject))]
-	[DisableDefaultCtor]
 	interface EMSGeofence
 	{
 		[Export ("id")]
@@ -118,7 +116,6 @@ namespace EmarsysiOS
 
 	// @interface EMSGeofenceTrigger : NSObject
 	[BaseType (typeof(NSObject))]
-	[DisableDefaultCtor]
 	interface EMSGeofenceTrigger
 	{
 		[Export ("id")]
@@ -222,6 +219,146 @@ namespace EmarsysiOS
 		[Static]
 		[Export ("setOnEventActionEventHandler:")]
 		void SetOnEventActionEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
+	}
+
+	// @interface EMSCartItem : NSObject
+	[BaseType (typeof(NSObject))]
+	interface EMSCartItem
+	{
+	}
+
+	// @interface EMSLogic : NSObject
+	[BaseType (typeof(NSObject))]
+	interface EMSRecommendationLogic
+	{
+	}
+
+	// @interface EMSRecommendationFilterProtocol : NSObject
+	[BaseType (typeof(NSObject))]
+	interface EMSRecommendationFilter
+	{
+	}
+
+	// @interface EMSProductProtocol : NSObject
+	[BaseType (typeof(NSObject))]
+	interface EMSProduct
+	{
+		[Export ("productId")]
+		string ProductId { get; }
+
+		[Export ("title")]
+		string Title { get; }
+
+		[Export ("linkUrl")]
+		NSUrl LinkUrl { get; }
+
+		[Export ("customFields")]
+		NSDictionary<NSString, NSObject> CustomFields { get; }
+
+		[Export ("feature")]
+		string Feature { get; }
+
+		[Export ("cohort")]
+		string Cohort { get; }
+
+		[Export ("imageUrl")]
+		NSUrl ImageUrl { get; }
+
+		[Export ("zoomImageUrl")]
+		NSUrl ZoomImageUrl { get; }
+
+		[Export ("categoryPath")]
+		string CategoryPath { get; }
+
+		[Export ("available")]
+		NSNumber Available { get; }
+
+		[Export ("productDescription")]
+		string ProductDescription { get; }
+
+		[Export ("price")]
+		NSNumber Price { get; }
+
+		[Export ("msrp")]
+		NSNumber Msrp { get; }
+
+		[Export ("album")]
+		string Album { get; }
+
+		[Export ("actor")]
+		string Actor { get; }
+
+		[Export ("artist")]
+		string Artist { get; }
+
+		[Export ("author")]
+		string Author { get; }
+
+		[Export ("brand")]
+		string Brand { get; }
+
+		[Export ("year")]
+		NSNumber Year { get; }
+	}
+
+	// @interface DotnetEmarsysPredict : NSObject
+	[BaseType (typeof(NSObject))]
+	interface DotnetEmarsysPredict
+	{
+		// +(EMSCartItem * _Nonnull)buildCartItem:(NSString * _Nonnull)itemId :(double)price :(double)quantity __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("buildCartItem:::")]
+		EMSCartItem BuildCartItem (string itemId, double price, double quantity);
+
+		// +(void)trackCart:(NSArray<EMSCartItem *> * _Nonnull)items;
+		[Static]
+		[Export ("trackCart:")]
+		void TrackCart (EMSCartItem[] items);
+
+		// +(void)trackPurchase:(NSString * _Nonnull)orderId :(NSArray<EMSCartItem *> * _Nonnull)items;
+		[Static]
+		[Export ("trackPurchase::")]
+		void TrackPurchase (string orderId, EMSCartItem[] items);
+
+		// +(void)trackItemView:(NSString * _Nonnull)itemId;
+		[Static]
+		[Export ("trackItemView:")]
+		void TrackItemView (string itemId);
+
+		// +(void)trackCategoryView:(NSString * _Nonnull)categoryPath;
+		[Static]
+		[Export ("trackCategoryView:")]
+		void TrackCategoryView (string categoryPath);
+
+		// +(void)trackSearchTerm:(NSString * _Nonnull)searchTerm;
+		[Static]
+		[Export ("trackSearchTerm:")]
+		void TrackSearchTerm (string searchTerm);
+
+		// +(void)trackTag:(NSString * _Nonnull)tag :(NSDictionary<NSString *,NSString *> * _Nullable)attributes;
+		[Static]
+		[Export ("trackTag::")]
+		void TrackTag (string tag, [NullAllowed] NSDictionary<NSString, NSString> attributes);
+
+		// +(EMSLogic * _Nonnull)buildLogic:(NSString * _Nonnull)name :(NSString * _Nullable)query :(NSArray<EMSCartItem *> * _Nullable)cartItems :(NSArray<NSString *> * _Nullable)variants __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("buildLogic::::")]
+		EMSRecommendationLogic BuildLogic (string name, [NullAllowed] string query, [NullAllowed] EMSCartItem[] cartItems, [NullAllowed] string[] variants);
+
+		// +(id<EMSRecommendationFilterProtocol> _Nonnull)buildFilter:(NSString * _Nonnull)type :(NSString * _Nonnull)field :(NSString * _Nonnull)comparison :(NSArray<NSString *> * _Nonnull)expectations __attribute__((warn_unused_result("")));
+		[Static]
+		[Export ("buildFilter::::")]
+		EMSRecommendationFilter BuildFilter (string type, string field, string comparison, string[] expectations);
+
+		// +(void)recommendProducts:(EMSLogic * _Nonnull)logic :(NSArray<EMSRecommendationFilter *> * _Nullable)filters :(NSNumber * _Nullable)limit :(NSString * _Nullable)availabilityZone :(void (^ _Nonnull)(NSArray<id<EMSProductProtocol>> * _Nullable, NSError * _Nullable))completionBlock;
+		[Static]
+		[Export ("recommendProducts:::::")]
+		void RecommendProducts (EMSRecommendationLogic logic, [NullAllowed] EMSRecommendationFilter[] filters, [NullAllowed] NSNumber limit, [NullAllowed] string availabilityZone, Action<EMSProduct[], NSError> completionBlock);
+
+		// +(void)trackRecommendationClick:(EMSProduct * _Nonnull)product;
+		[Static]
+		[Export ("trackRecommendationClick:")]
+		void TrackRecommendationClick (EMSProduct product);
 	}
 
 	// @interface DotnetEmarsysPush : NSObject

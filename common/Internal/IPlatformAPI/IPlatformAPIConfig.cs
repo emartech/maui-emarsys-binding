@@ -13,7 +13,7 @@ public interface IPlatformAPIConfig
 	#elif IOS
 	public EMSConfig Build(string? applicationCode, string? merchantId, string? sharedKeychainAccessGroup, bool enableConsoleLogging);
 	#else
-	public bool Build(string? applicationCode, string? merchantId, bool enableConsoleLogging);
+	public string Build(string? applicationCode, string? merchantId, bool enableConsoleLogging);
 	#endif
 
 	public void ChangeApplicationCode(string? applicationCode, OnCompletedAction onCompleted);
