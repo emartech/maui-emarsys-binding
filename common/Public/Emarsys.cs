@@ -57,6 +57,8 @@ public class Emarsys
 
 	public static EmarsysInApp InApp = new EmarsysInApp();
 
+	public static EmarsysInbox Inbox = new EmarsysInbox();
+
 	public static EmarsysGeofence Geofence = new EmarsysGeofence();
 
 	public static EmarsysPredict Predict = new EmarsysPredict();

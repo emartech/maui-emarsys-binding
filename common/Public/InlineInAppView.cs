@@ -70,7 +70,7 @@ public class InlineInAppView : View
 
 }
 
-public partial class InlineInAppViewHandler : ViewHandler<InlineInAppView, PlatformView>
+public class InlineInAppViewHandler : ViewHandler<InlineInAppView, PlatformView>
 {
 
 	private static InternalAPIInApp _internal = new InternalAPIInApp(new PlatformAPIInApp());

@@ -1,4 +1,4 @@
-﻿namespace EmarsysBinding.Internal;
+namespace EmarsysBinding.Internal;
 
 class InternalUtils
 {

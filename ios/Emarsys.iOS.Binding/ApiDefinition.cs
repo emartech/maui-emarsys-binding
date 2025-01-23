@@ -221,6 +221,26 @@ namespace EmarsysiOS
 		void SetOnEventActionEventHandler (Action<NSString, NSDictionary<NSString, NSObject>> eventHandler);
 	}
 
+	// @interface DotnetEmarsysInbox : NSObject
+	[BaseType (typeof(NSObject))]
+	interface DotnetEmarsysInbox
+	{
+		// +(void)fetchMessages:(void (^ _Nonnull)(NSArray<NSDictionary<NSString *,id> *> * _Nullable, NSError * _Nullable))resultCallback;
+		[Static]
+		[Export ("fetchMessages:")]
+		void FetchMessages (Action<NSArray<NSDictionary<NSString, NSObject>>, NSError> resultCallback);
+
+		// +(void)addTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonnull)messageId :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		[Static]
+		[Export ("addTag:messageId::")]
+		void AddTag (string tag, string messageId, Action<NSError> completionBlock);
+
+		// +(void)removeTag:(NSString * _Nonnull)tag messageId:(NSString * _Nonnull)messageId :(void (^ _Nonnull)(NSError * _Nullable))completionBlock;
+		[Static]
+		[Export ("removeTag:messageId::")]
+		void RemoveTag (string tag, string messageId, Action<NSError> completionBlock);
+	}
+
 	// @interface EMSCartItem : NSObject
 	[BaseType (typeof(NSObject))]
 	interface EMSCartItem
