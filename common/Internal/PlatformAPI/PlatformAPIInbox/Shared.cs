@@ -1,6 +1,6 @@
 namespace EmarsysBinding.Internal;
 
-public partial class PlatformAPIInbox: IPlatformAPIInbox
+public partial class PlatformAPIInbox : IPlatformAPIInbox
 {
 
 	public void AddTag(string tag, string messageId, OnCompletedAction onCompleted)

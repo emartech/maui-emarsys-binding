@@ -81,13 +81,14 @@ public class TestGeofence
 	[Fact]
 	public void GetRegisteredGeofences_ShouldWork()
 	{
+		List<string> resultGeofences = new List<string> { "test" };
 		_platformMock.Setup(mock => mock.GetRegisteredGeofences())
-			.Returns("test");
+			.Returns(resultGeofences);
 
-		string? result = _internal.GetRegisteredGeofences();
+		var result = _internal.GetRegisteredGeofences();
 
 		_platformMock.Verify(mock => mock.GetRegisteredGeofences());
-		Assert.Equal("test", result);
+		Assert.Equal(resultGeofences, result);
 	}
 
 }

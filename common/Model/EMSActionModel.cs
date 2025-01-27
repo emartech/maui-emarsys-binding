@@ -2,6 +2,7 @@ namespace EmarsysBinding.Model;
 
 public class EMSActionModel
 {
+
 	public string Id { get; set; }
 	public string Title { get; set; }
 	public string Type { get; set; }
@@ -12,10 +13,12 @@ public class EMSActionModel
 		Title = title;
 		Type = type;
 	}
+
 }
 
 public class EMSAppEventActionModel : EMSActionModel
 {
+
 	public string Name { get; set; }
 	public Dictionary<string, object>? Payload { get; set; }
 
@@ -30,10 +33,12 @@ public class EMSAppEventActionModel : EMSActionModel
 		Name = name;
 		Payload = payload;
 	}
+
 }
 
 public class EMSCustomEventActionModel : EMSActionModel
 {
+
 	public string Name { get; set; }
 	public Dictionary<string, object>? Payload { get; set; }
 
@@ -48,10 +53,12 @@ public class EMSCustomEventActionModel : EMSActionModel
 		Name = name;
 		Payload = payload;
 	}
+
 }
 
 public class EMSOpenExternalUrlActionModel : EMSActionModel
 {
+
 	public string Url { get; set; }
 
 	public EMSOpenExternalUrlActionModel(
@@ -63,4 +70,5 @@ public class EMSOpenExternalUrlActionModel : EMSActionModel
 	{
 		Url = url;
 	}
+
 }

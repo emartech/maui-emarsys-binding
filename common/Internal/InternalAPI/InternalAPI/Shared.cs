@@ -1,15 +1,10 @@
 ﻿namespace EmarsysBinding.Internal;
 
-#if ANDROID
-using Android.App;
-using Android.Content;
-#elif IOS
-using Foundation;
-#else
+#if !ANDROID && !IOS
 using EMSConfig = string;
 #endif
 
-public class InternalAPI(IPlatformAPI platform)
+public partial class InternalAPI(IPlatformAPI platform)
 {
 
 	private readonly IPlatformAPI _platform = platform;
@@ -42,25 +37,5 @@ public class InternalAPI(IPlatformAPI platform)
 			_platform.TrackCustomEvent(eventName, eventAttributes, onCompleted);
 		});
 	}
-
-	#if ANDROID
-	public Task<ErrorType?> TrackDeepLink(Activity activity, Intent intent)
-	{
-		return InternalUtils.Task((onCompleted) =>
-		{
-			_platform.TrackDeepLink(activity, intent, onCompleted);
-		});
-	}
-	#elif IOS
-	public bool TrackDeepLink(NSUserActivity userActivity, Action<NSString>? sourceHandler)
-	{
-		return _platform.TrackDeepLink(userActivity, sourceHandler);
-	}
-	#else
-	public void TrackDeepLink(string activity)
-	{
-		_platform.TrackDeepLink(activity);
-	}
-	#endif
 
 }

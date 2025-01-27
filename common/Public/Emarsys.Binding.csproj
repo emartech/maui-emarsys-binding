@@ -13,4 +13,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Internal\Emarsys.Binding.Internal.csproj" />
   </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.Contains('android'))">
+    <Compile Remove="**\iOS.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework.Contains('ios'))">
+    <Compile Remove="**\Android.cs" />
+  </ItemGroup>
 </Project>

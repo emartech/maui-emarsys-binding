@@ -56,4 +56,5 @@ public class DotnetEmarsysPush: NSObject {
     public static func setSilentMessageEventHandler(_ eventHandler: @escaping EventHandler) {
         Emarsys.push.silentMessageEventHandler = eventHandler
     }
+    
 }

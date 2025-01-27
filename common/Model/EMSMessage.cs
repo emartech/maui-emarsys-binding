@@ -2,6 +2,7 @@ namespace EmarsysBinding.Model;
 
 public class EMSMessage
 {
+
 	public string Id { get; set; }
 	public string CampaignId { get; set; }
 	public string? CollapseId { get; set; }
@@ -43,4 +44,5 @@ public class EMSMessage
 		Properties = properties;
 		Actions = actions;
 	}
+
 }
