@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true">
+	<application android:allowBackup="true" android:icon="@mipmap/ems_logo" android:roundIcon="@mipmap/ems_logo_round" android:supportsRtl="true">
 		<service android:name="com.emarsys.service.EmarsysFirebaseMessagingService" android:exported="false">
 			<intent-filter>
 				<action android:name="com.google.firebase.MESSAGING_EVENT"/>

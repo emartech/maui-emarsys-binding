@@ -27,7 +27,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/appicon.appiconset</string>
+	<string>Assets.xcassets/ems_logo.appiconset</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Emarsys Geofence</string>
 	<key>NSLocationAlwaysUsageDescription</key>
