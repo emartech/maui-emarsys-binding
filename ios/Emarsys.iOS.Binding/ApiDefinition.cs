@@ -249,7 +249,7 @@ namespace EmarsysiOS
 
 	// @interface EMSLogic : NSObject
 	[BaseType (typeof(NSObject))]
-	interface EMSRecommendationLogic
+	interface EMSLogic
 	{
 	}
 
@@ -363,7 +363,7 @@ namespace EmarsysiOS
 		// +(EMSLogic * _Nonnull)buildLogic:(NSString * _Nonnull)name :(NSString * _Nullable)query :(NSArray<EMSCartItem *> * _Nullable)cartItems :(NSArray<NSString *> * _Nullable)variants __attribute__((warn_unused_result("")));
 		[Static]
 		[Export ("buildLogic::::")]
-		EMSRecommendationLogic BuildLogic (string name, [NullAllowed] string query, [NullAllowed] EMSCartItem[] cartItems, [NullAllowed] string[] variants);
+		EMSLogic BuildLogic (string name, [NullAllowed] string query, [NullAllowed] EMSCartItem[] cartItems, [NullAllowed] string[] variants);
 
 		// +(id<EMSRecommendationFilterProtocol> _Nonnull)buildFilter:(NSString * _Nonnull)type :(NSString * _Nonnull)field :(NSString * _Nonnull)comparison :(NSArray<NSString *> * _Nonnull)expectations __attribute__((warn_unused_result("")));
 		[Static]
@@ -373,7 +373,7 @@ namespace EmarsysiOS
 		// +(void)recommendProducts:(EMSLogic * _Nonnull)logic :(NSArray<EMSRecommendationFilter *> * _Nullable)filters :(NSNumber * _Nullable)limit :(NSString * _Nullable)availabilityZone :(void (^ _Nonnull)(NSArray<id<EMSProductProtocol>> * _Nullable, NSError * _Nullable))completionBlock;
 		[Static]
 		[Export ("recommendProducts:::::")]
-		void RecommendProducts (EMSRecommendationLogic logic, [NullAllowed] EMSRecommendationFilter[] filters, [NullAllowed] NSNumber limit, [NullAllowed] string availabilityZone, Action<EMSProduct[], NSError> completionBlock);
+		void RecommendProducts (EMSLogic logic, [NullAllowed] EMSRecommendationFilter[] filters, [NullAllowed] NSNumber limit, [NullAllowed] string availabilityZone, Action<EMSProduct[], NSError> completionBlock);
 
 		// +(void)trackRecommendationClick:(EMSProduct * _Nonnull)product;
 		[Static]
