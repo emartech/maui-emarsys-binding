@@ -52,11 +52,11 @@ public class DotnetEmarsysPredict {
         Emarsys.getPredict().trackTag(tag, attributes);
     }
 
-    public static @NonNull EMSRecommendationLogic buildLogic(@NonNull String name, String query, List<EMSCartItem> cartItems, List<String> variants) {
-        return new EMSRecommendationLogic(name, query, cartItems, variants);
+    public static @NonNull EMSLogic buildLogic(@NonNull String name, String query, List<EMSCartItem> cartItems, List<String> variants) {
+        return new EMSLogic(name, query, cartItems, variants);
     }
 
-    static @NonNull Logic mapLogic(@NonNull EMSRecommendationLogic logic) {
+    static @NonNull Logic mapLogic(@NonNull EMSLogic logic) {
         switch (logic.getName()) {
             case "SEARCH":
                 if (logic.getQuery() != null) { return RecommendationLogic.search(logic.getQuery()); }
@@ -139,7 +139,7 @@ public class DotnetEmarsysPredict {
         void onCompleted(List<EMSProduct> products, Throwable errorCause);
     }
 
-    public static void recommendProducts(@NonNull EMSRecommendationLogic logic, List<EMSRecommendationFilter> filters, Integer limit, String availabilityZone,
+    public static void recommendProducts(@NonNull EMSLogic logic, List<EMSRecommendationFilter> filters, Integer limit, String availabilityZone,
                                          @NonNull RecommendProductsCompletionListener completionListener) {
         Logic _logic = mapLogic(logic);
         List<RecommendationFilter> _filters = mapFilters(filters);
