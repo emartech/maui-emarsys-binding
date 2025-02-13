@@ -3,6 +3,8 @@
 public partial class EmarsysPush
 {
 
+	internal EmarsysPush() {}
+
 	private static InternalAPIPush _internal = new InternalAPIPush(new PlatformAPIPush());
 
 	public void SetEventHandler(EventHandlerAction eventHandler)

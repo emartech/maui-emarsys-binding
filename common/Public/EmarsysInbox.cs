@@ -5,6 +5,8 @@ using EmarsysBinding.Model;
 public class EmarsysInbox
 {
 
+	internal EmarsysInbox() {}
+
 	private static InternalAPIInbox _internal = new InternalAPIInbox(new PlatformAPIInbox());
 
 	public Task<(List<EMSMessage>? Messages, ErrorType? Error)> FetchMessages()

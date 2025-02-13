@@ -5,6 +5,8 @@ using EmarsysBinding.Model;
 public class EmarsysPredict
 {
 
+	internal EmarsysPredict() {}
+
 	private static InternalAPIPredict _internal = new InternalAPIPredict(new PlatformAPIPredict());
 
 	public void TrackCart(IList<EMSPredictCartItem> items)

@@ -3,6 +3,8 @@
 public class EmarsysGeofence
 {
 
+	internal EmarsysGeofence() {}
+
 	private static InternalAPIGeofence _internal = new InternalAPIGeofence(new PlatformAPIGeofence());
 
 	public void SetInitialEnterTriggerEnabled(bool initialEnterTriggerEnabled)

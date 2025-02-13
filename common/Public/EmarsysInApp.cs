@@ -3,6 +3,8 @@
 public class EmarsysInApp
 {
 
+	internal EmarsysInApp() {}
+
 	private static InternalAPIInApp _internal = new InternalAPIInApp(new PlatformAPIInApp());
 
 	public void SetEventHandler(EventHandlerAction eventHandler)
