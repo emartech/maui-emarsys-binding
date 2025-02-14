@@ -77,7 +77,7 @@ class CompletionListener(OnCompletedAction action) : Object, ICompletionListener
 
 	public void OnCompleted(Throwable? errorCause)
 	{
-		_action.Invoke(errorCause);
+		_action.Invoke(errorCause == null ? null : new Exception(errorCause.Message));
 	}
 
 }

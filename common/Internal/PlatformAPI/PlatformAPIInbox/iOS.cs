@@ -9,7 +9,7 @@ public partial class PlatformAPIInbox
 	{
 		DotnetEmarsysInbox.FetchMessages((messages, error) =>
 		{
-			onCompleted(MessageMapper.Map(messages), error);
+			onCompleted(MessageMapper.Map(messages), error == null ? null : new Exception(error.Description));
 		});
 	}
 

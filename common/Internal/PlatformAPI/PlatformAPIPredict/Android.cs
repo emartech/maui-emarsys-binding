@@ -18,14 +18,14 @@ public partial class PlatformAPIPredict
 
 }
 
-class RecommendProductsCompletionListener(Action<IList<EMSProduct>?, Throwable?> action) : Object, DotnetEmarsysPredict.IRecommendProductsCompletionListener
+class RecommendProductsCompletionListener(Action<IList<EMSProduct>?, ErrorType?> action) : Object, DotnetEmarsysPredict.IRecommendProductsCompletionListener
 {
 
-	private readonly Action<IList<EMSProduct>?, Throwable?> _action = action;
+	private readonly Action<IList<EMSProduct>?, ErrorType?> _action = action;
 
 	public void OnCompleted(IList<EMSProduct>? products, Throwable? errorCause)
 	{
-		_action.Invoke(products, errorCause);
+		_action.Invoke(products, errorCause == null ? null : new Exception(errorCause.Message));
 	}
 
 }
