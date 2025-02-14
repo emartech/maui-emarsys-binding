@@ -40,10 +40,10 @@ public class InternalAPIPredict(IPlatformAPIPredict platform)
 		_platform.TrackTag(tag, attributes);
 	}
 
-	public Task<(IList<EMSProduct>? Products, ErrorType? Error)> RecommendProducts(
+	public Task<(IList<EMSPredictProduct>? Products, ErrorType? Error)> RecommendProducts(
 		EMSPredictLogic logic, IList<EMSPredictFilter>? filters, int? limit, string? availabilityZone)
 	{
-		var cs = new TaskCompletionSource<(IList<EMSProduct>?, ErrorType?)>();
+		var cs = new TaskCompletionSource<(IList<EMSPredictProduct>?, ErrorType?)>();
 		_platform.RecommendProducts(logic, filters, limit, availabilityZone, (products, error) =>
 		{
 			cs.SetResult((products, error));
@@ -51,7 +51,7 @@ public class InternalAPIPredict(IPlatformAPIPredict platform)
 		return cs.Task;
 	}
 
-	public void TrackRecommendationClick(EMSProduct product)
+	public void TrackRecommendationClick(EMSPredictProduct product)
 	{
 		_platform.TrackRecommendationClick(product);
 	}

@@ -39,13 +39,13 @@ public class EmarsysPredict
 		_internal.TrackTag(tag, attributes);
 	}
 
-	public Task<(IList<EMSProduct>? Products, ErrorType? Error)> RecommendProducts(
+	public Task<(IList<EMSPredictProduct>? Products, ErrorType? Error)> RecommendProducts(
 		EMSPredictLogic logic, IList<EMSPredictFilter>? filters = null, int? limit = null, string? availabilityZone = null)
 	{	
 		return _internal.RecommendProducts(logic, filters, limit, availabilityZone);
 	}
 
-	public void TrackRecommendationClick(EMSProduct product)
+	public void TrackRecommendationClick(EMSPredictProduct product)
 	{
 		_internal.TrackRecommendationClick(product);
 	}

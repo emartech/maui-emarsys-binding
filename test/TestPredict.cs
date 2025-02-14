@@ -84,15 +84,23 @@ public class TestPredict
 	[Fact]
 	public async Task RecommendProducts_ShouldWork()
 	{
-		List<string> resultProducts = new List<string> { "test" };
-		_platformMock.Setup(mock => mock.RecommendProducts(It.IsAny<EMSPredictLogic>(), It.IsAny<IList<EMSPredictFilter>?>(), It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<Action<IList<string>?, string?>>()))
-			.Callback((EMSPredictLogic _, IList<EMSPredictFilter>? _, int? _, string? _, Action<IList<string>?, string?> onCompleted) => onCompleted(resultProducts, null));
+		List<EMSPredictProduct> resultProducts = new List<EMSPredictProduct> { new EMSPredictProduct(
+			emsProduct: "testEMSProduct",
+			productId: "testProductId",
+			title: "testTitle",
+			linkUrl: new Uri("https://testLinkUrl.com"),
+			feature: "testFeature",
+			cohort: "testCohort",
+			customFields: new Dictionary<string, string> { { "testCustomFieldsKey", "testCustomFieldsValue" } }
+		) };
+		_platformMock.Setup(mock => mock.RecommendProducts(It.IsAny<EMSPredictLogic>(), It.IsAny<IList<EMSPredictFilter>?>(), It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<Action<IList<EMSPredictProduct>?, string?>>()))
+			.Callback((EMSPredictLogic _, IList<EMSPredictFilter>? _, int? _, string? _, Action<IList<EMSPredictProduct>?, string?> onCompleted) => onCompleted(resultProducts, null));
 		
 		EMSPredictLogic logic = EMSPredictLogic.Search();
 		List<EMSPredictFilter> filters = new List<EMSPredictFilter> { EMSPredictFilter.IncludeIsValue("testField", "testValue") };
 		var result = await _internal.RecommendProducts(logic, filters, 3, "testAZ");
 
-		_platformMock.Verify(mock => mock.RecommendProducts(logic, filters, 3, "testAZ", It.IsAny<Action<IList<string>?, string?>>()));
+		_platformMock.Verify(mock => mock.RecommendProducts(logic, filters, 3, "testAZ", It.IsAny<Action<IList<EMSPredictProduct>?, string?>>()));
 		Assert.Equal(resultProducts, result.Products);
 		Assert.Null(result.Error);
 	}
@@ -100,14 +108,22 @@ public class TestPredict
 	[Fact]
 	public async Task RecommendProducts_ShouldWorkWithNullOptions()
 	{
-		List<string> resultProducts = new List<string> { "test" };
-		_platformMock.Setup(mock => mock.RecommendProducts(It.IsAny<EMSPredictLogic>(), It.IsAny<IList<EMSPredictFilter>?>(), It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<Action<IList<string>?, string?>>()))
-			.Callback((EMSPredictLogic _, IList<EMSPredictFilter>? _, int? _, string? _, Action<IList<string>?, string?> onCompleted) => onCompleted(resultProducts, null));
+		List<EMSPredictProduct> resultProducts = new List<EMSPredictProduct> { new EMSPredictProduct(
+			emsProduct: "testEMSProduct",
+			productId: "testProductId",
+			title: "testTitle",
+			linkUrl: new Uri("https://testLinkUrl.com"),
+			feature: "testFeature",
+			cohort: "testCohort",
+			customFields: new Dictionary<string, string> { { "testCustomFieldsKey", "testCustomFieldsValue" } }
+		) };
+		_platformMock.Setup(mock => mock.RecommendProducts(It.IsAny<EMSPredictLogic>(), It.IsAny<IList<EMSPredictFilter>?>(), It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<Action<IList<EMSPredictProduct>?, string?>>()))
+			.Callback((EMSPredictLogic _, IList<EMSPredictFilter>? _, int? _, string? _, Action<IList<EMSPredictProduct>?, string?> onCompleted) => onCompleted(resultProducts, null));
 		
 		EMSPredictLogic logic = EMSPredictLogic.Search();
 		var result = await _internal.RecommendProducts(logic, null, null, null);
 
-		_platformMock.Verify(mock => mock.RecommendProducts(logic, null, null, null, It.IsAny<Action<IList<string>?, string?>>()));
+		_platformMock.Verify(mock => mock.RecommendProducts(logic, null, null, null, It.IsAny<Action<IList<EMSPredictProduct>?, string?>>()));
 		Assert.Equal(resultProducts, result.Products);
 		Assert.Null(result.Error);
 	}
@@ -115,14 +131,14 @@ public class TestPredict
 	[Fact]
 	public async Task RecommendProducts_ShouldWorkWithError()
 	{
-		_platformMock.Setup(mock => mock.RecommendProducts(It.IsAny<EMSPredictLogic>(), It.IsAny<IList<EMSPredictFilter>?>(), It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<Action<IList<string>?, string?>>()))
-			.Callback((EMSPredictLogic _, IList<EMSPredictFilter>? _, int? _, string? _, Action<IList<string>?, string?> onCompleted) => onCompleted(null, "error"));
+		_platformMock.Setup(mock => mock.RecommendProducts(It.IsAny<EMSPredictLogic>(), It.IsAny<IList<EMSPredictFilter>?>(), It.IsAny<int?>(), It.IsAny<string?>(), It.IsAny<Action<IList<EMSPredictProduct>?, string?>>()))
+			.Callback((EMSPredictLogic _, IList<EMSPredictFilter>? _, int? _, string? _, Action<IList<EMSPredictProduct>?, string?> onCompleted) => onCompleted(null, "error"));
 		
 		EMSPredictLogic logic = EMSPredictLogic.Search();
 		List<EMSPredictFilter> filters = new List<EMSPredictFilter> { EMSPredictFilter.IncludeIsValue("testField", "testValue") };
 		var result = await _internal.RecommendProducts(logic, filters, 3, "testAZ");
 
-		_platformMock.Verify(mock => mock.RecommendProducts(logic, filters, 3, "testAZ", It.IsAny<Action<IList<string>?, string?>>()));
+		_platformMock.Verify(mock => mock.RecommendProducts(logic, filters, 3, "testAZ", It.IsAny<Action<IList<EMSPredictProduct>?, string?>>()));
 		Assert.Null(result.Products);
 		Assert.Equal("error", result.Error);
 	}
@@ -130,11 +146,20 @@ public class TestPredict
 	[Fact]
 	public void TrackRecommendationClick_ShouldWork()
 	{
-		_platformMock.Setup(mock => mock.TrackRecommendationClick(It.IsAny<string>()));
+		_platformMock.Setup(mock => mock.TrackRecommendationClick(It.IsAny<EMSPredictProduct>()));
 		
-		_internal.TrackRecommendationClick("test");
+		EMSPredictProduct product = new EMSPredictProduct(
+			emsProduct: "testEMSProduct",
+			productId: "testProductId",
+			title: "testTitle",
+			linkUrl: new Uri("https://testLinkUrl.com"),
+			feature: "testFeature",
+			cohort: "testCohort",
+			customFields: new Dictionary<string, string> { { "testCustomFieldsKey", "testCustomFieldsValue" } }
+		);
+		_internal.TrackRecommendationClick(product);
 
-		_platformMock.Verify(mock => mock.TrackRecommendationClick("test"));
+		_platformMock.Verify(mock => mock.TrackRecommendationClick(product));
 	}
 
 }

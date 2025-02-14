@@ -2,16 +2,11 @@
 
 using EmarsysBinding;
 using EmarsysBinding.Model;
-#if ANDROID
-using EmarsysAndroid;
-#elif IOS
-using EmarsysiOS;
-#endif
 
 public partial class PredictPage : ContentPage
 {
 
-	EMSProduct? RecommendedProduct;
+	EMSPredictProduct? RecommendedProduct;
 
 	public PredictPage()
 	{
@@ -87,9 +82,15 @@ public partial class PredictPage : ContentPage
 			RecommendedProduct = result.Products[0];
 			foreach (var p in result.Products)
 			{
-				Console.WriteLine($"{p.ProductId}, {p.Title}, {p.LinkUrl}, {p.CustomFields}, {p.Feature}, {p.Cohort}, " +
+				Console.WriteLine($"{p.ProductId}, {p.Title}, {p.LinkUrl}, {p.Feature}, {p.Cohort}, " +
 					$"{p.ImageUrl}, {p.ZoomImageUrl}, {p.CategoryPath}, {p.Available}, {p.ProductDescription}, {p.Price}, {p.Msrp}, " +
 					$"{p.Album}, {p.Actor}, {p.Artist}, {p.Author}, {p.Brand}, {p.Year}");
+				Console.Write("  ");
+				foreach (var f in p.CustomFields)
+				{
+					Console.Write($"{f.Key}: {f.Value}, ");
+				}
+				Console.WriteLine("");
 			}
 		}
 	}

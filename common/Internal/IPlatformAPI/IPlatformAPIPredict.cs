@@ -1,8 +1,5 @@
 namespace EmarsysBinding.Internal;
 
-#if !ANDROID && !IOS
-using EMSProduct = string;
-#endif
 using EmarsysBinding.Model;
 
 public interface IPlatformAPIPredict
@@ -21,8 +18,8 @@ public interface IPlatformAPIPredict
 	public void TrackTag(string tag, Dictionary<string, string>? attributes);
 
 	public void RecommendProducts(EMSPredictLogic logic, IList<EMSPredictFilter>? filters, int? limit, string? availabilityZone,
-		Action<IList<EMSProduct>?, ErrorType?> onCompleted);
+		Action<IList<EMSPredictProduct>?, ErrorType?> onCompleted);
 
-	public void TrackRecommendationClick(EMSProduct product);
+	public void TrackRecommendationClick(EMSPredictProduct product);
 
 }

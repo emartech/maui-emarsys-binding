@@ -37,9 +37,9 @@ public partial class PlatformAPIPredict : IPlatformAPIPredict
 		DotnetEmarsysPredict.TrackTag(tag, PlatformUtils.ToNativeDictionary(attributes));
 	}
 
-	public void TrackRecommendationClick(EMSProduct product)
+	public void TrackRecommendationClick(EMSPredictProduct product)
 	{
-		DotnetEmarsysPredict.TrackRecommendationClick(product);
+		DotnetEmarsysPredict.TrackRecommendationClick(product.EMSProduct);
 	}
 
 }
