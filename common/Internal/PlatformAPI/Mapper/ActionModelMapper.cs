@@ -5,7 +5,7 @@ using EmarsysBinding.Model;
 class ActionModelMapper
 {
 
-	public static List<EMSActionModel> Map(object input)
+	public static List<ActionModel> Map(object input)
 	{
 		if (input is List<object> inputList)
 		{
@@ -16,13 +16,13 @@ class ActionModelMapper
 					return MapAction((Dictionary<string, object>)element);
 				})
 				.Where(action => action != null)
-				.Cast<EMSActionModel>()
+				.Cast<ActionModel>()
 				.ToList();
 		}
-		return new List<EMSActionModel>();
+		return new List<ActionModel>();
 	}
 
-	private static EMSActionModel? MapAction(Dictionary<string, object> actionMap)
+	private static ActionModel? MapAction(Dictionary<string, object> actionMap)
 	{
 		if (!actionMap.ContainsKey("type") || actionMap["type"] == null)
 		{
@@ -34,7 +34,7 @@ class ActionModelMapper
 		switch (type)
 		{
 			case "MEAppEvent":
-				return new EMSAppEventActionModel(
+				return new AppEventActionModel(
 					id: (string)actionMap["id"],
 					title: (string)actionMap["title"],
 					type: (string)actionMap["type"],
@@ -45,7 +45,7 @@ class ActionModelMapper
 				);
 
 			case "MECustomEvent":
-				return new EMSCustomEventActionModel(
+				return new CustomEventActionModel(
 					id: (string)actionMap["id"],
 					title: (string)actionMap["title"],
 					type: (string)actionMap["type"],
@@ -56,7 +56,7 @@ class ActionModelMapper
 				);
 
 			case "OpenExternalUrl":
-				return new EMSOpenExternalUrlActionModel(
+				return new OpenExternalUrlActionModel(
 					id: (string)actionMap["id"],
 					title: (string)actionMap["title"],
 					type: (string)actionMap["type"],

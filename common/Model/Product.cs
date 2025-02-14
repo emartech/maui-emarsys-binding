@@ -4,7 +4,7 @@
 using EMSProduct = string;
 #endif
 
-public class EMSPredictProduct(EMSProduct emsProduct, string productId, string title, Uri linkUrl, string feature, string cohort,
+public class Product(EMSProduct emsProduct, string productId, string title, Uri linkUrl, string feature, string cohort,
   Dictionary<string, string> customFields, Uri? imageUrl = null, Uri? zoomImageUrl = null,
   string? categoryPath = null, bool? available = null, string? productDescription = null, float? price = null, float? msrp = null,
   string? album = null, string? actor = null, string? artist = null, string? author = null, string? brand = null, int? year = null)

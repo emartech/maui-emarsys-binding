@@ -7,9 +7,9 @@ public class InternalAPIInbox(IPlatformAPIInbox platform)
 
 	private readonly IPlatformAPIInbox _platform = platform;
 
-	public Task<(List<EMSMessage>? Messages, ErrorType? Error)> FetchMessages()
+	public Task<(List<Message>? Messages, ErrorType? Error)> FetchMessages()
 	{
-		var cs = new TaskCompletionSource<(List<EMSMessage>?, ErrorType?)>();
+		var cs = new TaskCompletionSource<(List<Message>?, ErrorType?)>();
 		_platform.FetchMessages((messages, error) =>
 		{
 			cs.SetResult((messages, error));

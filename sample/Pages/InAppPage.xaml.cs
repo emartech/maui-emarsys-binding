@@ -6,7 +6,7 @@ using EmarsysBinding.Model;
 public partial class InAppPage : ContentPage
 {
 
-	EMSMessage? FetchedMessage;
+	Message? FetchedMessage;
 
 	public InAppPage()
 	{
@@ -100,7 +100,7 @@ public partial class InAppPage : ContentPage
 		}
 	}
 
-	private void LogInboxMessages(List<EMSMessage>? messages)
+	private void LogInboxMessages(List<Message>? messages)
 	{
 		if (messages == null || messages.Count == 0)
 		{
@@ -150,7 +150,7 @@ public partial class InAppPage : ContentPage
 					Console.WriteLine("Actions:");
 					foreach (var action in message.Actions)
 					{
-						if (action.Type == "MEAppEvent" && action is EMSAppEventActionModel appEventAction) {
+						if (action.Type == "MEAppEvent" && action is AppEventActionModel appEventAction) {
 							Console.WriteLine($"- ID: {appEventAction.Id}");
 							Console.WriteLine($" - Title: {appEventAction.Title}");
 							Console.WriteLine($" - Type: {appEventAction.Type}");
@@ -162,7 +162,7 @@ public partial class InAppPage : ContentPage
 									Console.WriteLine($" -- Key: {item.Key} - Value: {item.Value}");
 								}
 							}
-						} else if (action.Type == "OpenExternalUrl" && action is EMSOpenExternalUrlActionModel openExternalUrlAction) {
+						} else if (action.Type == "OpenExternalUrl" && action is OpenExternalUrlActionModel openExternalUrlAction) {
 							Console.WriteLine($"- ID: {openExternalUrlAction.Id}");
 							Console.WriteLine($" - Title: {openExternalUrlAction.Title}");
 							Console.WriteLine($" - Type: {openExternalUrlAction.Type}");

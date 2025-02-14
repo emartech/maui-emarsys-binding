@@ -1,6 +1,6 @@
 ﻿namespace EmarsysBinding.Model;
 
-public class EMSPredictCartItem(string itemId, double price, double quantity)
+public class CartItem(string itemId, double price, double quantity)
 {
 
 	public readonly string ItemId = itemId;

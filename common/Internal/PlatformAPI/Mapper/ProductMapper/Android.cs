@@ -5,7 +5,7 @@ using EmarsysBinding.Model;
 class ProductMapper
 {
 
-	public static List<EMSPredictProduct>? Map(IList<EMSProduct>? input)
+	public static List<Product>? Map(IList<EMSProduct>? input)
 	{
 		if (input == null)
 		{
@@ -14,7 +14,7 @@ class ProductMapper
 
 		return input.Select(element =>
 			{
-				return new EMSPredictProduct(
+				return new Product(
 					emsProduct: element,
 					productId: element.ProductId,
 					title: element.Title,

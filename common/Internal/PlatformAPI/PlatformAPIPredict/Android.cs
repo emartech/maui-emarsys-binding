@@ -6,8 +6,8 @@ using EmarsysBinding.Model;
 public partial class PlatformAPIPredict
 {
 
-	public void RecommendProducts(EMSPredictLogic logic, IList<EMSPredictFilter>? filters, int? limit, string? availabilityZone,
-		Action<IList<EMSPredictProduct>?, ErrorType?> onCompleted)
+	public void RecommendProducts(Logic logic, IList<Filter>? filters, int? limit, string? availabilityZone,
+		Action<IList<Product>?, ErrorType?> onCompleted)
 	{
 		var _logicCartItems = logic.CartItems?.Select(i => DotnetEmarsysPredict.BuildCartItem(i.ItemId, i.Price, i.Quantity)).ToArray();
 		var _logic = DotnetEmarsysPredict.BuildLogic(logic.Name, logic.Query, _logicCartItems, logic.Variants?.ToArray());
@@ -18,10 +18,10 @@ public partial class PlatformAPIPredict
 
 }
 
-class RecommendProductsCompletionListener(Action<IList<EMSPredictProduct>?, ErrorType?> action) : Object, DotnetEmarsysPredict.IRecommendProductsCompletionListener
+class RecommendProductsCompletionListener(Action<IList<Product>?, ErrorType?> action) : Object, DotnetEmarsysPredict.IRecommendProductsCompletionListener
 {
 
-	private readonly Action<IList<EMSPredictProduct>?, ErrorType?> _action = action;
+	private readonly Action<IList<Product>?, ErrorType?> _action = action;
 
 	public void OnCompleted(IList<EMSProduct>? products, Throwable? errorCause)
 	{

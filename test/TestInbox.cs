@@ -17,19 +17,19 @@ public class TestInbox
 	[Fact]
 	public async Task FetchMessages_ShouldWork()
 	{
-		List<EMSMessage> resultMessages = new List<EMSMessage> { new EMSMessage(
+		List<Message> resultMessages = new List<Message> { new Message(
 			id: "testId",
 			campaignId: "testCampaignId",
 			title: "testTitle",
 			body: "testBody",
 			receivedAt: 123
 		) };
-		_platformMock.Setup(mock => mock.FetchMessages(It.IsAny<Action<List<EMSMessage>?, string?>>()))
-			.Callback((Action<List<EMSMessage>?, string?> resultCallback) => resultCallback(resultMessages, null));
+		_platformMock.Setup(mock => mock.FetchMessages(It.IsAny<Action<List<Message>?, string?>>()))
+			.Callback((Action<List<Message>?, string?> resultCallback) => resultCallback(resultMessages, null));
 
 		var result = await _internal.FetchMessages();
 
-		_platformMock.Verify(mock => mock.FetchMessages(It.IsAny<Action<List<EMSMessage>?, string?>>()));
+		_platformMock.Verify(mock => mock.FetchMessages(It.IsAny<Action<List<Message>?, string?>>()));
 		Assert.Equal(resultMessages, result.Messages);
 		Assert.Null(result.Error);
 	}
@@ -37,12 +37,12 @@ public class TestInbox
 	[Fact]
 	public async Task FetchMessages_ShouldWorkWithError()
 	{
-		_platformMock.Setup(mock => mock.FetchMessages(It.IsAny<Action<List<EMSMessage>?, string?>>()))
-			.Callback((Action<List<EMSMessage>?, string?> resultCallback) => resultCallback(null, "error"));
+		_platformMock.Setup(mock => mock.FetchMessages(It.IsAny<Action<List<Message>?, string?>>()))
+			.Callback((Action<List<Message>?, string?> resultCallback) => resultCallback(null, "error"));
 
 		var result = await _internal.FetchMessages();
 
-		_platformMock.Verify(mock => mock.FetchMessages(It.IsAny<Action<List<EMSMessage>?, string?>>()));
+		_platformMock.Verify(mock => mock.FetchMessages(It.IsAny<Action<List<Message>?, string?>>()));
 		Assert.Null(result.Messages);
 		Assert.Equal("error", result.Error);
 	}

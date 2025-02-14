@@ -5,9 +5,9 @@ using EmarsysBinding.Model;
 public interface IPlatformAPIPredict
 {
 
-	public void TrackCart(IList<EMSPredictCartItem> items);
+	public void TrackCart(IList<CartItem> items);
 
-	public void TrackPurchase(string orderId, IList<EMSPredictCartItem> items);
+	public void TrackPurchase(string orderId, IList<CartItem> items);
 
 	public void TrackItemView(string itemId);
 
@@ -17,9 +17,9 @@ public interface IPlatformAPIPredict
 
 	public void TrackTag(string tag, Dictionary<string, string>? attributes);
 
-	public void RecommendProducts(EMSPredictLogic logic, IList<EMSPredictFilter>? filters, int? limit, string? availabilityZone,
-		Action<IList<EMSPredictProduct>?, ErrorType?> onCompleted);
+	public void RecommendProducts(Logic logic, IList<Filter>? filters, int? limit, string? availabilityZone,
+		Action<IList<Product>?, ErrorType?> onCompleted);
 
-	public void TrackRecommendationClick(EMSPredictProduct product);
+	public void TrackRecommendationClick(Product product);
 
 }

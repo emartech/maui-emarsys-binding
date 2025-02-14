@@ -6,7 +6,7 @@ using EmarsysBinding.Model;
 public partial class PredictPage : ContentPage
 {
 
-	EMSPredictProduct? RecommendedProduct;
+	Product? RecommendedProduct;
 
 	public PredictPage()
 	{
@@ -15,10 +15,10 @@ public partial class PredictPage : ContentPage
 
 	private void OnTrackCartClicked(object sender, EventArgs e)
 	{
-		List<EMSPredictCartItem> items = new List<EMSPredictCartItem>
+		List<CartItem> items = new List<CartItem>
 		{
-			new EMSPredictCartItem("item1", 1.1, 1.0),
-			new EMSPredictCartItem("item2", 2.2, 2.0)
+			new CartItem("item1", 1.1, 1.0),
+			new CartItem("item2", 2.2, 2.0)
 		};
 		Emarsys.Predict.TrackCart(items);
 		Utils.LogResult("TrackCart");
@@ -27,10 +27,10 @@ public partial class PredictPage : ContentPage
 	private void OnTrackPurchaseClicked(object sender, EventArgs e)
 	{
 		string orderId = "order1";
-		List<EMSPredictCartItem> items = new List<EMSPredictCartItem>
+		List<CartItem> items = new List<CartItem>
 		{
-			new EMSPredictCartItem("item1", 1.1, 1.0),
-			new EMSPredictCartItem("item2", 2.2, 2.0)
+			new CartItem("item1", 1.1, 1.0),
+			new CartItem("item2", 2.2, 2.0)
 		};
 		Emarsys.Predict.TrackPurchase(orderId, items);
 		Utils.LogResult("TrackPurchase");
@@ -71,8 +71,8 @@ public partial class PredictPage : ContentPage
 
 	private async void OnRecommendProductsClicked(object sender, EventArgs e)
 	{
-		EMSPredictLogic logic = EMSPredictLogic.Home(["1", "2"]);
-		List<EMSPredictFilter> filters = new List<EMSPredictFilter> { EMSPredictFilter.ExcludeIsValue("field", "value") };
+		Logic logic = Logic.Home(["1", "2"]);
+		List<Filter> filters = new List<Filter> { Filter.ExcludeIsValue("field", "value") };
 		int limit = 3;
 		string availabilityZone = "en";
 		var result = await Emarsys.Predict.RecommendProducts(logic, filters, limit, availabilityZone);

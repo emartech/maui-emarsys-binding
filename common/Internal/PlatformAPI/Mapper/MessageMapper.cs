@@ -5,7 +5,7 @@ using EmarsysBinding.Model;
 class MessageMapper
 {
 
-	public static List<EMSMessage>? Map(object? input)
+	public static List<Message>? Map(object? input)
 	{
 		if (input == null)
 		{
@@ -43,7 +43,7 @@ class MessageMapper
 						? ActionModelMapper.Map(messageMap["actions"])
 						: null;
 
-					return new EMSMessage(
+					return new Message(
 						id: id,
 						campaignId: campaignId,
 						collapseId: collapseId,
@@ -62,7 +62,7 @@ class MessageMapper
 		}
 		else
 		{
-			return new List<EMSMessage>();
+			return new List<Message>();
 		}
 	}
 

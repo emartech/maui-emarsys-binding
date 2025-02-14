@@ -1,6 +1,6 @@
 namespace EmarsysBinding.Model;
 
-public class EMSMessage
+public class Message
 {
 
 	public string Id { get; set; }
@@ -14,9 +14,9 @@ public class EMSMessage
 	public int? ExpiresAt { get; set; }
 	public List<string>? Tags { get; set; }
 	public Dictionary<string, object>? Properties { get; set; }
-	public List<EMSActionModel>? Actions { get; set; }
+	public List<ActionModel>? Actions { get; set; }
 
-	public EMSMessage(
+	public Message(
 		string id,
 		string campaignId,
 		string title,
@@ -28,7 +28,7 @@ public class EMSMessage
 		int? expiresAt = null,
 		List<string>? tags = null,
 		Dictionary<string, object>? properties = null,
-		List<EMSActionModel>? actions = null
+		List<ActionModel>? actions = null
 	)
 	{
 		Id = id;
