@@ -82,15 +82,14 @@ public partial class PredictPage : ContentPage
 			RecommendedProduct = result.Products[0];
 			foreach (var p in result.Products)
 			{
-				Console.WriteLine($"{p.ProductId}, {p.Title}, {p.LinkUrl}, {p.Feature}, {p.Cohort}, " +
+				Console.Write($"{p.ProductId}, {p.Title}, {p.LinkUrl}, {p.Feature}, {p.Cohort}, " +
 					$"{p.ImageUrl}, {p.ZoomImageUrl}, {p.CategoryPath}, {p.Available}, {p.ProductDescription}, {p.Price}, {p.Msrp}, " +
-					$"{p.Album}, {p.Actor}, {p.Artist}, {p.Author}, {p.Brand}, {p.Year}");
-				Console.Write("  ");
+					$"{p.Album}, {p.Actor}, {p.Artist}, {p.Author}, {p.Brand}, {p.Year}, {{ ");
 				foreach (var f in p.CustomFields)
 				{
 					Console.Write($"{f.Key}: {f.Value}, ");
 				}
-				Console.WriteLine("");
+				Console.WriteLine("}");
 			}
 		}
 	}

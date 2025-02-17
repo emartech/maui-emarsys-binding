@@ -1,5 +1,7 @@
 ﻿namespace EmarsysBinding;
 
+using EmarsysBinding.Model;
+
 public class EmarsysGeofence
 {
 
@@ -32,7 +34,7 @@ public class EmarsysGeofence
 		_internal.SetEventHandler(eventHandler);
 	}
 
-	public IList<EMSGeofence> GetRegisteredGeofences()
+	public IList<Geofence> GetRegisteredGeofences()
 	{
 		return _internal.GetRegisteredGeofences();
 	}

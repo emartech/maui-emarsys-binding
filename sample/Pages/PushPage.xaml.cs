@@ -73,7 +73,12 @@ public partial class PushPage : ContentPage
 			Console.WriteLine($"{g.Id}, {g.Lat}, {g.Lon}, {g.Radius}, {g.WaitInterval}");
 			foreach (var t in g.Triggers)
 			{
-				Console.WriteLine($"  {t.Id}, {t.Type}, {t.LoiteringDelay}, {t.Action}");
+				Console.Write($"  {t.Id}, {t.Type}, {t.LoiteringDelay}, {{ ");
+				foreach (var a in t.Action)
+				{
+					Console.Write($"{a.Key}: {a.Value}, ");
+				}
+				Console.WriteLine("}");
 			}
 		}
 	}

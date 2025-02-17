@@ -39,7 +39,7 @@ class ProductMapper
 			}).ToList();
 	}
 
-	public static Dictionary<string, string> ToDictionary(IDictionary<string, string> input)
+	private static Dictionary<string, string> ToDictionary(IDictionary<string, string> input)
 	{
 		var dict = new Dictionary<string, string>();
 		foreach (var key in input.Keys)

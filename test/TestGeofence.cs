@@ -1,5 +1,7 @@
 ﻿namespace Test;
 
+using EmarsysBinding.Model;
+
 public class TestGeofence
 {
 
@@ -81,7 +83,9 @@ public class TestGeofence
 	[Fact]
 	public void GetRegisteredGeofences_ShouldWork()
 	{
-		List<string> resultGeofences = new List<string> { "test" };
+		List<Geofence> resultGeofences = new List<Geofence> {
+			new Geofence(id: "testId", lat: 0, lon: 0, radius: 0, waitInterval: 0, triggers: [])
+		};
 		_platformMock.Setup(mock => mock.GetRegisteredGeofences())
 			.Returns(resultGeofences);
 

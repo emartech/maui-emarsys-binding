@@ -40,7 +40,7 @@ class ProductMapper
 			}).ToList();
 	}
 
-	public static Dictionary<string, string> ToDictionary(NSDictionary<NSString, NSObject> nsDict)
+	private static Dictionary<string, string> ToDictionary(NSDictionary<NSString, NSObject> nsDict)
 	{
 		var dict = new Dictionary<string, string>();
 		foreach (var key in nsDict.Keys)

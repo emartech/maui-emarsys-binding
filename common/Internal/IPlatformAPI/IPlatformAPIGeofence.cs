@@ -1,8 +1,6 @@
 namespace EmarsysBinding.Internal;
 
-#if !ANDROID && !IOS
-using EMSGeofence = string;
-#endif
+using EmarsysBinding.Model;
 
 public interface IPlatformAPIGeofence
 {
@@ -17,6 +15,6 @@ public interface IPlatformAPIGeofence
 
 	public void SetEventHandler(EventHandlerAction eventHandler);
 
-	public IList<EMSGeofence> GetRegisteredGeofences();
+	public IList<Geofence> GetRegisteredGeofences();
 
 }
