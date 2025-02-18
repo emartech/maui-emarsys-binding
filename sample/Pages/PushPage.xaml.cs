@@ -76,7 +76,19 @@ public partial class PushPage : ContentPage
 				Console.Write($"  {t.Id}, {t.Type}, {t.LoiteringDelay}, {{ ");
 				foreach (var a in t.Action)
 				{
-					Console.Write($"{a.Key}: {a.Value}, ");
+					if (a.Value is Dictionary<string, object>)
+					{
+						Console.Write($"{a.Key}: {{ ");
+						foreach (var p in (Dictionary<string, object>) a.Value)
+						{
+							Console.Write($"{p.Key}: {p.Value}, ");
+						}
+						Console.Write("}, ");
+					}
+					else
+					{
+						Console.Write($"{a.Key}: {a.Value}, ");
+					}
 				}
 				Console.WriteLine("}");
 			}

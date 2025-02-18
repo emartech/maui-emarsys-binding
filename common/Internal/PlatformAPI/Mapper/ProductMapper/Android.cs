@@ -21,7 +21,7 @@ class ProductMapper
 					linkUrl: new Uri(element.LinkUrl.ToString()),
 					feature: element.Feature,
 					cohort: element.Cohort,
-					customFields: ToDictionary(element.CustomFields),
+					customFields: (Dictionary<string, object>) PlatformUtils.ToDotnetObject(element.CustomFields),
 					imageUrl: element.ImageUrl != null ? new Uri(element.ImageUrl.ToString()) : null,
 					zoomImageUrl: element.ZoomImageUrl != null ? new Uri(element.ZoomImageUrl.ToString()) : null,
 					categoryPath: element.CategoryPath,
@@ -37,16 +37,6 @@ class ProductMapper
 					year: element.Year?.IntValue()
 				);
 			}).ToList();
-	}
-
-	private static Dictionary<string, string> ToDictionary(IDictionary<string, string> input)
-	{
-		var dict = new Dictionary<string, string>();
-		foreach (var key in input.Keys)
-		{
-			dict[key] = input[key];
-		}
-		return dict;
 	}
 
 }

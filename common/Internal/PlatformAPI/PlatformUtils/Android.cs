@@ -32,6 +32,8 @@ partial class PlatformUtils
 				return ToDotnetList(jList);
 			case JavaDictionary jDictionary:
 				return ToDotnetDictionary(jDictionary);
+			case JSONObject jsonObj:
+				return ToDotnetDictionary(jsonObj);
 			case String jString:
 				return jString.ToString();
 			case Integer jInteger:
@@ -63,6 +65,26 @@ partial class PlatformUtils
 			var item = javaDictionary[key];
 			if (item != null) {
 				dict[key.ToString()!] = ToDotnetObject(item);
+			}
+		}
+		return dict;
+	}
+
+	private static Dictionary<string, object> ToDotnetDictionary(JSONObject obj)
+	{
+		var dict = new Dictionary<string, object>();
+		var keys = obj.Keys();
+		while (keys.HasNext)
+		{
+			string key = keys.Next()!.ToString();
+			Object value = obj.Get(key);
+			if (value is String)
+			{
+				dict[key] = value.ToString();
+			}
+			else if (value is JSONObject)
+			{
+				dict[key] = ToDotnetDictionary((JSONObject) value);
 			}
 		}
 		return dict;

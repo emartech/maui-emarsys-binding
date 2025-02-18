@@ -5,7 +5,7 @@ using EMSProduct = string;
 #endif
 
 public class Product(EMSProduct emsProduct, string productId, string title, Uri linkUrl, string feature, string cohort,
-  Dictionary<string, string> customFields, Uri? imageUrl = null, Uri? zoomImageUrl = null,
+  Dictionary<string, object> customFields, Uri? imageUrl = null, Uri? zoomImageUrl = null,
   string? categoryPath = null, bool? available = null, string? productDescription = null, float? price = null, float? msrp = null,
   string? album = null, string? actor = null, string? artist = null, string? author = null, string? brand = null, int? year = null)
 {
@@ -17,7 +17,7 @@ public class Product(EMSProduct emsProduct, string productId, string title, Uri 
     public readonly Uri LinkUrl = linkUrl;
     public readonly string Feature = feature;
     public readonly string Cohort = cohort;
-    public readonly Dictionary<string, string> CustomFields = customFields;
+    public readonly Dictionary<string, object> CustomFields = customFields;
     public readonly Uri? ImageUrl = imageUrl;
     public readonly Uri? ZoomImageUrl = zoomImageUrl;
     public readonly string? CategoryPath = categoryPath;

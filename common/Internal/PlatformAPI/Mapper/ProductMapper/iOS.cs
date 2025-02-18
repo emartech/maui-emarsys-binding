@@ -22,7 +22,7 @@ class ProductMapper
 					linkUrl: element.LinkUrl!,
 					feature: element.Feature,
 					cohort: element.Cohort,
-					customFields: ToDictionary(element.CustomFields),
+					customFields: (Dictionary<string, object>) PlatformUtils.ToDotnetObject(element.CustomFields),
 					imageUrl: element.ImageUrl,
 					zoomImageUrl: element.ZoomImageUrl,
 					categoryPath: element.CategoryPath,
@@ -38,16 +38,6 @@ class ProductMapper
 					year: element.Year?.Int32Value
 				);
 			}).ToList();
-	}
-
-	private static Dictionary<string, string> ToDictionary(NSDictionary<NSString, NSObject> nsDict)
-	{
-		var dict = new Dictionary<string, string>();
-		foreach (var key in nsDict.Keys)
-		{
-			dict[key.ToString()] = nsDict[key].ToString();
-		}
-		return dict;
 	}
 
 }
