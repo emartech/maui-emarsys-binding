@@ -15,11 +15,7 @@ class Utils
 		});
 	}
 
-	#if ANDROID
-	public static void LogResult(string method, Java.Lang.Throwable? error = null, string? message = null)
-	#elif IOS
-	public static void LogResult(string method, Foundation.NSError? error = null, string? message = null)
-	#endif
+	public static void LogResult(string method, Exception? error = null, string? message = null)
 	{
 		if (error == null)
 		{
@@ -36,13 +32,8 @@ class Utils
 		}
 		else
 		{
-			#if ANDROID
-			Console.WriteLine($"{method} fail: {error.Message}");
-			DisplayAlert($"{method} fail", error.Message ?? "");
-			#elif IOS
-			Console.WriteLine($"{method} fail: {error.Description}");
-			DisplayAlert($"{method} fail", error.Description);
-			#endif
+			Console.WriteLine($"{method} fail: {error}");
+			DisplayAlert($"{method} fail", error.Message);
 		}
 	}
 

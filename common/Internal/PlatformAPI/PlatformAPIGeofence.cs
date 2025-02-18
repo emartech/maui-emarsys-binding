@@ -1,5 +1,7 @@
 namespace EmarsysBinding.Internal;
 
+using EmarsysBinding.Model;
+
 public class PlatformAPIGeofence : IPlatformAPIGeofence
 {
 
@@ -28,9 +30,9 @@ public class PlatformAPIGeofence : IPlatformAPIGeofence
 		DotnetEmarsysGeofence.SetEventHandler(PlatformUtils.EventHandler(eventHandler));
 	}
 
-	public IList<EMSGeofence> GetRegisteredGeofences()
+	public IList<Geofence> GetRegisteredGeofences()
 	{
-		return DotnetEmarsysGeofence.RegisteredGeofences;
+		return GeofenceMapper.Map(DotnetEmarsysGeofence.RegisteredGeofences);
 	}
 
 }

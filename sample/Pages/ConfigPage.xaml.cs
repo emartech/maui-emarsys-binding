@@ -14,12 +14,6 @@ public partial class ConfigPage : ContentPage
 	{
 		int contactFieldId = 100009769;
 		string contactFieldValue = "B8mau1nMO8PilvTp6P"; // demoapp@emarsys.com
-		// #if ANDROID
-		// Java.Lang.Throwable? error =
-		// #elif IOS
-		// Foundation.NSError? error =
-		// #endif
-		// 	await Emarsys.SetContact(contactFieldId, contactFieldValue);
 		var error = await Emarsys.SetContact(contactFieldId, contactFieldValue);
 		Utils.LogResult("SetContact", error);
 	}

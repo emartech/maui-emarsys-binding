@@ -73,7 +73,24 @@ public partial class PushPage : ContentPage
 			Console.WriteLine($"{g.Id}, {g.Lat}, {g.Lon}, {g.Radius}, {g.WaitInterval}");
 			foreach (var t in g.Triggers)
 			{
-				Console.WriteLine($"  {t.Id}, {t.Type}, {t.LoiteringDelay}, {t.Action}");
+				Console.Write($"  {t.Id}, {t.Type}, {t.LoiteringDelay}, {{ ");
+				foreach (var a in t.Action)
+				{
+					if (a.Value is Dictionary<string, object>)
+					{
+						Console.Write($"{a.Key}: {{ ");
+						foreach (var p in (Dictionary<string, object>) a.Value)
+						{
+							Console.Write($"{p.Key}: {p.Value}, ");
+						}
+						Console.Write("}, ");
+					}
+					else
+					{
+						Console.Write($"{a.Key}: {a.Value}, ");
+					}
+				}
+				Console.WriteLine("}");
 			}
 		}
 	}

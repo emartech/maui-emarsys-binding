@@ -1,12 +1,13 @@
-# Get started with a new binding
+## MAUI Binding for SAP Emarsys
+> __`Note`__
+>
+> The currently supported platforms are iOS and Android.
+> 
+> For further informations about how to use the MAUI Binding please visit our [Documentation](https://github.com/emartech/maui-emarsys-binding/wiki)
 
-Get started by copying the contents of this template and following the instructions in the [documentation](https://learn.microsoft.com/dotnet/communitytoolkit/maui/native-library-interop/get-started).
+The MAUI Binding for SAP Emarsys is the official binding to help integrate Emarsys into your MAUI application. 
+On this page we won't go into details about how the underlying Emarsys SDK works and how the supported features can be used.
+For more detailed information about the different features please visit the [iOS](https://github.com/emartech/ios-emarsys-sdk/wiki) or the [Android](https://github.com/emartech/android-emarsys-sdk/wiki) SDK documentation.
 
-This template provides the boilerplate needed to get started with creating a new binding via Native Library Interop. It is organized by binding and platform, like all the other sample bindings in the repo:
-- **android**
-    - **Emarsys.Android.Binding** - the .NET API you will use
-    - **native** - the Android project with Java/Kotlin code exposing the API you will use
-- **ios**
-    - **Emarsys.iOS.Binding** - the .NET API you will use
-    - **native** - the Xcode project with Java/Kotlin code exposing the API you will use
-- **sample** - the .NET MAUI app showing the library in use
+## What is the Emarsys SDK
+The Emarsys SDK enables you to use Mobile Engage and Predict in a very straightforward way. By incorporating the SDK in your app, we, among others, support you in handling credentials, API calls, tracking of opens and events as well as logins and logouts in the app.

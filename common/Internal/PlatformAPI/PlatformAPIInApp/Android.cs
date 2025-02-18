@@ -20,7 +20,7 @@ public partial class PlatformAPIInApp
 
 	public void SetInlineInAppCompletionListener(PlatformView view, OnCompletedAction onCompleted)
 	{
-		DotnetEmarsysInApp.SetInlineInAppCompletionListener(view, new CompletionListener(onCompleted));
+		DotnetEmarsysInApp.SetInlineInAppCompletionListener(view, PlatformUtils.CompletionListener(onCompleted));
 	}
 
 	public void SetInlineInAppCloseListener(PlatformView view, Action onClosed)

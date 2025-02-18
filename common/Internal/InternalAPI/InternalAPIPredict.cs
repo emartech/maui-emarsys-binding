@@ -1,8 +1,5 @@
 ﻿namespace EmarsysBinding.Internal;
 
-#if !ANDROID && !IOS
-using EMSProduct = string;
-#endif
 using EmarsysBinding.Model;
 
 public class InternalAPIPredict(IPlatformAPIPredict platform)
@@ -10,12 +7,12 @@ public class InternalAPIPredict(IPlatformAPIPredict platform)
 
 	private readonly IPlatformAPIPredict _platform = platform;
 
-	public void TrackCart(IList<EMSPredictCartItem> items)
+	public void TrackCart(IList<CartItem> items)
 	{
 		_platform.TrackCart(items);
 	}
 
-	public void TrackPurchase(string orderId, IList<EMSPredictCartItem> items)
+	public void TrackPurchase(string orderId, IList<CartItem> items)
 	{
 		_platform.TrackPurchase(orderId, items);
 	}
@@ -40,10 +37,10 @@ public class InternalAPIPredict(IPlatformAPIPredict platform)
 		_platform.TrackTag(tag, attributes);
 	}
 
-	public Task<(IList<EMSProduct>? Products, ErrorType? Error)> RecommendProducts(
-		EMSPredictLogic logic, IList<EMSPredictFilter>? filters, int? limit, string? availabilityZone)
+	public Task<(IList<Product>? Products, ErrorType? Error)> RecommendProducts(
+		Logic logic, IList<Filter>? filters, int? limit, string? availabilityZone)
 	{
-		var cs = new TaskCompletionSource<(IList<EMSProduct>?, ErrorType?)>();
+		var cs = new TaskCompletionSource<(IList<Product>?, ErrorType?)>();
 		_platform.RecommendProducts(logic, filters, limit, availabilityZone, (products, error) =>
 		{
 			cs.SetResult((products, error));
@@ -51,7 +48,7 @@ public class InternalAPIPredict(IPlatformAPIPredict platform)
 		return cs.Task;
 	}
 
-	public void TrackRecommendationClick(EMSProduct product)
+	public void TrackRecommendationClick(Product product)
 	{
 		_platform.TrackRecommendationClick(product);
 	}

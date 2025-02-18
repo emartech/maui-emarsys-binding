@@ -6,24 +6,21 @@ using EmarsysBinding.Model;
 public partial class PlatformAPIInbox
 {
 
-	public void FetchMessages(Action<List<EMSMessage>?, ErrorType?> onCompleted)
+	public void FetchMessages(Action<List<Message>?, ErrorType?> onCompleted)
 	{
-		DotnetEmarsysInbox.FetchMessages(new FetchMessagesResultCallback((messages, error) =>
-		{
-			onCompleted(MessageMapper.Map(messages), error);
-		}));
+		DotnetEmarsysInbox.FetchMessages(new FetchMessagesResultCallback(onCompleted));
 	}
 
 }
 
-class FetchMessagesResultCallback(Action<IList<IDictionary<string, Object>>?, Throwable?> action) : Object, DotnetEmarsysInbox.IFetchMessagesResultCallback
+class FetchMessagesResultCallback(Action<List<Message>?, ErrorType?> action) : Object, DotnetEmarsysInbox.IFetchMessagesResultCallback
 {
 
-	private readonly Action<IList<IDictionary<string, Object>>?, Throwable?> _action = action;
+	private readonly Action<List<Message>?, ErrorType?> _action = action;
 
 	public void OnResult(IList<IDictionary<string, Object>>? messages, Throwable? error)
 	{
-		_action.Invoke(messages, error);
+		_action.Invoke(MessageMapper.Map(messages), error == null ? null : new Exception(error.Message));
 	}
 
 }

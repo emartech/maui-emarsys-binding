@@ -3,6 +3,8 @@
 public partial class EmarsysConfig
 {
 
+	internal EmarsysConfig() {}
+
 	private static InternalAPIConfig _internal = new InternalAPIConfig(new PlatformAPIConfig());
 
 	public Task<ErrorType?> ChangeApplicationCode(string? applicationCode)

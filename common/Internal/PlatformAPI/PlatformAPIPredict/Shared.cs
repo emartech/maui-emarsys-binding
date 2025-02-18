@@ -5,13 +5,13 @@ using EmarsysBinding.Model;
 public partial class PlatformAPIPredict : IPlatformAPIPredict
 {
 
-	public void TrackCart(IList<EMSPredictCartItem> items)
+	public void TrackCart(IList<CartItem> items)
 	{
 		var _items = items.Select(i => DotnetEmarsysPredict.BuildCartItem(i.ItemId, i.Price, i.Quantity)).ToArray();
 		DotnetEmarsysPredict.TrackCart(_items);
 	}
 
-	public void TrackPurchase(string orderId, IList<EMSPredictCartItem> items)
+	public void TrackPurchase(string orderId, IList<CartItem> items)
 	{
 		var _items = items.Select(i => DotnetEmarsysPredict.BuildCartItem(i.ItemId, i.Price, i.Quantity)).ToArray();
 		DotnetEmarsysPredict.TrackPurchase(orderId, _items);
@@ -37,9 +37,9 @@ public partial class PlatformAPIPredict : IPlatformAPIPredict
 		DotnetEmarsysPredict.TrackTag(tag, PlatformUtils.ToNativeDictionary(attributes));
 	}
 
-	public void TrackRecommendationClick(EMSProduct product)
+	public void TrackRecommendationClick(Product product)
 	{
-		DotnetEmarsysPredict.TrackRecommendationClick(product);
+		DotnetEmarsysPredict.TrackRecommendationClick(product.EMSProduct);
 	}
 
 }

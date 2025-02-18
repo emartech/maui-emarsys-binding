@@ -5,9 +5,12 @@ using Foundation;
 partial class PlatformUtils
 {
 
-	public static OnCompletedAction CompletionListener(OnCompletedAction action)
+	public static Action<NSError?> CompletionListener(OnCompletedAction action)
 	{
-		return action;
+		return (error) =>
+		{
+			action(error == null ? null : new Exception(error.Description));
+		};
 	}
 
 	public static EventHandlerAction EventHandler(EventHandlerAction action)
