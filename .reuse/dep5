@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: MAUI Emarsys Binding
+Upstream-Contact: g-gsuite-mobileengineers@emarsys.com
+Source: https://github.com/emartech/maui-emarsys-binding
+
+Files: *
+Copyright: Copyright 2025 Emarsys
+License: MPL-2.0

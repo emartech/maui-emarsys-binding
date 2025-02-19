@@ -1,3 +1,5 @@
+[![REUSE status](https://api.reuse.software/badge/github.com/emartech/maui-emarsys-binding)](https://api.reuse.software/info/github.com/emartech/maui-emarsys-binding)
+
 ## MAUI Binding for SAP Emarsys
 > __`Note`__
 >
